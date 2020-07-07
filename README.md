@@ -34,8 +34,11 @@ Helps college students find other students that are taking the same classes to h
 * User can remove classes from their schedule
 * User can view details view of a class including other students in the class
 * User can view a list of students that share at least one class
+* User can view a list of their current study buddies
 * User can access other users' profiles to get their contact information
 * User can have schedules compared to find common free time
+* User can edit their profile
+* User can view other students' schedules through their profile
 
 **Optional Nice-to-have Stories**
 
@@ -44,8 +47,7 @@ Helps college students find other students that are taking the same classes to h
 * User can coordinate and create study sessions through the app
 * User can share locations with other users
 * User can search for other users
-* User can view other students' schedules through their profile
-* User can edit their profile
+* User can add other users as Facebook friends
 
 ### 2. Screen Archetypes
 
@@ -58,12 +60,16 @@ Helps college students find other students that are taking the same classes to h
     * User can remove classes from their schedule
 * Stream 2
     * User can view a list of students that share at least one class
+* Stream 3
+    * User can view a list of their current study buddies
 * Creation
     * User can add classes to their schedule
 * Details
     * User can view a list of students in a particular class
     * User can access other users' profiles to get their contact information
     * User can have schedules compared to find common free time
+    * User can edit their profile
+    * User can view other students' schedules through their profile
 
 ### 3. Navigation
 
@@ -71,6 +77,7 @@ Helps college students find other students that are taking the same classes to h
 
 * Schedule (Home screen)
 * Suggested Study Buddies
+* Current Study Buddies
 * Profile
 
 **Flow Navigation** (Screen to Screen)
@@ -83,6 +90,8 @@ Helps college students find other students that are taking the same classes to h
     * => Class details
     * => Class creation
 * Suggested Buddies
+    * => Other user's profile
+* Current Study Buddies
     * => Other user's profile
 * Profile
     * => None
