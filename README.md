@@ -97,8 +97,7 @@ Helps college students find other students that are taking the same classes to h
     * => None
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://github.com/Zingsla/Study-Buddy/blob/master/BF069023-A068-474F-951E-41D953DFA050.jpeg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
