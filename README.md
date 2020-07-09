@@ -31,7 +31,7 @@ Helps college students find other students that are taking the same classes to h
 * User can login to the app
 * User can view their class schedule
 * User can add classes to their schedule
-* User can remove classes from their schedule
+* User can add blockout times to their schedule
 * User can view details view of a class including other students in the class
 * User can view a list of students that share at least one class
 * User can view a list of their current study buddies
@@ -42,6 +42,7 @@ Helps college students find other students that are taking the same classes to h
 
 **Optional Nice-to-have Stories**
 
+* User can remove classes from their schedule
 * User can send study requests to other students through the app
 * User can find study groups for classes they are in
 * User can coordinate and create study sessions through the app
@@ -121,6 +122,7 @@ Helps college students find other students that are taking the same classes to h
    | year          | Number   | year of college the student is in |
    | profileImage  | File     | the user's profile picture |
    | schedule      | Array    | array of TimeBlocks representing the user's class schedule |
+   | buddies       | Array    | array of PFUsers representing the user's current buddies |
    
 #### TimeBlock
 
@@ -138,7 +140,7 @@ Helps college students find other students that are taking the same classes to h
    | friday        | Boolean  | whether the block is active on Fridays |
    | saturday      | Boolean  | whether the block is active on Saturdays |
    | sunday        | Boolean  | whether the block is active on Sundays |
-   | class         | Pointer to Class | the class represented by the timeblock (nil if time is blockout) |
+   | class         | Pointer to Class | the class represented by the timeblock (nil if timeblock is blockout) |
    
 #### Class
    | Property      | Type     | Description |
@@ -152,6 +154,47 @@ Helps college students find other students that are taking the same classes to h
    | students      | Array    | array of PFUser's that are in this class |
    
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- Login Screen
+      - (Read/GET) Login
+         
+         [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+         if (error != nil) {
+             NSLog(@"Error logging in: %@", error.localizedDescription);
+             //TODO: Show error alert
+         } else {
+             NSLog(@"Successfully logged in!");
+             //TODO: Send user to home screen
+         }
+         }];
+- Signup Screen
+      - (Create/POST) Signup
+        
+        PFUser *newUser = [PFUser user];
+    
+        //TODO: Set user fields
+        
+        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error signing up: %@", error.localizedDescription);
+            //TODO: Show error alert
+        } else {
+            NSLog(@"Successfully registered user!");
+            //TODO: Send user to home screen
+        }
+        }];
+- Schedule Screen
+      - (Read/GET) Get schedule
+      - (Delete) Delete existing timeblock
+- Class Creation Screen
+      - (Create/POST) Create new timeblock
+- Suggested Buddies Screen
+      - (Read/GET) Get list of suggested buddies
+- Current Buddies Screen
+      - (Read/GET) Get list of current buddies
+- Profile Screen
+      - (Read/GET) Query logged in user
+      - (Update/PUT) Update profile
+- Class Details Screen
+      - (Read/GET) Get list of students in class
+- Person Details Screen
+      - (Read/GET) Get student's schedule
