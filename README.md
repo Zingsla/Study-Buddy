@@ -104,9 +104,53 @@ Helps college students find other students that are taking the same classes to h
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### PFUser
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | objectId      | String   | unique id for the user (default field) |
+   | username      | String   | unique login for the user (default field) |
+   | password      | String   | encrypted password for logging in (default field) |
+   | createdAt     | DateTime | date when post is created (default field) |
+   | updatedAt     | DateTime | date when post is last updated (default field) |
+   | email         | String   | the user's email address (default field) |
+   | firstName     | String   | the user's first name |
+   | lastName      | String   | the user's last name |
+   | major         | String   | the user's major |
+   | year          | Number   | year of college the student is in |
+   | profileImage  | File     | the user's profile picture |
+   | schedule      | Array    | array of TimeBlocks representing the user's class schedule |
+   
+#### TimeBlock
+
+   | Property      | Type     | Description |
+   | --------------| ---------| ------------|
+   | objectId      | String   | unique id for the timeblock (default field) |
+   | createdAt     | DateTime | date when the timeblock is created (default field) |
+   | updatedAt     | DateTime | date when the timeblock is last updated (default field) |
+   | startTime     | DateTime | time of day the block starts |
+   | endTime       | DateTime | time of day the block ends |
+   | monday        | Boolean  | whether the block is active on Mondays |
+   | tuesday       | Boolean  | whether the block is active on Tuesdays |
+   | wednesday     | Boolean  | whether the block is active on Wednesdays |
+   | thursday      | Boolean  | whether the block is active on Thursdays |
+   | friday        | Boolean  | whether the block is active on Fridays |
+   | saturday      | Boolean  | whether the block is active on Saturdays |
+   | sunday        | Boolean  | whether the block is active on Sundays |
+   | class         | Pointer to Class | the class represented by the timeblock (nil if time is blockout) |
+   
+#### Class
+   | Property      | Type     | Description |
+   | --------------| ---------| ------------|
+   | objectId      | String   | unique id for the user (default field) |
+   | createdAt     | DateTime | date when the class is created (default field) |
+   | updatedAt     | DateTime | date when the class is last updated (default field) |
+   | className     | String   | the name of the class |
+   | courseNumber  | String   | the course number for the class |
+   | professorName | String   | the name of the professor for the class |
+   | students      | Array    | array of PFUser's that are in this class |
+   
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
