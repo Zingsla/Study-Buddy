@@ -32,17 +32,20 @@ Helps college students find other students that are taking the same classes to h
 * User can view their class schedule
 * User can add classes to their schedule
 * User can add blockout times to their schedule
+* User can remove classes/blockout times from their schedule
 * User can view details view of a class including other students in the class
 * User can view a list of students that share at least one class
 * User can view a list of their current study buddies
+* User can add other users as study buddies
+* User can remove study buddies
 * User can access other users' profiles to get their contact information
 * User can have schedules compared to find common free time
 * User can edit their profile
 * User can view other students' schedules through their profile
+* User can login through Facebook
 
 **Optional Nice-to-have Stories**
 
-* User can remove classes from their schedule
 * User can send study requests to other students through the app
 * User can find study groups for classes they are in
 * User can coordinate and create study sessions through the app
@@ -54,23 +57,27 @@ Helps college students find other students that are taking the same classes to h
 
 * Login screen
     * User can login to the app
+    * User can login through Facebook
 * Registration screen
     * User can create a new account
 * Stream
     * User can view their class schedule
-    * User can remove classes from their schedule
+    * User can remove classes/blockout times from their schedule
 * Stream 2
     * User can view a list of students that share at least one class
 * Stream 3
     * User can view a list of their current study buddies
+    * User can remove study buddies
 * Creation
     * User can add classes to their schedule
+    * User can add blockout times to their schedule
 * Details
-    * User can view a list of students in a particular class
+    * User can view details view of a class including other students in the class
     * User can access other users' profiles to get their contact information
     * User can have schedules compared to find common free time
     * User can edit their profile
     * User can view other students' schedules through their profile
+    * User can add other users as study buddies
 
 ### 3. Navigation
 
