@@ -52,6 +52,7 @@ Helps college students find other students that are taking the same classes to h
 * User can share locations with other users
 * User can search for other users
 * User can add other users as Facebook friends
+* User can search existing classes to add to their schedule
 
 ### 2. Screen Archetypes
 
