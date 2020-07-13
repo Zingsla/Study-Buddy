@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoginViewController.h
 //  Study-Buddy
 //
 //  Created by Jacob Franz on 7/13/20.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface LoginViewController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
