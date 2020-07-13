@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		2063FF385E8088B36C6E1FC3 /* Pods_Study_Buddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5492805CFFE9E84E05FA9126 /* Pods_Study_Buddy.framework */; };
 		2202E2E824BCFCE700130982 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2E724BCFCE700130982 /* User.m */; };
+		2202E2EC24BD040B00130982 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2EB24BD040B00130982 /* SignupViewController.m */; };
+		2202E2EF24BD045800130982 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2EE24BD045800130982 /* LoginViewController.m */; };
 		22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */; };
 		22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */; };
-		22F9F50224BCC8FD005379A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F50124BCC8FD005379A9 /* ViewController.m */; };
 		22F9F50524BCC8FD005379A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50324BCC8FD005379A9 /* Main.storyboard */; };
 		22F9F50724BCC8FE005379A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50624BCC8FE005379A9 /* Assets.xcassets */; };
 		22F9F50A24BCC8FE005379A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50824BCC8FE005379A9 /* LaunchScreen.storyboard */; };
@@ -43,13 +44,15 @@
 		0A5D24129F676C71E2839A5D /* Pods-Study-BuddyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Study-BuddyTests.release.xcconfig"; path = "Target Support Files/Pods-Study-BuddyTests/Pods-Study-BuddyTests.release.xcconfig"; sourceTree = "<group>"; };
 		2202E2E624BCFCE700130982 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		2202E2E724BCFCE700130982 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		2202E2EA24BD040B00130982 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		2202E2EB24BD040B00130982 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		2202E2ED24BD045800130982 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		2202E2EE24BD045800130982 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		22F9F4F724BCC8FD005379A9 /* Study-Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study-Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		22F9F4FD24BCC8FD005379A9 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		22F9F50024BCC8FD005379A9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		22F9F50124BCC8FD005379A9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		22F9F50424BCC8FD005379A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22F9F50624BCC8FE005379A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22F9F50924BCC8FE005379A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -131,6 +134,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2202E2E924BD03DC00130982 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2202E2EA24BD040B00130982 /* SignupViewController.h */,
+				2202E2EB24BD040B00130982 /* SignupViewController.m */,
+				2202E2ED24BD045800130982 /* LoginViewController.h */,
+				2202E2EE24BD045800130982 /* LoginViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		22F9F4EE24BCC8FD005379A9 = {
 			isa = PBXGroup;
 			children = (
@@ -157,12 +171,11 @@
 			isa = PBXGroup;
 			children = (
 				2202E2E524BCFCD300130982 /* Models */,
+				2202E2E924BD03DC00130982 /* View Controllers */,
 				22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */,
 				22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */,
 				22F9F4FD24BCC8FD005379A9 /* SceneDelegate.h */,
 				22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */,
-				22F9F50024BCC8FD005379A9 /* ViewController.h */,
-				22F9F50124BCC8FD005379A9 /* ViewController.m */,
 				22F9F50324BCC8FD005379A9 /* Main.storyboard */,
 				22F9F50624BCC8FE005379A9 /* Assets.xcassets */,
 				22F9F50824BCC8FE005379A9 /* LaunchScreen.storyboard */,
@@ -429,10 +442,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2202E2E824BCFCE700130982 /* User.m in Sources */,
-				22F9F50224BCC8FD005379A9 /* ViewController.m in Sources */,
 				22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */,
+				2202E2EF24BD045800130982 /* LoginViewController.m in Sources */,
 				22F9F50D24BCC8FE005379A9 /* main.m in Sources */,
 				22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */,
+				2202E2EC24BD040B00130982 /* SignupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
