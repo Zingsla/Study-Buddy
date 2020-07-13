@@ -1,0 +1,6 @@
+framework module Pods_Study_Buddy_Study_BuddyUITests {
+  umbrella header "Pods-Study-Buddy-Study-BuddyUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
