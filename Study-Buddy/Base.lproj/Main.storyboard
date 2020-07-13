@@ -135,11 +135,12 @@
                         <outlet property="passwordField" destination="GP5-ZK-Std" id="rBE-eu-oSn"/>
                         <outlet property="usernameField" destination="vyF-63-uyH" id="Wny-04-xBH"/>
                         <outlet property="yearControl" destination="0B0-bW-o1Z" id="Y8s-eK-Jf6"/>
+                        <segue destination="6T2-Wz-RxY" kind="presentation" identifier="SignupSegue" modalPresentationStyle="fullScreen" id="Yy7-Qt-wYs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QjU-ok-5aK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="870.53571428571422"/>
+            <point key="canvasLocation" x="138" y="863"/>
         </scene>
     </scenes>
     <resources>

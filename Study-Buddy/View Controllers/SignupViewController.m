@@ -46,6 +46,7 @@
                 NSLog(@"Error signing up user: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully signed up new user!");
+                [self performSegueWithIdentifier:@"SignupSegue" sender:nil];
             }
         }];
     } else {
