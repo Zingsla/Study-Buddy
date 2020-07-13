@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2063FF385E8088B36C6E1FC3 /* Pods_Study_Buddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5492805CFFE9E84E05FA9126 /* Pods_Study_Buddy.framework */; };
+		2202E2E824BCFCE700130982 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2E724BCFCE700130982 /* User.m */; };
 		22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */; };
 		22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */; };
 		22F9F50224BCC8FD005379A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F50124BCC8FD005379A9 /* ViewController.m */; };
@@ -40,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		0A5D24129F676C71E2839A5D /* Pods-Study-BuddyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Study-BuddyTests.release.xcconfig"; path = "Target Support Files/Pods-Study-BuddyTests/Pods-Study-BuddyTests.release.xcconfig"; sourceTree = "<group>"; };
+		2202E2E624BCFCE700130982 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		2202E2E724BCFCE700130982 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		22F9F4F724BCC8FD005379A9 /* Study-Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study-Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,8 +119,16 @@
 				E33C8C5E7C5950B6EA193EB6 /* Pods-Study-BuddyTests.debug.xcconfig */,
 				0A5D24129F676C71E2839A5D /* Pods-Study-BuddyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		2202E2E524BCFCD300130982 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2202E2E624BCFCE700130982 /* User.h */,
+				2202E2E724BCFCE700130982 /* User.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		22F9F4EE24BCC8FD005379A9 = {
@@ -145,6 +156,7 @@
 		22F9F4F924BCC8FD005379A9 /* Study-Buddy */ = {
 			isa = PBXGroup;
 			children = (
+				2202E2E524BCFCD300130982 /* Models */,
 				22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */,
 				22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */,
 				22F9F4FD24BCC8FD005379A9 /* SceneDelegate.h */,
@@ -416,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2202E2E824BCFCE700130982 /* User.m in Sources */,
 				22F9F50224BCC8FD005379A9 /* ViewController.m in Sources */,
 				22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */,
 				22F9F50D24BCC8FE005379A9 /* main.m in Sources */,
