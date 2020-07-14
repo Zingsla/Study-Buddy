@@ -9,6 +9,7 @@
 #import "ScheduleViewController.h"
 #import "BlockoutCell.h"
 #import "CourseCell.h"
+#import "User.h"
 
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -24,6 +25,24 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [self fetchData];
+}
+
+- (void)fetchData {
+    PFQuery *query = [User query];
+    [query whereKey:@"username" equalTo:[User currentUser].username];
+    [query includeKey:@"schedule"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error fetching user data: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully fetched user data!");
+            User *user = objects[0];
+            self.timeBlocks = user.schedule;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - TableView Data Source
