@@ -148,7 +148,7 @@ Helps college students find other students that are taking the same classes to h
    | friday        | Boolean  | whether the block is active on Fridays |
    | saturday      | Boolean  | whether the block is active on Saturdays |
    | sunday        | Boolean  | whether the block is active on Sundays |
-   | class         | Pointer to Class | the class represented by the timeblock (nil if timeblock is blockout) |
+   | course         | Pointer to Course | the course represented by the timeblock (nil if timeblock is blockout) |
    
 #### Class
    | Property      | Type     | Description |
@@ -156,10 +156,10 @@ Helps college students find other students that are taking the same classes to h
    | objectId      | String   | unique id for the user (default field) |
    | createdAt     | DateTime | date when the class is created (default field) |
    | updatedAt     | DateTime | date when the class is last updated (default field) |
-   | className     | String   | the name of the class |
-   | courseNumber  | String   | the course number for the class |
-   | professorName | String   | the name of the professor for the class |
-   | students      | Array    | array of PFUser's that are in this class |
+   | courseName     | String   | the name of the course |
+   | courseNumber  | String   | the course number for the course |
+   | professorName | String   | the name of the professor for the course |
+   | students      | Array    | array of PFUser's that are in this course |
    
 ### Networking
 - Login Screen
