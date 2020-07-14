@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL sunday;
 @property (strong, nonatomic) Course *course;
 
+- (NSString *)getDaysString;
+- (NSString *)getTimesString;
+
 @end
 
 NS_ASSUME_NONNULL_END

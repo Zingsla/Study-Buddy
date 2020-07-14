@@ -1,5 +1,5 @@
 //
-//  ScheduleCell.h
+//  BlockoutCell.h
 //  Study-Buddy
 //
 //  Created by Jacob Franz on 7/14/20.
@@ -11,8 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ScheduleCell : UITableViewCell
+@interface BlockoutCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *daysLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timesLabel;
 @property (strong, nonatomic) TimeBlock *timeBlock;
 
 @end

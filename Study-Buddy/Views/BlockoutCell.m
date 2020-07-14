@@ -1,14 +1,14 @@
 //
-//  ScheduleCell.m
+//  BlockoutCell.m
 //  Study-Buddy
 //
 //  Created by Jacob Franz on 7/14/20.
 //  Copyright © 2020 Jacob Franz. All rights reserved.
 //
 
-#import "ScheduleCell.h"
+#import "BlockoutCell.h"
 
-@implementation ScheduleCell
+@implementation BlockoutCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

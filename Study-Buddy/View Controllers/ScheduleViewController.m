@@ -7,7 +7,8 @@
 //
 
 #import "ScheduleViewController.h"
-#import "ScheduleCell.h"
+#import "BlockoutCell.h"
+#import "CourseCell.h"
 
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -28,9 +29,14 @@
 #pragma mark - TableView Data Source
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ScheduleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCell"];
-    cell.timeBlock = self.timeBlocks[indexPath.row];
-    return cell;
+    TimeBlock *timeBlock = self.timeBlocks[indexPath.row];
+    if (timeBlock.course == nil) {
+        BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlockoutCell"];
+        return cell;
+    } else {
+        CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
