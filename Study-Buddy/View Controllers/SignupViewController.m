@@ -39,6 +39,8 @@
     newUser.lastName = self.lastNameField.text;
     newUser.major = self.majorField.text;
     newUser.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
+    newUser.schedule = [[NSMutableArray alloc] init];
+    newUser.buddies = [[NSMutableArray alloc] init];
     
     if ([self allFieldsFilled]) {
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
