@@ -22,7 +22,7 @@
     if (user != nil) {
         NSLog(@"Successfully using cached user!");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
         self.window.rootViewController = viewController;
     }
 }
