@@ -14,6 +14,7 @@
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *timeBlocks;
 
 @end
@@ -25,6 +26,10 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     [self fetchData];
 }
@@ -38,6 +43,7 @@
             NSLog(@"Error fetching user data: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully fetched user data!");
+            [self.refreshControl endRefreshing];
             User *user = objects[0];
             self.timeBlocks = user.schedule;
             [self.tableView reloadData];
