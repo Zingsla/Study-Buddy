@@ -13,6 +13,8 @@
 		2202E2EF24BD045800130982 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2EE24BD045800130982 /* LoginViewController.m */; };
 		2202E2F224BE095000130982 /* TimeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2F124BE095000130982 /* TimeBlock.m */; };
 		2202E2F824BE0CD900130982 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2F724BE0CD900130982 /* Course.m */; };
+		2202E2FB24BE238900130982 /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2FA24BE238900130982 /* ScheduleViewController.m */; };
+		2202E2FF24BE274200130982 /* ScheduleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E2FE24BE274200130982 /* ScheduleCell.m */; };
 		22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */; };
 		22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */; };
 		22F9F50524BCC8FD005379A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50324BCC8FD005379A9 /* Main.storyboard */; };
@@ -54,6 +56,10 @@
 		2202E2F124BE095000130982 /* TimeBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeBlock.m; sourceTree = "<group>"; };
 		2202E2F624BE0CD900130982 /* Course.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		2202E2F724BE0CD900130982 /* Course.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		2202E2F924BE238900130982 /* ScheduleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		2202E2FA24BE238900130982 /* ScheduleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
+		2202E2FD24BE274200130982 /* ScheduleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleCell.h; sourceTree = "<group>"; };
+		2202E2FE24BE274200130982 /* ScheduleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleCell.m; sourceTree = "<group>"; };
 		22F9F4F724BCC8FD005379A9 /* Study-Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study-Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -151,8 +157,19 @@
 				2202E2EB24BD040B00130982 /* SignupViewController.m */,
 				2202E2ED24BD045800130982 /* LoginViewController.h */,
 				2202E2EE24BD045800130982 /* LoginViewController.m */,
+				2202E2F924BE238900130982 /* ScheduleViewController.h */,
+				2202E2FA24BE238900130982 /* ScheduleViewController.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		2202E2FC24BE272500130982 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2202E2FD24BE274200130982 /* ScheduleCell.h */,
+				2202E2FE24BE274200130982 /* ScheduleCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		22F9F4EE24BCC8FD005379A9 = {
@@ -182,6 +199,7 @@
 			children = (
 				2202E2E524BCFCD300130982 /* Models */,
 				2202E2E924BD03DC00130982 /* View Controllers */,
+				2202E2FC24BE272500130982 /* Views */,
 				22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */,
 				22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */,
 				22F9F4FD24BCC8FD005379A9 /* SceneDelegate.h */,
@@ -458,6 +476,8 @@
 				2202E2F824BE0CD900130982 /* Course.m in Sources */,
 				22F9F50D24BCC8FE005379A9 /* main.m in Sources */,
 				22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */,
+				2202E2FB24BE238900130982 /* ScheduleViewController.m in Sources */,
+				2202E2FF24BE274200130982 /* ScheduleCell.m in Sources */,
 				2202E2EC24BD040B00130982 /* SignupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
