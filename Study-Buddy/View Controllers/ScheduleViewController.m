@@ -37,6 +37,7 @@
 - (void)fetchData {
     PFQuery *query = [User query];
     [query whereKey:@"username" equalTo:[User currentUser].username];
+    [query orderByDescending:@"createdAt"];
     [query includeKey:@"schedule"];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
