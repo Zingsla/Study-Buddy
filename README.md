@@ -150,7 +150,7 @@ Helps college students find other students that are taking the same classes to h
    | sunday        | Boolean  | whether the block is active on Sundays |
    | course         | Pointer to Course | the course represented by the timeblock (nil if timeblock is blockout) |
    
-#### Class
+#### Course
    | Property      | Type     | Description |
    | --------------| ---------| ------------|
    | objectId      | String   | unique id for the user (default field) |
