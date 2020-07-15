@@ -57,7 +57,7 @@
     }];
 }
 
-#pragma mark - TableView Data Source
+#pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TimeBlock *timeBlock = self.timeBlocks[indexPath.row];
@@ -74,6 +74,27 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.timeBlocks.count;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        TimeBlock *block = self.timeBlocks[indexPath.row];
+        [self.timeBlocks removeObjectAtIndex:indexPath.row];
+        [[User currentUser] removeObject:block forKey:@"schedule"];
+        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error deleting timeblock: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully deleted timeblock!");
+                [block deleteInBackground];
+            }
+        }];
+        [tableView reloadData];
+    }
 }
 
 /*
