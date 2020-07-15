@@ -56,6 +56,27 @@
     }];
 }
 
++ (void)addTimeBlockWithStartTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion {
+    TimeBlock *newBlock = [TimeBlock new];
+    newBlock.startTime = startTime;
+    newBlock.endTime = endTime;
+    newBlock.monday = monday;
+    newBlock.tuesday = tuesday;
+    newBlock.wednesday = wednesday;
+    newBlock.thursday = thursday;
+    newBlock.friday = friday;
+    newBlock.saturday = saturday;
+    newBlock.sunday = sunday;
+    newBlock.isClass = NO;
+    
+    [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error == nil) {
+            [[User currentUser] addObject:newBlock forKey:@"schedule"];
+            [[User currentUser] saveInBackgroundWithBlock:completion];
+        }
+    }];
+}
+
 - (NSString *)getDaysString {
     NSString *string = @"";
     if (self.monday) {

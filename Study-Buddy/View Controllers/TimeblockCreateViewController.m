@@ -11,6 +11,7 @@
 
 @interface TimeblockCreateViewController ()
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typeControl;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *mondaySwitch;
@@ -33,15 +34,41 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)didChangeType:(id)sender {
+    if (self.typeControl.selectedSegmentIndex == 1) {
+        self.courseNameField.hidden = YES;
+        self.courseNameField.text = @"";
+        self.courseNumberField.hidden = YES;
+        self.courseNumberField.text = @"";
+        self.professorNameField.hidden = YES;
+        self.professorNameField.text = @"";
+    } else {
+        self.courseNameField.hidden = NO;
+        self.courseNumberField.hidden = NO;
+        self.professorNameField.hidden = NO;
+    }
+}
+
 - (IBAction)didTapAdd:(id)sender {
-    [TimeBlock addTimeBlockWithCourseName:self.courseNameField.text courseNumber:self.courseNumberField.text professorName:self.professorNameField.text startTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error creating new timeblock: %@", error.localizedDescription);
-        } else {
-            NSLog(@"Successfully added new timeblock!");
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
+    if (self.typeControl.selectedSegmentIndex == 0) {
+        [TimeBlock addTimeBlockWithCourseName:self.courseNameField.text courseNumber:self.courseNumberField.text professorName:self.professorNameField.text startTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error creating new course timeblock: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully added new course timeblock!");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    } else {
+        [TimeBlock addTimeBlockWithStartTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error creating new blockout timeblock: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully added new blockout timeblock!");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 - (IBAction)didTapCancel:(id)sender {

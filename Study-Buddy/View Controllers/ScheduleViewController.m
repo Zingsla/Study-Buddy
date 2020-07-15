@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) NSArray *timeBlocks;
+@property (strong, nonatomic) NSMutableArray *timeBlocks;
 
 @end
 
@@ -37,7 +37,6 @@
 - (void)fetchData {
     PFQuery *query = [User query];
     [query whereKey:@"username" equalTo:[User currentUser].username];
-    [query orderByDescending:@"createdAt"];
     [query includeKey:@"schedule"];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
@@ -47,6 +46,12 @@
             [self.refreshControl endRefreshing];
             User *user = objects[0];
             self.timeBlocks = user.schedule;
+            [self.timeBlocks sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                TimeBlock *block1 = obj1;
+                TimeBlock *block2 = obj2;
+                
+                return [block2.createdAt compare:block1.createdAt];
+            }];
             [self.tableView reloadData];
         }
     }];
@@ -56,12 +61,12 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TimeBlock *timeBlock = self.timeBlocks[indexPath.row];
-    if (timeBlock.course == nil) {
-        BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlockoutCell"];
+    if (timeBlock.isClass) {
+        CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
         cell.timeBlock = timeBlock;
         return cell;
     } else {
-        CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+        BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlockoutCell"];
         cell.timeBlock = timeBlock;
         return cell;
     }
