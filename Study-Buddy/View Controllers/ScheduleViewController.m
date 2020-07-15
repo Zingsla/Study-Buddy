@@ -57,9 +57,11 @@
     TimeBlock *timeBlock = self.timeBlocks[indexPath.row];
     if (timeBlock.course == nil) {
         BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlockoutCell"];
+        cell.timeBlock = timeBlock;
         return cell;
     } else {
         CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+        cell.timeBlock = timeBlock;
         return cell;
     }
 }
