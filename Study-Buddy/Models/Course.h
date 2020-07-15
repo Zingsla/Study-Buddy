@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *courseName;
 @property (strong, nonatomic) NSString *courseNumber;
 @property (strong, nonatomic) NSString *professorName;
-@property (strong, nonatomic) NSArray *students;
+@property (strong, nonatomic) NSMutableArray *students;
 
 @end
 

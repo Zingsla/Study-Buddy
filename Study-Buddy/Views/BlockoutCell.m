@@ -16,6 +16,7 @@
 }
 
 - (void)setTimeBlock:(TimeBlock *)timeBlock {
+    _timeBlock = timeBlock;
     self.daysLabel.text = [self.timeBlock getDaysString];
     self.timesLabel.text = [self.timeBlock getTimesString];
 }

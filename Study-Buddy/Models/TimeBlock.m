@@ -7,6 +7,7 @@
 //
 
 #import "TimeBlock.h"
+#import "User.h"
 
 @implementation TimeBlock
 
@@ -24,6 +25,35 @@
 
 + (nonnull NSString *)parseClassName {
     return @"TimeBlock";
+}
+
++ (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion{
+    Course *newCourse = [Course new];
+    newCourse.courseName = courseName;
+    newCourse.courseNumber = courseNumber;
+    newCourse.professorName = professorName;
+    newCourse.students = [[NSMutableArray alloc] init];
+    [newCourse.students addObject:[User currentUser]];
+    
+    TimeBlock *newBlock = [TimeBlock new];
+    newBlock.course = newCourse;
+    newBlock.startTime = startTime;
+    newBlock.endTime = endTime;
+    newBlock.monday = monday;
+    newBlock.tuesday = tuesday;
+    newBlock.wednesday = wednesday;
+    newBlock.thursday = thursday;
+    newBlock.friday = friday;
+    newBlock.saturday = saturday;
+    newBlock.sunday = sunday;
+    newBlock.isClass = YES;
+    
+    [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error == nil) {
+            [[User currentUser] addObject:newBlock forKey:@"schedule"];
+            [[User currentUser] saveInBackgroundWithBlock:completion];
+        }
+    }];
 }
 
 - (NSString *)getDaysString {

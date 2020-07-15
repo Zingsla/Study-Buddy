@@ -37,6 +37,7 @@
 - (void)fetchData {
     PFQuery *query = [User query];
     [query whereKey:@"username" equalTo:[User currentUser].username];
+    [query orderByDescending:@"createdAt"];
     [query includeKey:@"schedule"];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
@@ -57,9 +58,11 @@
     TimeBlock *timeBlock = self.timeBlocks[indexPath.row];
     if (timeBlock.course == nil) {
         BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlockoutCell"];
+        cell.timeBlock = timeBlock;
         return cell;
     } else {
         CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+        cell.timeBlock = timeBlock;
         return cell;
     }
 }

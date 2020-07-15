@@ -11,9 +11,16 @@
 @implementation CourseCell
 
 - (void)setTimeBlock:(TimeBlock *)timeBlock {
-    self.courseNameLabel.text = self.timeBlock.course.courseName;
-    self.courseNumberLabel.text = self.timeBlock.course.courseNumber;
-    self.professorNameLabel.text = self.timeBlock.course.professorName;
+    _timeBlock = timeBlock;
+    [self.timeBlock.course fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error fetching course for timeblock: %@", error.localizedDescription);
+        } else {
+            self.courseNameLabel.text = self.timeBlock.course.courseName;
+            self.courseNumberLabel.text = self.timeBlock.course.courseNumber;
+            self.professorNameLabel.text = self.timeBlock.course.professorName;
+        }
+    }];
     self.daysLabel.text = [self.timeBlock getDaysString];
     self.timesLabel.text = [self.timeBlock getTimesString];
 }
