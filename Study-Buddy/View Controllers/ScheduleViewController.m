@@ -87,10 +87,20 @@
         [[User currentUser] removeObject:block forKey:@"schedule"];
         [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                NSLog(@"Error deleting timeblock: %@", error.localizedDescription);
+                NSLog(@"Error removing timeblock from schedule: %@", error.localizedDescription);
             } else {
-                NSLog(@"Successfully deleted timeblock!");
-                [block deleteInBackground];
+                NSLog(@"Successfully removed timeblock from schedule!");
+                if (block.isClass) {
+                    [block.course removeObject:[User currentUser] forKey:@"students"];
+                    if (block.course.students.count == 0) {
+                        [block.course deleteInBackground];
+                        [block deleteInBackground];
+                    } else {
+                        [block.course saveInBackground];
+                    }
+                } else {
+                    [block deleteInBackground];
+                }
             }
         }];
         [tableView reloadData];

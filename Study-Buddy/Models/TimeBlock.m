@@ -48,12 +48,25 @@
     newBlock.sunday = sunday;
     newBlock.isClass = YES;
     
-    [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error == nil) {
-            [[User currentUser] addObject:newBlock forKey:@"schedule"];
-            [[User currentUser] saveInBackgroundWithBlock:completion];
-        }
-    }];
+    TimeBlock *match = [newBlock getExistingMatchingTimeBlock];
+    if (match == nil) {
+        NSLog(@"Creating new block");
+        [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error == nil) {
+                [[User currentUser] addObject:newBlock forKey:@"schedule"];
+                [[User currentUser] saveInBackgroundWithBlock:completion];
+            }
+        }];
+    } else {
+        NSLog(@"Adding to existing block");
+        [match.course addObject:[User currentUser] forKey:@"students"];
+        [match saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error == nil) {
+                [[User currentUser] addObject:match forKey:@"schedule"];
+                [[User currentUser] saveInBackgroundWithBlock:completion];
+            }
+        }];
+    }
 }
 
 + (void)addTimeBlockWithStartTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion {
@@ -75,6 +88,34 @@
             [[User currentUser] saveInBackgroundWithBlock:completion];
         }
     }];
+}
+
+- (TimeBlock *)getExistingMatchingTimeBlock {
+    PFQuery *innerQuery = [Course query];
+    [innerQuery whereKey:@"courseName" equalTo:self.course.courseName];
+    [innerQuery whereKey:@"courseNumber" equalTo:self.course.courseNumber];
+    [innerQuery whereKey:@"professorName" equalTo:self.course.professorName];
+    
+    PFQuery *query = [TimeBlock query];
+    [query whereKey:@"monday" equalTo:[NSNumber numberWithBool:self.monday]];
+    [query whereKey:@"tuesday" equalTo:[NSNumber numberWithBool:self.tuesday]];
+    [query whereKey:@"wednesday" equalTo:[NSNumber numberWithBool:self.wednesday]];
+    [query whereKey:@"thursday" equalTo:[NSNumber numberWithBool:self.thursday]];
+    [query whereKey:@"friday" equalTo:[NSNumber numberWithBool:self.friday]];
+    [query whereKey:@"saturday" equalTo:[NSNumber numberWithBool:self.saturday]];
+    [query whereKey:@"sunday" equalTo:[NSNumber numberWithBool:self.sunday]];
+    [query whereKey:@"course" matchesQuery:innerQuery];
+    
+    TimeBlock *match = nil;
+    NSArray *blocks = [query findObjects];
+    for (TimeBlock *block in blocks) {
+        if ([[block getTimesString] isEqualToString:[self getTimesString]]) {
+            NSLog(@"Found matching timeblock!");
+            match = block;
+        }
+    }
+    
+    return match;
 }
 
 - (NSString *)getDaysString {
