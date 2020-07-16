@@ -17,6 +17,7 @@
 		2202E30224BE3C0900130982 /* BlockoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E30124BE3C0900130982 /* BlockoutCell.m */; };
 		2202E30524BE3C3C00130982 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E30424BE3C3C00130982 /* CourseCell.m */; };
 		2202E30824BE6C6400130982 /* TimeblockCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E30724BE6C6400130982 /* TimeblockCreateViewController.m */; };
+		2202E30B24BFBEE300130982 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E30A24BFBEE300130982 /* ProfileViewController.m */; };
 		22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */; };
 		22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */; };
 		22F9F50524BCC8FD005379A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50324BCC8FD005379A9 /* Main.storyboard */; };
@@ -66,6 +67,8 @@
 		2202E30424BE3C3C00130982 /* CourseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
 		2202E30624BE6C6400130982 /* TimeblockCreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeblockCreateViewController.h; sourceTree = "<group>"; };
 		2202E30724BE6C6400130982 /* TimeblockCreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeblockCreateViewController.m; sourceTree = "<group>"; };
+		2202E30924BFBEE300130982 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		2202E30A24BFBEE300130982 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		22F9F4F724BCC8FD005379A9 /* Study-Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study-Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				2202E2FA24BE238900130982 /* ScheduleViewController.m */,
 				2202E30624BE6C6400130982 /* TimeblockCreateViewController.h */,
 				2202E30724BE6C6400130982 /* TimeblockCreateViewController.m */,
+				2202E30924BFBEE300130982 /* ProfileViewController.h */,
+				2202E30A24BFBEE300130982 /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				2202E30224BE3C0900130982 /* BlockoutCell.m in Sources */,
 				2202E30824BE6C6400130982 /* TimeblockCreateViewController.m in Sources */,
 				2202E30524BE3C3C00130982 /* CourseCell.m in Sources */,
+				2202E30B24BFBEE300130982 /* ProfileViewController.m in Sources */,
 				22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */,
 				2202E2FB24BE238900130982 /* ScheduleViewController.m in Sources */,
 				2202E2EC24BD040B00130982 /* SignupViewController.m in Sources */,
