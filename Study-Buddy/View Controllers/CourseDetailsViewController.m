@@ -10,13 +10,24 @@
 
 @interface CourseDetailsViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *courseNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *professorNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *daysLabel;
+
 @end
 
 @implementation CourseDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.courseNameLabel.text = self.timeBlock.course.courseName;
+    self.courseNumberLabel.text = self.timeBlock.course.courseNumber;
+    self.professorNameLabel.text = self.timeBlock.course.professorName;
+    self.timeLabel.text = [self.timeBlock getTimesString];
+    self.daysLabel.text = [self.timeBlock getDaysString];
 }
 
 /*

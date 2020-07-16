@@ -115,7 +115,9 @@
     TimeBlock *block = self.timeBlocks[indexPath.row];
     
     if (block.isClass) {
-        
+        CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailsViewController"];
+        newView.timeBlock = block;
+        [self.navigationController pushViewController:newView animated:YES];
     } else {
         BlockoutDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"BlockoutDetailsViewController"];
         newView.timeBlock = block;

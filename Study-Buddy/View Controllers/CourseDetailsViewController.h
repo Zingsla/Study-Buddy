@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimeBlock.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CourseDetailsViewController : UIViewController
+
+@property (strong, nonatomic) TimeBlock *timeBlock;
 
 @end
 
