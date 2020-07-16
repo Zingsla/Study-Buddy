@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion;
 + (void)addTimeBlockWithStartTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion;
 - (NSString *)getDaysString;
+- (NSString *)getStartTimeString;
+- (NSString *)getEndTimeString;
 - (NSString *)getTimesString;
 
 @end
