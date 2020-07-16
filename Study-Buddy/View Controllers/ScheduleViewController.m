@@ -8,7 +8,9 @@
 
 #import "ScheduleViewController.h"
 #import "BlockoutCell.h"
+#import "BlockoutDetailsViewController.h"
 #import "CourseCell.h"
+#import "CourseDetailsViewController.h"
 #import "User.h"
 
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -104,6 +106,20 @@
             }
         }];
         [tableView reloadData];
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TimeBlock *block = self.timeBlocks[indexPath.row];
+    
+    if (block.isClass) {
+        
+    } else {
+        BlockoutDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"BlockoutDetailsViewController"];
+        newView.timeBlock = block;
+        [self.navigationController pushViewController:newView animated:YES];
     }
 }
 

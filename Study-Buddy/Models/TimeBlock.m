@@ -145,12 +145,22 @@
     return string;
 }
 
-- (NSString *)getTimesString {
+- (NSString *)getStartTimeString {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateStyle = NSDateFormatterNoStyle;
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    
-    return [NSString stringWithFormat:@"%@ - %@", [dateFormatter stringFromDate:self.startTime], [dateFormatter stringFromDate:self.endTime]];
+    return [dateFormatter stringFromDate:self.startTime];
+}
+
+- (NSString *)getEndTimeString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterNoStyle;
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    return [dateFormatter stringFromDate:self.endTime];
+}
+
+- (NSString *)getTimesString {
+    return [NSString stringWithFormat:@"%@ - %@", [self getStartTimeString], [self getEndTimeString]];
 }
 
 @end
