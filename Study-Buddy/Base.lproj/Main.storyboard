@@ -10,7 +10,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -478,14 +478,20 @@
         <!--Profile-->
         <scene sceneID="3c7-Vs-inA">
             <objects>
-                <viewController id="AMl-21-f6O" sceneMemberID="viewController">
+                <viewController id="AMl-21-f6O" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tKD-oS-uFE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="dcP-TU-4Sr"/>
+                    <navigationItem key="navigationItem" title="Profile" id="dcP-TU-4Sr">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="htx-TJ-Msp">
+                            <connections>
+                                <action selector="didTapLogout:" destination="AMl-21-f6O" id="kOf-1H-hNY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9i-eW-gvS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
