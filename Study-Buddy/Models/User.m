@@ -22,4 +22,18 @@
     return (User *)[PFUser user];
 }
 
+- (NSString *)getYearString {
+    if ([self.year isEqualToNumber:@(1)]) {
+        return @"Freshman";
+    } else if ([self.year isEqualToNumber:@(2)]) {
+        return @"Sophomore";
+    } else if ([self.year isEqualToNumber:@(3)]) {
+        return @"Junior";
+    } else if ([self.year isEqualToNumber:@(4)]) {
+        return @"Senior";
+    } else {
+        return @"";
+    }
+}
+
 @end

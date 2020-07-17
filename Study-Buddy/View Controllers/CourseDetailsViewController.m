@@ -7,14 +7,17 @@
 //
 
 #import "CourseDetailsViewController.h"
+#import "StudentCell.h"
 
-@interface CourseDetailsViewController ()
+@interface CourseDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courseNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *professorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *daysLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *students;
 
 @end
 
@@ -28,6 +31,36 @@
     self.professorNameLabel.text = self.timeBlock.course.professorName;
     self.timeLabel.text = [self.timeBlock getTimesString];
     self.daysLabel.text = [self.timeBlock getDaysString];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self fetchData];
+}
+
+- (void)fetchData {
+    self.students = self.timeBlock.course.students;
+    User *toRemove;
+    for (User *user in self.students) {
+        if ([user.objectId isEqualToString:[User currentUser].objectId]) {
+            toRemove = user;
+        }
+    }
+    [self.students removeObject:toRemove];
+    [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudentCell"];
+    cell.user = self.students[indexPath.row];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.students.count;
 }
 
 /*

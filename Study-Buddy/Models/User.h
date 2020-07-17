@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSMutableArray *schedule;
 @property (strong, nonatomic) NSMutableArray *buddies;
 
+- (NSString *)getYearString;
+
 @end
 
 NS_ASSUME_NONNULL_END
