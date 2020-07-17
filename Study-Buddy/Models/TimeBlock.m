@@ -124,6 +124,28 @@
     return match;
 }
 
+- (void)deleteExistingTimeBlockWithCompletion:(PFBooleanResultBlock)completion {
+    [[User currentUser] removeObject:self forKey:@"schedule"];
+    [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            completion(NO, error);
+        } else {
+            if (self.isClass) {
+                [self.course removeObject:[User currentUser] forKey:@"students"];
+                if (self.course.students.count == 0) {
+                    [self.course deleteInBackground];
+                    [self deleteInBackground];
+                } else {
+                    [self.course saveInBackground];
+                }
+            } else {
+                [self deleteInBackground];
+            }
+            completion(YES, nil);
+        }
+    }];
+}
+
 - (NSString *)getDaysString {
     NSString *string = @"";
     if (self.monday) {
