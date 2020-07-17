@@ -23,16 +23,15 @@
 }
 
 - (IBAction)didTapLogout:(id)sender {
-    SceneDelegate *myDelegate = (SceneDelegate *) self.view.window.windowScene.delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    myDelegate.window.rootViewController = loginViewController;
-    
     [User logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error logging out: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully logged out!");
+            SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            myDelegate.window.rootViewController = loginViewController;
         }
     }];
 }

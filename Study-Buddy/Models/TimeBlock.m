@@ -52,7 +52,10 @@
     if (match == nil) {
         NSLog(@"Creating new block");
         [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error == nil) {
+            if (error != nil) {
+                NSLog(@"Error creating new block: %@", error.localizedDescription);
+                completion(NO, error);
+            } else {
                 [[User currentUser] addObject:newBlock forKey:@"schedule"];
                 [[User currentUser] saveInBackgroundWithBlock:completion];
             }
@@ -61,7 +64,10 @@
         NSLog(@"Adding to existing block");
         [match.course addObject:[User currentUser] forKey:@"students"];
         [match saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error == nil) {
+            if (error != nil) {
+                NSLog(@"Error adding to existing block: %@", error.localizedDescription);
+                completion(NO, error);
+            } else {
                 [[User currentUser] addObject:match forKey:@"schedule"];
                 [[User currentUser] saveInBackgroundWithBlock:completion];
             }
@@ -116,6 +122,28 @@
     }
     
     return match;
+}
+
+- (void)deleteExistingTimeBlockWithCompletion:(PFBooleanResultBlock)completion {
+    [[User currentUser] removeObject:self forKey:@"schedule"];
+    [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            completion(NO, error);
+        } else {
+            if (self.isClass) {
+                [self.course removeObject:[User currentUser] forKey:@"students"];
+                if (self.course.students.count == 0) {
+                    [self.course deleteInBackground];
+                    [self deleteInBackground];
+                } else {
+                    [self.course saveInBackground];
+                }
+            } else {
+                [self deleteInBackground];
+            }
+            completion(YES, nil);
+        }
+    }];
 }
 
 - (NSString *)getDaysString {

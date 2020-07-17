@@ -85,27 +85,15 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         TimeBlock *block = self.timeBlocks[indexPath.row];
-        [self.timeBlocks removeObjectAtIndex:indexPath.row];
-        [[User currentUser] removeObject:block forKey:@"schedule"];
-        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [block deleteExistingTimeBlockWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                NSLog(@"Error removing timeblock from schedule: %@", error.localizedDescription);
+                NSLog(@"Error deleting timeblock: %@", error.localizedDescription);
             } else {
-                NSLog(@"Successfully removed timeblock from schedule!");
-                if (block.isClass) {
-                    [block.course removeObject:[User currentUser] forKey:@"students"];
-                    if (block.course.students.count == 0) {
-                        [block.course deleteInBackground];
-                        [block deleteInBackground];
-                    } else {
-                        [block.course saveInBackground];
-                    }
-                } else {
-                    [block deleteInBackground];
-                }
+                NSLog(@"Successfully deleted timeblock!");
+                [self.timeBlocks removeObjectAtIndex:indexPath.row];
+                [tableView reloadData];
             }
         }];
-        [tableView reloadData];
     }
 }
 
