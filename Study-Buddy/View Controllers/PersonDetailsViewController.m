@@ -7,8 +7,9 @@
 //
 
 #import "PersonDetailsViewController.h"
+#import "CourseCell.h"
 
-@interface PersonDetailsViewController ()
+@interface PersonDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -16,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *majorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *schedule;
 
 @end
 
@@ -28,6 +31,24 @@
     self.yearLabel.text = [self.user getYearString];
     self.majorLabel.text = self.user.major;
     self.emailLabel.text = self.user.emailAddress;
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.schedule = self.user.schedule;
+    [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+    cell.timeBlock = self.schedule[indexPath.row];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.schedule.count;
 }
 
 /*
