@@ -13,13 +13,24 @@
 
 @interface ProfileViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yearLabel;
+@property (weak, nonatomic) IBOutlet UILabel *majorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    User *user = [User currentUser];
+    self.nameLabel.text = [user getNameString];
+    self.yearLabel.text = [user getYearString];
+    self.majorLabel.text = user.major;
+    self.emailLabel.text = user.email;
 }
 
 - (IBAction)didTapLogout:(id)sender {

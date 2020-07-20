@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSMutableArray *buddies;
 
 - (NSString *)getYearString;
+- (NSString *)getNameString;
 
 @end
 

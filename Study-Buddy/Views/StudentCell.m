@@ -21,7 +21,7 @@
         if (error != nil) {
             NSLog(@"Error fetching user: %@", error.localizedDescription);
         } else {
-            self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName];
+            self.nameLabel.text = [self.user getNameString];
             self.majorLabel.text = self.user.major;
             self.yearLabel.text = [self.user getYearString];
         }
