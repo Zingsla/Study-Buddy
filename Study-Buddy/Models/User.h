@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *emailAddress;
 @property (strong, nonatomic) NSString *major;
 @property (strong, nonatomic) NSNumber *year;
 @property (strong, nonatomic) PFFileObject *profileImage;

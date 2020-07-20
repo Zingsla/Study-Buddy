@@ -35,6 +35,7 @@
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
+    newUser.emailAddress = self.emailField.text;
     newUser.firstName = self.firstNameField.text;
     newUser.lastName = self.lastNameField.text;
     newUser.major = self.majorField.text;
