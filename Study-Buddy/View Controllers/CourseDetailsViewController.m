@@ -7,6 +7,7 @@
 //
 
 #import "CourseDetailsViewController.h"
+#import "PersonDetailsViewController.h"
 #import "StudentCell.h"
 
 @interface CourseDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -63,14 +64,16 @@
     return self.students.count;
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"PersonDetailsSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        User *user = self.students[indexPath.row];
+        PersonDetailsViewController *personDetailsViewController = [segue destinationViewController];
+        personDetailsViewController.user = user;
+    }
 }
-*/
 
 @end
