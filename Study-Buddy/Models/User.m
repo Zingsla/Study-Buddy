@@ -12,6 +12,7 @@
 
 @dynamic firstName;
 @dynamic lastName;
+@dynamic emailAddress;
 @dynamic major;
 @dynamic year;
 @dynamic profileImage;

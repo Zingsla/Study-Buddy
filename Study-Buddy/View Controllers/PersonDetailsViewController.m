@@ -27,7 +27,7 @@
     self.nameLabel.text = [self.user getNameString];
     self.yearLabel.text = [self.user getYearString];
     self.majorLabel.text = self.user.major;
-    self.emailLabel.text = self.user.email;
+    self.emailLabel.text = self.user.emailAddress;
 }
 
 /*
