@@ -16,20 +16,14 @@
     return @"Connection";
 }
 
-+ (void)addConnectionWithUser:(User *)user1 andUser:(User *)user2 {
++ (void)addConnectionWithUser:(User *)user1 andUser:(User *)user2 withBlock:(PFBooleanResultBlock)completion {
     if ([self connectionExistsWithUser:user1 andUser:user2]) {
         return;
     }
     
     Connection *connection = [Connection new];
     connection.users = [NSArray arrayWithObjects:user1, user2, nil];
-    [connection saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error saving connection: %@", error.localizedDescription);
-        } else {
-            NSLog(@"Successfully saved connection!");
-        }
-    }];
+    [connection saveInBackgroundWithBlock:completion];
 }
 
 + (BOOL)connectionExistsWithUser:(User *)user1 andUser:(User *)user2 {
