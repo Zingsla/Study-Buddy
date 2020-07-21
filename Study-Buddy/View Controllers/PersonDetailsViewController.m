@@ -8,6 +8,7 @@
 
 #import "PersonDetailsViewController.h"
 #import "CourseCell.h"
+#import "CourseDetailsViewController.h"
 
 @interface PersonDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -49,6 +50,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.schedule.count;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TimeBlock *block = self.schedule[indexPath.row];
+    
+    CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailsViewController"];
+    newView.timeBlock = block;
+    [self.navigationController pushViewController:newView animated:YES];
 }
 
 /*
