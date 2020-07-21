@@ -13,8 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Connection : PFObject<PFSubclassing>
 
-@property (strong, nonatomic) User *user1;
-@property (strong, nonatomic) User *user2;
+@property (strong, nonatomic) NSArray *users;
+
++ (void)addConnectionWithUsers:(NSArray *)users;
++ (BOOL)connectionExistsWith:(NSArray *)users;
 
 @end
 
