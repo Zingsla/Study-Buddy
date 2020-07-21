@@ -15,8 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSArray *users;
 
-+ (void)addConnectionWithUsers:(NSArray *)users;
-+ (BOOL)connectionExistsWith:(NSArray *)users;
++ (void)addConnectionWithUser:(User *)user1 andUser:(User *)user2;
++ (BOOL)connectionExistsWithUser:(User *)user1 andUser:(User *)user2;
+
 
 @end
 

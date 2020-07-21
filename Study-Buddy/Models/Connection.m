@@ -16,13 +16,13 @@
     return @"Connection";
 }
 
-+ (void)addConnectionWithUsers:(NSArray *)users {
-    if ([self connectionExistsWith:users]) {
++ (void)addConnectionWithUser:(User *)user1 andUser:(User *)user2 {
+    if ([self connectionExistsWithUser:user1 andUser:user2]) {
         return;
     }
     
     Connection *connection = [Connection new];
-    connection.users = [NSArray arrayWithArray:users];
+    connection.users = [NSArray arrayWithObjects:user1, user2, nil];
     [connection saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error saving connection: %@", error.localizedDescription);
@@ -32,7 +32,8 @@
     }];
 }
 
-+ (BOOL)connectionExistsWith:(NSArray *)users {
++ (BOOL)connectionExistsWithUser:(User *)user1 andUser:(User *)user2 {
+    NSArray *users = [NSArray arrayWithObjects:user1, user2, nil];
     PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
     [query whereKey:@"users" containsAllObjectsInArray:users];
     NSArray *connections = [query findObjects];
