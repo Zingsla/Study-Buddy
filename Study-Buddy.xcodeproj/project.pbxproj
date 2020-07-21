@@ -22,6 +22,7 @@
 		2202E31424C0E93B00130982 /* CourseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E31324C0E93B00130982 /* CourseDetailsViewController.m */; };
 		22B148A324C24FD900EEC31A /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A224C24FD900EEC31A /* StudentCell.m */; };
 		22B148A624C6323B00EEC31A /* PersonDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A524C6323B00EEC31A /* PersonDetailsViewController.m */; };
+		22B148A924C7765000EEC31A /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A824C7765000EEC31A /* Connection.m */; };
 		22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */; };
 		22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */; };
 		22F9F50524BCC8FD005379A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50324BCC8FD005379A9 /* Main.storyboard */; };
@@ -81,6 +82,8 @@
 		22B148A224C24FD900EEC31A /* StudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentCell.m; sourceTree = "<group>"; };
 		22B148A424C6323B00EEC31A /* PersonDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonDetailsViewController.h; sourceTree = "<group>"; };
 		22B148A524C6323B00EEC31A /* PersonDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonDetailsViewController.m; sourceTree = "<group>"; };
+		22B148A724C7765000EEC31A /* Connection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
+		22B148A824C7765000EEC31A /* Connection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
 		22F9F4F724BCC8FD005379A9 /* Study-Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study-Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				2202E2F124BE095000130982 /* TimeBlock.m */,
 				2202E2F624BE0CD900130982 /* Course.h */,
 				2202E2F724BE0CD900130982 /* Course.m */,
+				22B148A724C7765000EEC31A /* Connection.h */,
+				22B148A824C7765000EEC31A /* Connection.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				22B148A624C6323B00EEC31A /* PersonDetailsViewController.m in Sources */,
 				22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */,
 				2202E2EF24BD045800130982 /* LoginViewController.m in Sources */,
+				22B148A924C7765000EEC31A /* Connection.m in Sources */,
 				2202E31424C0E93B00130982 /* CourseDetailsViewController.m in Sources */,
 				2202E2F224BE095000130982 /* TimeBlock.m in Sources */,
 				2202E2F824BE0CD900130982 /* Course.m in Sources */,

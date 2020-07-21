@@ -7,6 +7,7 @@
 //
 
 #import "PersonDetailsViewController.h"
+#import "Connection.h"
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *majorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *addBuddyButton;
 @property (strong, nonatomic) NSMutableArray *schedule;
 
 @end
@@ -32,11 +34,33 @@
     self.yearLabel.text = [self.user getYearString];
     self.majorLabel.text = self.user.major;
     self.emailLabel.text = self.user.emailAddress;
+    [self checkBuddyStatus];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.schedule = self.user.schedule;
     [self.tableView reloadData];
+}
+
+- (void)checkBuddyStatus {
+    if ([Connection connectionExistsWithUser:self.user andUser:[User currentUser]]) {
+        self.buddyStatusLabel.text = @"Currently buddies!";
+        self.addBuddyButton.hidden = YES;
+    } else {
+        self.buddyStatusLabel.text = @"Not currently buddies";
+        self.addBuddyButton.hidden = NO;
+    }
+}
+
+- (IBAction)didTapAddBuddy:(id)sender {
+    [Connection addConnectionWithUser:self.user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error creating connection: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully created connection!");
+            [self checkBuddyStatus];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDataSource

@@ -17,7 +17,6 @@
 @dynamic year;
 @dynamic profileImage;
 @dynamic schedule;
-@dynamic buddies;
 
 + (User *)user {
     return (User *)[PFUser user];
