@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *year;
 @property (strong, nonatomic) PFFileObject *profileImage;
 @property (strong, nonatomic) NSMutableArray *schedule;
-@property (strong, nonatomic) NSMutableArray *buddies;
 
 - (NSString *)getYearString;
 - (NSString *)getNameString;
