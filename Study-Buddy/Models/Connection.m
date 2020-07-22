@@ -51,4 +51,25 @@
     }
 }
 
++ (void)deleteConnectionWithUser:(User *)user1 andUser:(User *)user2 withBlock:(PFBooleanResultBlock)completion {
+    if ([Connection connectionExistsWithUser:user1 andUser:user2]) {
+        Connection *connection = [Connection getExistingConnectionWithUser:user1 andUser:user2];
+        [connection deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                completion(NO, error);
+            } else {
+                completion(YES, nil);
+            }
+        }];
+    } else {
+        NSLog(@"Doing nothing, connection does not exist");
+    }
+}
+
++ (Connection *)getExistingConnectionWithUser:(User *)user1 andUser:(User *)user2 {
+    PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
+    [query whereKey:@"users" containsAllObjectsInArray:[NSArray arrayWithObjects:user1, user2, nil]];
+    return [query findObjects][0];
+}
+
 @end
