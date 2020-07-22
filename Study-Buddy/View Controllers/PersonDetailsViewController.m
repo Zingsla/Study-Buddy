@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *addBuddyButton;
+@property (weak, nonatomic) IBOutlet UIButton *removeBuddyButton;
 @property (strong, nonatomic) NSMutableArray *schedule;
 
 @end
@@ -46,9 +47,11 @@
     if ([Connection connectionExistsWithUser:self.user andUser:[User currentUser]]) {
         self.buddyStatusLabel.text = @"Currently buddies!";
         self.addBuddyButton.hidden = YES;
+        self.removeBuddyButton.hidden = NO;
     } else {
         self.buddyStatusLabel.text = @"Not currently buddies";
         self.addBuddyButton.hidden = NO;
+        self.removeBuddyButton.hidden = YES;
     }
 }
 
@@ -58,6 +61,17 @@
             NSLog(@"Error creating connection: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully created connection!");
+            [self checkBuddyStatus];
+        }
+    }];
+}
+
+- (IBAction)didTapRemoveBuddy:(id)sender {
+    [Connection deleteConnectionWithUser:self.user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error removing buddy: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully removed buddy!");
             [self checkBuddyStatus];
         }
     }];

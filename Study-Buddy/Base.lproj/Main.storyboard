@@ -1121,6 +1121,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRJ-Ce-PnF">
+                                <rect key="frame" x="225" y="223" width="122" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Remove Buddy">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapRemoveBuddy:" destination="D0D-ni-X1f" eventType="touchUpInside" id="QCN-B5-HVI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="W5e-m6-1EM"/>
@@ -1141,6 +1152,7 @@
                         <outlet property="majorLabel" destination="0pa-E1-8Pp" id="T3g-p7-E88"/>
                         <outlet property="nameLabel" destination="yDU-2C-27c" id="SUD-VT-cZX"/>
                         <outlet property="profileImage" destination="g8O-83-Slu" id="GxZ-8E-OMn"/>
+                        <outlet property="removeBuddyButton" destination="lRJ-Ce-PnF" id="QJv-EN-tPG"/>
                         <outlet property="tableView" destination="Bj9-aL-dKJ" id="UYo-Aj-caH"/>
                         <outlet property="yearLabel" destination="bdC-H6-CC5" id="FgU-UP-T5u"/>
                     </connections>
