@@ -65,6 +65,25 @@
     return self.buddies.count;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        User *buddy = self.buddies[indexPath.row];
+        [Connection deleteConnectionWithUser:buddy andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error deleting connection: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully deleted connection!");
+                [self.buddies removeObjectAtIndex:indexPath.row];
+                [self.tableView reloadData];
+            }
+        }];
+    }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
