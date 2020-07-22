@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)addConnectionWithUser:(User *)user1 andUser:(User *)user2 withBlock:(PFBooleanResultBlock)completion;
 + (BOOL)connectionExistsWithUser:(User *)user1 andUser:(User *)user2;
-
++ (NSMutableArray *)getBuddiesArrayFromConnectionsArray:(NSArray *)connections user:(User *)user;
 
 @end
 

@@ -34,4 +34,21 @@
     return (connections.count > 0);
 }
 
++ (NSMutableArray *)getBuddiesArrayFromConnectionsArray:(NSArray *)connections user:(User *)user {
+    NSMutableArray *buddies = [[NSMutableArray alloc] init];
+    for (Connection *connection in connections) {
+        [buddies addObject:[connection getOtherUserFrom:user]];
+    }
+    
+    return buddies;
+}
+
+- (User *)getOtherUserFrom:(User *)user {
+    if ([self.users[0] isEqual:[User currentUser]]) {
+        return self.users[1];
+    } else {
+        return self.users[0];
+    }
+}
+
 @end
