@@ -14,6 +14,7 @@
 @interface CurrentBuddiesViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSMutableArray *buddies;
 
 @end
@@ -25,6 +26,10 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -41,6 +46,7 @@
             NSLog(@"Error fetching current buddies: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully fetched current buddies!");
+            [self.refreshControl endRefreshing];
             self.buddies = [Connection getBuddiesArrayFromConnectionsArray:objects user:[User currentUser]];
             [self.tableView reloadData];
         }
