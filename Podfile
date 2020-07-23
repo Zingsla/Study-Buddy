@@ -8,6 +8,7 @@ target 'Study-Buddy' do
   # Pods for Study-Buddy
     pod 'Parse'
     pod 'IQKeyboardManager'
+    pod 'DateTools'
 
   target 'Study-BuddyTests' do
     inherit! :search_paths
