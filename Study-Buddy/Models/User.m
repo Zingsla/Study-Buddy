@@ -51,7 +51,23 @@
     } else if (sharedOther > sharedSelf) {
         return NSOrderedDescending;
     } else {
-        return NSOrderedSame;
+        BOOL majorMatchSelf = [self.major isEqualToString:currentUser.major];
+        BOOL majorMatchOther = [otherUser.major isEqualToString:currentUser.major];
+        if (majorMatchSelf && !majorMatchOther) {
+            return NSOrderedAscending;
+        } else if (majorMatchOther && !majorMatchSelf) {
+            return NSOrderedDescending;
+        } else {
+            NSInteger yearDifferenceSelf = labs([self.year integerValue] - [currentUser.year integerValue]);
+            NSInteger yearDifferenceOther = labs([otherUser.year integerValue] - [currentUser.year integerValue]);
+            if (yearDifferenceSelf < yearDifferenceOther) {
+                return NSOrderedAscending;
+            } else if (yearDifferenceOther < yearDifferenceSelf) {
+                return NSOrderedDescending;
+            } else {
+                return NSOrderedSame;
+            }
+        }
     }
 }
 
