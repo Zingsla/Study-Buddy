@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)getYearString;
 - (NSString *)getNameString;
+- (NSComparisonResult)compare:(User *)otherUser;
+- (NSInteger)numberOfSharedClassesWith:(User *)user;
 
 @end
 

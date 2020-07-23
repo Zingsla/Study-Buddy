@@ -24,6 +24,7 @@
 		22B148A624C6323B00EEC31A /* PersonDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A524C6323B00EEC31A /* PersonDetailsViewController.m */; };
 		22B148A924C7765000EEC31A /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A824C7765000EEC31A /* Connection.m */; };
 		22B148AC24C7998300EEC31A /* CurrentBuddiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148AB24C7998300EEC31A /* CurrentBuddiesViewController.m */; };
+		22B148AF24C8B5B500EEC31A /* SuggestedBuddiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148AE24C8B5B500EEC31A /* SuggestedBuddiesViewController.m */; };
 		22F9F4FC24BCC8FD005379A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */; };
 		22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F9F4FE24BCC8FD005379A9 /* SceneDelegate.m */; };
 		22F9F50524BCC8FD005379A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F9F50324BCC8FD005379A9 /* Main.storyboard */; };
@@ -87,6 +88,8 @@
 		22B148A824C7765000EEC31A /* Connection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
 		22B148AA24C7998300EEC31A /* CurrentBuddiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentBuddiesViewController.h; sourceTree = "<group>"; };
 		22B148AB24C7998300EEC31A /* CurrentBuddiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentBuddiesViewController.m; sourceTree = "<group>"; };
+		22B148AD24C8B5B500EEC31A /* SuggestedBuddiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestedBuddiesViewController.h; sourceTree = "<group>"; };
+		22B148AE24C8B5B500EEC31A /* SuggestedBuddiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuggestedBuddiesViewController.m; sourceTree = "<group>"; };
 		22F9F4F724BCC8FD005379A9 /* Study-Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study-Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F9F4FA24BCC8FD005379A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22F9F4FB24BCC8FD005379A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				22B148A524C6323B00EEC31A /* PersonDetailsViewController.m */,
 				22B148AA24C7998300EEC31A /* CurrentBuddiesViewController.h */,
 				22B148AB24C7998300EEC31A /* CurrentBuddiesViewController.m */,
+				22B148AD24C8B5B500EEC31A /* SuggestedBuddiesViewController.h */,
+				22B148AE24C8B5B500EEC31A /* SuggestedBuddiesViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				2202E30224BE3C0900130982 /* BlockoutCell.m in Sources */,
 				2202E30824BE6C6400130982 /* TimeblockCreateViewController.m in Sources */,
 				2202E30524BE3C3C00130982 /* CourseCell.m in Sources */,
+				22B148AF24C8B5B500EEC31A /* SuggestedBuddiesViewController.m in Sources */,
 				2202E30B24BFBEE300130982 /* ProfileViewController.m in Sources */,
 				22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */,
 				2202E2FB24BE238900130982 /* ScheduleViewController.m in Sources */,
