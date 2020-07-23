@@ -551,6 +551,7 @@
                                             <outlet property="nameLabel" destination="3nZ-ej-Ido" id="b8e-bJ-M9M"/>
                                             <outlet property="profileImageView" destination="DUF-i3-lNF" id="NGf-9y-SLE"/>
                                             <outlet property="yearLabel" destination="YW3-Dq-bbW" id="kju-MI-3OT"/>
+                                            <segue destination="D0D-ni-X1f" kind="show" identifier="SuggestedBuddyDetailsSegue" id="yl2-iN-IRB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1230,7 +1231,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FO2-VB-b9k"/>
+        <segue reference="yl2-iN-IRB"/>
         <segue reference="uAD-0P-uB1"/>
     </inferredMetricsTieBreakers>
     <resources>
