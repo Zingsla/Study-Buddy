@@ -15,6 +15,7 @@
 @interface SuggestedBuddiesViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSMutableArray *buddies;
 
 @end
@@ -26,6 +27,10 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,6 +57,7 @@
             }
             
             [possibleBuddies sortUsingSelector:@selector(compare:)];
+            [self.refreshControl endRefreshing];
             self.buddies = possibleBuddies;
             [self.tableView reloadData];
         }
