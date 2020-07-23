@@ -21,8 +21,12 @@
         configuration.applicationId = @"study-buddy-franz";
         configuration.server = @"https://study-buddy-franz.herokuapp.com/parse";
     }];
-    
     [Parse initializeWithConfiguration:config];
+    
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.backgroundColor = [UIColor whiteColor];
     
     return YES;
 }
