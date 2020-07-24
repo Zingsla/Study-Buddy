@@ -665,6 +665,30 @@
                                 <rect key="frame" x="132" y="110" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfh-qX-YHF">
+                                <rect key="frame" x="20" y="269" width="162" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DOw-gE-5d2">
+                                <rect key="frame" x="232" y="269" width="162" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Major" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9EC-yD-kMa">
+                                <rect key="frame" x="20" y="378" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3qT-BB-2OY">
+                                <rect key="frame" x="20" y="439" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jacob Franz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCj-DJ-lhO">
                                 <rect key="frame" x="20" y="269" width="374" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -693,6 +717,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mco-aw-pn7">
+                                <rect key="frame" x="20" y="324" width="374" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Freshman"/>
+                                    <segment title="Sophomore"/>
+                                    <segment title="Junior"/>
+                                    <segment title="Senior"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
@@ -703,12 +737,23 @@
                                 <action selector="didTapLogout:" destination="AMl-21-f6O" id="kOf-1H-hNY"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="7oV-zi-B0f">
+                            <connections>
+                                <action selector="didTapEdit:" destination="AMl-21-f6O" id="28q-7g-U2m"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="emailLabel" destination="aGE-j8-4jP" id="Kx8-0u-KlH"/>
+                        <outlet property="editButton" destination="7oV-zi-B0f" id="4f4-Y5-IQQ"/>
+                        <outlet property="emailAddressField" destination="3qT-BB-2OY" id="HLb-T8-y0D"/>
+                        <outlet property="emailLabel" destination="aGE-j8-4jP" id="fXW-Rv-TNX"/>
+                        <outlet property="firstNameField" destination="Yfh-qX-YHF" id="ZMy-w9-1hQ"/>
+                        <outlet property="lastNameField" destination="DOw-gE-5d2" id="pmB-AB-vFL"/>
+                        <outlet property="majorField" destination="9EC-yD-kMa" id="4iM-ZO-WHq"/>
                         <outlet property="majorLabel" destination="cio-4o-zkm" id="QT4-Af-I1c"/>
-                        <outlet property="nameLabel" destination="iCj-DJ-lhO" id="W24-gl-1fc"/>
+                        <outlet property="nameLabel" destination="iCj-DJ-lhO" id="xt0-vF-E03"/>
                         <outlet property="profileImage" destination="XXu-8Z-KVH" id="OUv-QH-7mt"/>
+                        <outlet property="yearControl" destination="mco-aw-pn7" id="Odm-ur-oAQ"/>
                         <outlet property="yearLabel" destination="sZc-xq-wUG" id="SaG-BZ-58p"/>
                     </connections>
                 </viewController>
