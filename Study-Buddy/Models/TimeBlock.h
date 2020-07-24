@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getStartTimeString;
 - (NSString *)getEndTimeString;
 - (NSString *)getTimesString;
+- (NSString *)getDurationString;
 
 @end
 

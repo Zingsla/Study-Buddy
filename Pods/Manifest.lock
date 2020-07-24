@@ -1,5 +1,6 @@
 PODS:
   - Bolts/Tasks (1.9.1)
+  - DateTools (2.0.0)
   - IQKeyboardManager (6.5.5)
   - Parse (1.18.0):
     - Parse/Core (= 1.18.0)
@@ -7,20 +8,23 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
 
 DEPENDENCIES:
+  - DateTools
   - IQKeyboardManager
   - Parse
 
 SPEC REPOS:
   trunk:
     - Bolts
+    - DateTools
     - IQKeyboardManager
     - Parse
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 942ef2b5dcf8aafb7c0055be5486e946f3a8811d
+PODFILE CHECKSUM: d2c0e47ba2137dc1e8215a49bfbea3b64b6c0519
 
 COCOAPODS: 1.9.3

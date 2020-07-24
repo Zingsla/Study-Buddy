@@ -7,6 +7,7 @@
 //
 
 #import "TimeBlock.h"
+#import "DateTools.h"
 #import "User.h"
 
 @implementation TimeBlock
@@ -189,6 +190,15 @@
 
 - (NSString *)getTimesString {
     return [NSString stringWithFormat:@"%@ - %@", [self getStartTimeString], [self getEndTimeString]];
+}
+
+- (NSString *)getDurationString {
+    DTTimePeriod *period = [DTTimePeriod timePeriodWithStartDate:self.startTime endDate:self.endTime];
+    if (period.durationInHours != 1.0) {
+        return [NSString stringWithFormat:@"Duration: %g hours", period.durationInHours];
+    } else {
+        return [NSString stringWithFormat:@"Duration: %g hour", period.durationInHours];
+    }
 }
 
 @end

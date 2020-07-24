@@ -1205,12 +1205,10 @@
                         <viewLayoutGuide key="safeArea" id="W5e-m6-1EM"/>
                     </view>
                     <navigationItem key="navigationItem" id="OGS-Iu-xtI">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="8cM-kh-R4Q">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8zo-2E-0IS">
-                                <rect key="frame" x="331" y="7" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Compare"/>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="Compare" id="Y8R-5i-49t">
+                            <connections>
+                                <segue destination="An1-7y-f9k" kind="show" id="ccp-x3-kAf"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1228,6 +1226,97 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pN8-cQ-Yv5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1086.9565217391305" y="3048.8839285714284"/>
+        </scene>
+        <!--Compare Schedule View Controller-->
+        <scene sceneID="Z0V-oK-LQK">
+            <objects>
+                <viewController id="An1-7y-f9k" customClass="CompareScheduleViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="72c-VC-g67">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="jr9-PW-RwE"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aM5-yy-sbW"/>
+                    <connections>
+                        <segue destination="uXb-Xh-Yzp" kind="show" id="ft0-Bd-VfI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sFg-6V-qLF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2070" y="3049"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="QF1-j7-2lX">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ajp-iE-trL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MJu-mb-0od" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="3765"/>
+        </scene>
+        <!--Compare Page Content View Controller-->
+        <scene sceneID="ohZ-oL-fg3">
+            <objects>
+                <viewController storyboardIdentifier="PageContentController" id="uXb-Xh-Yzp" customClass="ComparePageContentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t9q-4h-4dm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q83-BD-eVi">
+                                <rect key="frame" x="0.0" y="152" width="414" height="744"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FreetimeCell" rowHeight="86" id="mqz-cD-WfH" customClass="FreetimeCell">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="86"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mqz-cD-WfH" id="752-Kv-FI3" customClass="FreetimeCell">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12:00 PM - 1:30 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXA-Wm-BUW">
+                                                    <rect key="frame" x="20" y="11" width="374" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duration: 1.5 hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqM-2l-DVz">
+                                                    <rect key="frame" x="20" y="48" width="374" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="durationLabel" destination="SqM-2l-DVz" id="61z-ff-tIT"/>
+                                            <outlet property="timeLabel" destination="EXA-Wm-BUW" id="TW4-2d-Qok"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heY-3R-mDr">
+                                <rect key="frame" x="20" y="101" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="U35-RK-IIA"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="sgs-4P-Hth"/>
+                    <connections>
+                        <outlet property="dayLabel" destination="heY-3R-mDr" id="llu-oJ-DgC"/>
+                        <outlet property="tableView" destination="Q83-BD-eVi" id="yFy-E8-UiO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M9y-ba-eRH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2457.971014492754" y="3764.7321428571427"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

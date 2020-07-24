@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getNameString;
 - (NSComparisonResult)compare:(User *)otherUser;
 - (NSInteger)numberOfSharedClassesWith:(User *)user;
+- (NSArray *)compareScheduleWith:(User *)otherUser;
 
 @end
 
