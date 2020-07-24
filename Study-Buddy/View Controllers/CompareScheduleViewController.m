@@ -23,8 +23,8 @@
     [super viewDidLoad];
     
     self.dayNames = @[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday"];
-    [self findFreetimes];
-    
+    self.freetimeArrays = [[User currentUser] compareScheduleWith:self.user];
+
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;
     
@@ -37,10 +37,6 @@
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
-}
-
-- (void)findFreetimes {
-    self.freetimeArrays = @[@[], @[], @[], @[], @[], @[], @[]];
 }
 
 #pragma mark - UIPageViewControllerDataSource

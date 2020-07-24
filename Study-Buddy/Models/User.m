@@ -8,6 +8,7 @@
 
 #import "User.h"
 #import "TimeBlock.h"
+#import "DateTools.h"
 
 @implementation User
 
@@ -85,4 +86,113 @@
     return count;
 }
 
+- (NSArray *)compareScheduleWith:(User *)otherUser {
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    [results addObject:[self compareDay:@"monday" withUser:otherUser]];
+    [results addObject:[self compareDay:@"tuesday" withUser:otherUser]];
+    [results addObject:[self compareDay:@"wednesday" withUser:otherUser]];
+    [results addObject:[self compareDay:@"thursday" withUser:otherUser]];
+    [results addObject:[self compareDay:@"friday" withUser:otherUser]];
+    [results addObject:[self compareDay:@"saturday" withUser:otherUser]];
+    [results addObject:[self compareDay:@"sunday" withUser:otherUser]];
+    return [NSArray arrayWithArray:results];
+}
+
+- (NSArray *)compareDay:(NSString *)day withUser:(User *)otherUser {
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.timeZone = [NSTimeZone systemTimeZone];
+    components.year = today.year;
+    components.month = today.month;
+    components.day = today.day;
+    components.hour = 8;
+    components.minute = 0;
+    components.second = 0;
+    NSDate *baseStartDate = [gregorian dateFromComponents:components];
+    components.hour = 20;
+    NSDate *baseEndDate = [gregorian dateFromComponents:components];
+        
+    NSMutableArray *busyPeriods = [[NSMutableArray alloc] init];
+    [busyPeriods addObjectsFromArray:[self getTimePeriodsForDay:day]];
+    [busyPeriods addObjectsFromArray:[otherUser getTimePeriodsForDay:day]];
+    NSMutableArray *sharedFreeTimes = [[NSMutableArray alloc] init];
+    
+    DTTimePeriod *period = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMinute amount:30 startingAt:baseStartDate];
+    // Continue looping until past end time
+    while ([period.EndDate isEarlierThanOrEqualTo:baseEndDate]) {
+        BOOL hadConflict = NO;
+        
+        // Compare current time period to all busy periods
+        for (DTTimePeriod *busyPeriod in busyPeriods) {
+            if ([period overlapsWith:busyPeriod]) {
+                // Current period overlaps with a busy period
+                // Recreate the previous time period and check if it had a length greater than 0
+                DTTimePeriod *previousPeriod = [DTTimePeriod timePeriodWithStartDate:period.StartDate endDate:period.EndDate];
+                [previousPeriod shortenWithAnchorDate:DTTimePeriodAnchorStart size:DTTimePeriodSizeMinute amount:30];
+                if (![previousPeriod.StartDate isEqualToDate:previousPeriod.EndDate]) {
+                    // Previous time period was valid, add it
+                    TimeBlock *block = [TimeBlock new];
+                    block.startTime = previousPeriod.StartDate;
+                    block.endTime = previousPeriod.EndDate;
+                    [sharedFreeTimes addObject:block];
+                }
+                // Move on to next time period
+                period = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMinute amount:30 startingAt:period.EndDate];
+                hadConflict = YES;
+                break;
+            }
+        }
+        
+        if (!hadConflict) {
+            if ([period.EndDate isEqualToDate:baseEndDate]) {
+                // End of the day, add freetime
+                TimeBlock *block = [TimeBlock new];
+                block.startTime = period.StartDate;
+                block.endTime = period.EndDate;
+                [sharedFreeTimes addObject:block];
+            }
+            // Never overlapped with a busy period, extend period
+            [period lengthenWithAnchorDate:DTTimePeriodAnchorStart size:DTTimePeriodSizeMinute amount:30];
+        }
+    }
+    
+    return sharedFreeTimes;
+}
+
+- (NSMutableArray *)getTimePeriodsForDay:(NSString *)day {
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    
+    for (TimeBlock *block in self.schedule) {
+        [block fetchIfNeeded];
+        if ([block[day] boolValue]) {
+            NSLog(@"%@", block.objectId);
+            NSDateComponents *startComponents = [[NSDateComponents alloc] init];
+            startComponents.year = today.year;
+            startComponents.month = today.month;
+            startComponents.day = today.day;
+            startComponents.hour = block.startTime.hour;
+            startComponents.minute = block.startTime.minute;
+            startComponents.second = 0;
+            NSDate *start = [gregorian dateFromComponents:startComponents];
+            
+            NSDateComponents *endComponents = [[NSDateComponents alloc] init];
+            endComponents.year = today.year;
+            endComponents.month = today.month;
+            endComponents.day = today.day;
+            endComponents.hour = block.endTime.hour;
+            endComponents.minute = block.endTime.minute;
+            endComponents.second = 0;
+            NSDate *end = [gregorian dateFromComponents:endComponents];
+            
+            DTTimePeriod *period = [DTTimePeriod timePeriodWithStartDate:start endDate:end];
+            [results addObject:period];
+        }
+    }
+    
+    return results;
+}
+                             
 @end

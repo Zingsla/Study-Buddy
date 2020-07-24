@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FreetimeCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+
 @property (strong, nonatomic) TimeBlock *timeBlock;
 
 @end

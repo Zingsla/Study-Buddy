@@ -1267,7 +1267,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FreetimeCell" rowHeight="86" id="mqz-cD-WfH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FreetimeCell" rowHeight="86" id="mqz-cD-WfH" customClass="FreetimeCell">
                                         <rect key="frame" x="0.0" y="28" width="414" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mqz-cD-WfH" id="752-Kv-FI3" customClass="FreetimeCell">
@@ -1290,6 +1290,10 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="durationLabel" destination="SqM-2l-DVz" id="61z-ff-tIT"/>
+                                            <outlet property="timeLabel" destination="EXA-Wm-BUW" id="TW4-2d-Qok"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
