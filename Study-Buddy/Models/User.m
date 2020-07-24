@@ -168,7 +168,6 @@
     for (TimeBlock *block in self.schedule) {
         [block fetchIfNeeded];
         if ([block[day] boolValue]) {
-            NSLog(@"%@", block.objectId);
             NSDateComponents *startComponents = [[NSDateComponents alloc] init];
             startComponents.year = today.year;
             startComponents.month = today.month;
