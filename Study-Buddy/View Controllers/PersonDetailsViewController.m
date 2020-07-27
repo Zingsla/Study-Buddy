@@ -11,10 +11,11 @@
 #import "Connection.h"
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
+@import Parse;
 
 @interface PersonDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *buddyStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
@@ -36,6 +37,11 @@
     self.yearLabel.text = [self.user getYearString];
     self.majorLabel.text = self.user.major;
     self.emailLabel.text = self.user.emailAddress;
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    if (self.user.profileImage != nil) {
+        self.profileImage.file = self.user.profileImage;
+        [self.profileImage loadInBackground];
+    }
     [self checkBuddyStatus];
     
     self.tableView.delegate = self;

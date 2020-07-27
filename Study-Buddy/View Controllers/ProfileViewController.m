@@ -10,11 +10,12 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "User.h"
+@import Parse;
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *majorLabel;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *yearControl;
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressField;
+@property (weak, nonatomic) IBOutlet UIButton *editImageButton;
 @property (assign, nonatomic) BOOL inEditMode;
 
 @end
@@ -38,6 +40,8 @@
     self.yearLabel.text = [user getYearString];
     self.majorLabel.text = user.major;
     self.emailLabel.text = user.email;
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    [self loadImage];
     self.inEditMode = NO;
 }
 
@@ -74,6 +78,7 @@
         self.emailAddressField.text = user.email;
         self.emailAddressField.hidden = NO;
         self.editButton.title = @"Save Changes";
+        self.editImageButton.hidden = NO;
         self.inEditMode = YES;
     } else {
         user.firstName = self.firstNameField.text;
@@ -82,6 +87,7 @@
         user.major = self.majorField.text;
         user.email = self.emailAddressField.text;
         user.emailAddress = self.emailAddressField.text;
+        user.profileImage = [User getPFFileObjectFromImage:self.profileImage.image];
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error saving user changes: %@", error.localizedDescription);
@@ -92,6 +98,7 @@
                 self.yearControl.hidden = YES;
                 self.majorField.hidden = YES;
                 self.emailAddressField.hidden = YES;
+                self.editImageButton.hidden = YES;
                 self.nameLabel.text = [user getNameString];
                 self.nameLabel.hidden = NO;
                 self.yearLabel.text = [user getYearString];
@@ -105,6 +112,65 @@
             }
         }];
     }
+}
+
+- (void)loadImage {
+    User *user = [User currentUser];
+    if (user.profileImage != nil) {
+        self.profileImage.file = user.profileImage;
+        [self.profileImage loadInBackground];
+    }
+}
+
+- (IBAction)didTapEditImage:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self showPhotoMenu];
+    } else {
+        [self selectPhotoFromLibrary];
+    }
+}
+
+- (void)showPhotoMenu {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self takePhotoWithCamera];
+    }];
+    UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"Choose from Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self selectPhotoFromLibrary];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:cameraAction];
+    [alert addAction:libraryAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)takePhotoWithCamera {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)selectPhotoFromLibrary {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(512, 512)];
+    self.profileImage.image = editedImage;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

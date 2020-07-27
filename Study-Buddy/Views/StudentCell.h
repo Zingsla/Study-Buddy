@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface StudentCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *majorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
