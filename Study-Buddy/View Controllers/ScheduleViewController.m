@@ -40,21 +40,24 @@
     PFQuery *query = [User query];
     [query whereKey:@"username" equalTo:[User currentUser].username];
     [query includeKey:@"schedule"];
+    __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error fetching user data: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully fetched user data!");
-            [self.refreshControl endRefreshing];
             User *user = objects[0];
-            self.timeBlocks = user.schedule;
-            [self.timeBlocks sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                TimeBlock *block1 = obj1;
-                TimeBlock *block2 = obj2;
-                
-                return [block2.createdAt compare:block1.createdAt];
-            }];
-            [self.tableView reloadData];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self.refreshControl endRefreshing];
+                self.timeBlocks = user.schedule;
+                [self.timeBlocks sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                    TimeBlock *block1 = obj1;
+                    TimeBlock *block2 = obj2;
+                    return [block2.createdAt compare:block1.createdAt];
+                }];
+                [self.tableView reloadData];
+            }
         }
     }];
 }
@@ -85,12 +88,16 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         TimeBlock *block = self.timeBlocks[indexPath.row];
+        __weak typeof(self) weakSelf = self;
         [block deleteExistingTimeBlockWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error deleting timeblock: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully deleted timeblock!");
-                [self.timeBlocks removeObjectAtIndex:indexPath.row];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self.timeBlocks removeObjectAtIndex:indexPath.row];
+                }
                 [tableView reloadData];
             }
         }];

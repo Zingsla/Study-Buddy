@@ -63,23 +63,31 @@
 }
 
 - (IBAction)didTapAddBuddy:(id)sender {
+    __weak typeof(self) weakSelf = self;
     [Connection addConnectionWithUser:self.user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error creating connection: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully created connection!");
-            [self checkBuddyStatus];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self checkBuddyStatus];
+            }
         }
     }];
 }
 
 - (IBAction)didTapRemoveBuddy:(id)sender {
+    __weak typeof(self) weakSelf = self;
     [Connection deleteConnectionWithUser:self.user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error removing buddy: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully removed buddy!");
-            [self checkBuddyStatus];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self checkBuddyStatus];
+            }
         }
     }];
 }

@@ -51,21 +51,29 @@
 
 - (IBAction)didTapAdd:(id)sender {
     if (self.typeControl.selectedSegmentIndex == 0) {
+        __weak typeof(self) weakSelf = self;
         [TimeBlock addTimeBlockWithCourseName:self.courseNameField.text courseNumber:self.courseNumberField.text professorName:self.professorNameField.text startTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error creating new course timeblock: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully added new course timeblock!");
-                [self dismissViewControllerAnimated:YES completion:nil];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
             }
         }];
     } else {
+        __weak typeof(self) weakSelf = self;
         [TimeBlock addTimeBlockWithStartTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error creating new blockout timeblock: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully added new blockout timeblock!");
-                [self dismissViewControllerAnimated:YES completion:nil];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
             }
         }];
     }

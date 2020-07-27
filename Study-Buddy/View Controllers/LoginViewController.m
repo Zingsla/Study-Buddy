@@ -27,12 +27,16 @@
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
+    __weak typeof(self) weakSelf = self;
     [User logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error logging in user: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully logged in user!");
-            [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+            }
         }
     }];
 }
