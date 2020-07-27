@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSComparisonResult)compare:(User *)otherUser;
 - (NSInteger)numberOfSharedClassesWith:(User *)user;
 - (NSArray *)compareScheduleWith:(User *)otherUser;
++ (PFFileObject *)getPFFileObjectFromImage:(UIImage * _Nullable)image;
 
 @end
 

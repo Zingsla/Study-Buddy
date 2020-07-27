@@ -193,5 +193,18 @@
     
     return results;
 }
+
++ (PFFileObject *)getPFFileObjectFromImage:(UIImage * _Nullable)image {
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
                              
 @end

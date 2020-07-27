@@ -661,7 +661,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-8Z-KVH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-8Z-KVH" customClass="PFImageView">
                                 <rect key="frame" x="132" y="110" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -727,6 +727,14 @@
                                     <segment title="Senior"/>
                                 </segments>
                             </segmentedControl>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef7-s6-sgo">
+                                <rect key="frame" x="290" y="169" width="73" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit Image"/>
+                                <connections>
+                                    <action selector="didTapEditImage:" destination="AMl-21-f6O" eventType="touchUpInside" id="mhU-tF-8RH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
@@ -745,6 +753,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="editButton" destination="7oV-zi-B0f" id="4f4-Y5-IQQ"/>
+                        <outlet property="editImageButton" destination="Ef7-s6-sgo" id="eQY-o9-wFj"/>
                         <outlet property="emailAddressField" destination="3qT-BB-2OY" id="HLb-T8-y0D"/>
                         <outlet property="emailLabel" destination="aGE-j8-4jP" id="fXW-Rv-TNX"/>
                         <outlet property="firstNameField" destination="Yfh-qX-YHF" id="ZMy-w9-1hQ"/>
