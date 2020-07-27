@@ -44,6 +44,7 @@
     
     PFQuery *query = [User query];
     [query includeKey:@"schedule"];
+    __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error fetching users: %@", error.localizedDescription);
@@ -57,9 +58,12 @@
             }
             
             [possibleBuddies sortUsingSelector:@selector(compare:)];
-            [self.refreshControl endRefreshing];
-            self.buddies = possibleBuddies;
-            [self.tableView reloadData];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self.refreshControl endRefreshing];
+                self.buddies = possibleBuddies;
+                [self.tableView reloadData];
+            }
         }
     }];
 }

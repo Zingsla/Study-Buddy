@@ -46,15 +46,19 @@
 }
 
 - (IBAction)didTapLogout:(id)sender {
+    __weak typeof(self) weakSelf = self;
     [User logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error logging out: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully logged out!");
-            SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-            myDelegate.window.rootViewController = loginViewController;
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+                myDelegate.window.rootViewController = loginViewController;
+            }
         }
     }];
 }
@@ -88,27 +92,31 @@
         user.email = self.emailAddressField.text;
         user.emailAddress = self.emailAddressField.text;
         user.profileImage = [User getPFFileObjectFromImage:self.profileImage.image];
+        __weak typeof(self) weakSelf = self;
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error saving user changes: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully saved user changes!");
-                self.firstNameField.hidden = YES;
-                self.lastNameField.hidden = YES;
-                self.yearControl.hidden = YES;
-                self.majorField.hidden = YES;
-                self.emailAddressField.hidden = YES;
-                self.editImageButton.hidden = YES;
-                self.nameLabel.text = [user getNameString];
-                self.nameLabel.hidden = NO;
-                self.yearLabel.text = [user getYearString];
-                self.yearLabel.hidden = NO;
-                self.majorLabel.text = user.major;
-                self.majorLabel.hidden = NO;
-                self.emailLabel.text = user.email;
-                self.emailLabel.hidden = NO;
-                self.editButton.title = @"Edit";
-                self.inEditMode = NO;
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    self.firstNameField.hidden = YES;
+                    self.lastNameField.hidden = YES;
+                    self.yearControl.hidden = YES;
+                    self.majorField.hidden = YES;
+                    self.emailAddressField.hidden = YES;
+                    self.editImageButton.hidden = YES;
+                    self.nameLabel.text = [user getNameString];
+                    self.nameLabel.hidden = NO;
+                    self.yearLabel.text = [user getYearString];
+                    self.yearLabel.hidden = NO;
+                    self.majorLabel.text = user.major;
+                    self.majorLabel.hidden = NO;
+                    self.emailLabel.text = user.email;
+                    self.emailLabel.hidden = NO;
+                    self.editButton.title = @"Edit";
+                    self.inEditMode = NO;
+                }
             }
         }];
     }

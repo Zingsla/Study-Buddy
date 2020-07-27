@@ -45,12 +45,16 @@
     newUser.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
     
     if ([self allFieldsFilled]) {
+        __weak typeof(self) weakSelf = self;
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error signing up user: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully signed up new user!");
-                [self performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                }
             }
         }];
     } else {

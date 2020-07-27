@@ -41,14 +41,18 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
     [query whereKey:@"users" equalTo:[User currentUser]];
     [query includeKey:@"users"];
+    __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error fetching current buddies: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully fetched current buddies!");
-            [self.refreshControl endRefreshing];
-            self.buddies = [Connection getBuddiesArrayFromConnectionsArray:objects user:[User currentUser]];
-            [self.tableView reloadData];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self.refreshControl endRefreshing];
+                self.buddies = [Connection getBuddiesArrayFromConnectionsArray:objects user:[User currentUser]];
+                [self.tableView reloadData];
+            }
         }
     }];
 }
@@ -72,13 +76,17 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         User *buddy = self.buddies[indexPath.row];
+        __weak typeof(self) weakSelf = self;
         [Connection deleteConnectionWithUser:buddy andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error deleting connection: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successfully deleted connection!");
-                [self.buddies removeObjectAtIndex:indexPath.row];
-                [self.tableView reloadData];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [self.buddies removeObjectAtIndex:indexPath.row];
+                    [self.tableView reloadData];
+                }
             }
         }];
     }
