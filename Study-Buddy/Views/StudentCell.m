@@ -24,6 +24,13 @@
             self.nameLabel.text = [self.user getNameString];
             self.majorLabel.text = self.user.major;
             self.yearLabel.text = [self.user getYearString];
+            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+            if (user.profileImage != nil) {
+                 self.profileImageView.file = user.profileImage;
+                 [self.profileImageView loadInBackground];
+            } else {
+                self.profileImageView.image = [UIImage systemImageNamed:@"person"];
+            }
         }
     }];
 }
