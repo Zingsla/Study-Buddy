@@ -745,6 +745,31 @@
                                     <action selector="didTapEditImage:" destination="AMl-21-f6O" eventType="touchUpInside" id="mhU-tF-8RH"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account not linked with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbC-vf-Lkj">
+                                <rect key="frame" x="20" y="420" width="374" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nn-mE-yjA">
+                                <rect key="frame" x="141" y="481" width="132" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Link with Facebook"/>
+                                <connections>
+                                    <action selector="didTapLink:" destination="AMl-21-f6O" eventType="touchUpInside" id="GiS-Jp-p1k"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXI-WC-GBj">
+                                <rect key="frame" x="132" y="481" width="147" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Unlink with Facebook">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapUnlink:" destination="AMl-21-f6O" eventType="touchUpInside" id="6WV-pt-3mn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
@@ -768,10 +793,13 @@
                         <outlet property="emailLabel" destination="aGE-j8-4jP" id="fXW-Rv-TNX"/>
                         <outlet property="firstNameField" destination="Yfh-qX-YHF" id="ZMy-w9-1hQ"/>
                         <outlet property="lastNameField" destination="DOw-gE-5d2" id="pmB-AB-vFL"/>
+                        <outlet property="linkButton" destination="7nn-mE-yjA" id="udD-H0-KAM"/>
+                        <outlet property="linkedLabel" destination="GbC-vf-Lkj" id="uYF-t5-chA"/>
                         <outlet property="majorField" destination="9EC-yD-kMa" id="4iM-ZO-WHq"/>
                         <outlet property="majorLabel" destination="cio-4o-zkm" id="QT4-Af-I1c"/>
                         <outlet property="nameLabel" destination="iCj-DJ-lhO" id="xt0-vF-E03"/>
                         <outlet property="profileImage" destination="XXu-8Z-KVH" id="OUv-QH-7mt"/>
+                        <outlet property="unlinkButton" destination="XXI-WC-GBj" id="ujA-WR-IvP"/>
                         <outlet property="yearControl" destination="mco-aw-pn7" id="Odm-ur-oAQ"/>
                         <outlet property="yearLabel" destination="sZc-xq-wUG" id="SaG-BZ-58p"/>
                     </connections>

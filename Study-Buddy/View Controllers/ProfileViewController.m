@@ -26,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressField;
 @property (weak, nonatomic) IBOutlet UIButton *editImageButton;
+@property (weak, nonatomic) IBOutlet UILabel *linkedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *linkButton;
+@property (weak, nonatomic) IBOutlet UIButton *unlinkButton;
 @property (assign, nonatomic) BOOL inEditMode;
 
 @end
@@ -84,6 +87,7 @@
         self.editButton.title = @"Save Changes";
         self.editImageButton.hidden = NO;
         self.inEditMode = YES;
+        [self checkLink];
     } else {
         user.firstName = self.firstNameField.text;
         user.lastName = self.lastNameField.text;
@@ -116,10 +120,65 @@
                     self.emailLabel.hidden = NO;
                     self.editButton.title = @"Edit";
                     self.inEditMode = NO;
+                    [self checkLink];
                 }
             }
         }];
     }
+}
+
+- (void)checkLink {
+    if ([PFFacebookUtils isLinkedWithUser:[User currentUser]]) {
+        self.linkedLabel.text = @"Account linked with Facebook";
+        self.linkButton.hidden = YES;
+        if (self.inEditMode) {
+            self.unlinkButton.hidden = NO;
+            self.linkedLabel.hidden = YES;
+        } else {
+            self.unlinkButton.hidden = YES;
+            self.linkedLabel.hidden = NO;
+        }
+    } else {
+        self.linkedLabel.text = @"Account not linked with Facebook";
+        self.unlinkButton.hidden = YES;
+        if (self.inEditMode) {
+            self.linkButton.hidden = NO;
+            self.linkedLabel.hidden = YES;
+        } else {
+            self.linkButton.hidden = YES;
+            self.linkedLabel.hidden = NO;
+        }
+    }
+}
+
+- (IBAction)didTapLink:(id)sender {
+    __weak typeof(self) weakSelf = self;
+    [PFFacebookUtils linkUserInBackground:[User currentUser] withReadPermissions:nil block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error linking Faceboook account: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully linked Facebook account!");
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self checkLink];
+            }
+        }
+    }];
+}
+
+- (IBAction)didTapUnlink:(id)sender {
+    __weak typeof(self) weakSelf = self;
+    [PFFacebookUtils unlinkUserInBackground:[User currentUser] block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Eror unlinking Facebook account: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully unlinked Facebook account!");
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [self checkLink];
+            }
+        }
+    }];
 }
 
 - (void)loadImage {
