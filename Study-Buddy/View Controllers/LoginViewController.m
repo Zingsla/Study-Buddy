@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "User.h"
+#import <PFFacebookUtils.h>
 
 @interface LoginViewController ()
 
@@ -37,6 +38,22 @@
             if (strongSelf) {
                 [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
             }
+        }
+    }];
+}
+
+- (IBAction)didTapLoginWithFacebook:(id)sender {
+    NSArray *permissions = @[@"email", @"public_profile"];
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissions block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error logging in with Facebook: %@", error.localizedDescription);
+        } else if (!user) {
+            NSLog(@"User cancelled Facebook login");
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in with Facebook!");
+        } else {
+            NSLog(@"User successfully logged in with Facebook!");
+            [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
         }
     }];
 }

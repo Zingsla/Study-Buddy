@@ -43,6 +43,7 @@
     self.yearLabel.text = [user getYearString];
     self.majorLabel.text = user.major;
     self.emailLabel.text = user.email;
+    [self checkLink];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self loadImage];
     self.inEditMode = NO;
