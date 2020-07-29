@@ -32,12 +32,25 @@
     [super viewDidLoad];
     if (self.signingUpWithFacebook) {
         FBSDKProfile *profile = [FBSDKProfile currentProfile];
-        self.existingAccountLabel.hidden = YES;
-        self.existingAccountButton.hidden = YES;
-        self.usernameField.hidden = YES;
-        self.passwordField.hidden = YES;
-        self.firstNameField.text = profile.firstName;
-        self.lastNameField.text = profile.lastName;
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{ @"fields": @"email"} HTTPMethod:@"GET"];
+        __weak typeof(self) weakSelf = self;
+        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection * _Nullable connection, id  _Nullable result, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error fetching Facebook user data: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully fetched Facebook user data!");
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    self.existingAccountLabel.hidden = YES;
+                    self.existingAccountButton.hidden = YES;
+                    self.usernameField.hidden = YES;
+                    self.passwordField.hidden = YES;
+                    self.firstNameField.text = profile.firstName;
+                    self.lastNameField.text = profile.lastName;
+                    self.emailField.text = result[@"email"];
+                }
+            }
+        }];
     }
 }
 
