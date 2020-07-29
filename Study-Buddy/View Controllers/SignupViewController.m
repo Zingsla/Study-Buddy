@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     if (self.signingUpWithFacebook) {
         FBSDKProfile *profile = [FBSDKProfile currentProfile];
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{@"fields": @"email"} HTTPMethod:@"GET"];
@@ -48,6 +49,10 @@
                     strongSelf.firstNameField.text = profile.firstName;
                     strongSelf.lastNameField.text = profile.lastName;
                     strongSelf.emailField.text = result[@"email"];
+                    
+                    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", profile.userID]];
+                    NSData *data = [NSData dataWithContentsOfURL:url];
+                    strongSelf.profileImageView.image = [User resizeImage:[UIImage imageWithData:data] withSize:CGSizeMake(512, 512)];
                 }
             }
         }];
