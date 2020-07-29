@@ -19,6 +19,7 @@
 @dynamic year;
 @dynamic profileImage;
 @dynamic schedule;
+@dynamic facebookAccount;
 
 + (User *)user {
     return (User *)[PFUser user];

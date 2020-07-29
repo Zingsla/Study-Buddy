@@ -52,6 +52,7 @@
         user.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
         user.schedule = [[NSMutableArray alloc] init];
         user.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
+        user.facebookAccount = YES;
         
         if ([self allFieldsFilled]) {
             __weak typeof(self) weakSelf = self;
@@ -81,6 +82,7 @@
         newUser.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
         newUser.schedule = [[NSMutableArray alloc] init];
         newUser.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
+        newUser.facebookAccount = NO;
         
         if ([self allFieldsFilled]) {
             __weak typeof(self) weakSelf = self;

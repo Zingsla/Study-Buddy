@@ -129,7 +129,16 @@
 }
 
 - (void)checkLink {
-    if ([PFFacebookUtils isLinkedWithUser:[User currentUser]]) {
+    if ([User currentUser].facebookAccount) {
+        self.linkedLabel.text = @"Account created with Facebook";
+        self.unlinkButton.hidden = YES;
+        self.linkButton.hidden = YES;
+        if (self.inEditMode) {
+            self.linkedLabel.hidden = YES;
+        } else {
+            self.linkedLabel.hidden = NO;
+        }
+    } else if ([PFFacebookUtils isLinkedWithUser:[User currentUser]]) {
         self.linkedLabel.text = @"Account linked with Facebook";
         self.linkButton.hidden = YES;
         if (self.inEditMode) {
