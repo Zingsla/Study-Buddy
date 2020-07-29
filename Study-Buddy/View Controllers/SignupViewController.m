@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import <Parse/Parse.h>
 #import <PFFacebookUtils.h>
 
@@ -34,6 +35,7 @@
     if (self.signingUpWithFacebook) {
         FBSDKProfile *profile = [FBSDKProfile currentProfile];
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{@"fields": @"email"} HTTPMethod:@"GET"];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection * _Nullable connection, id  _Nullable result, NSError * _Nullable error) {
             if (error != nil) {
@@ -42,6 +44,7 @@
                 NSLog(@"Successfully fetched Facebook user data!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     strongSelf.firstNameField.text = profile.firstName;
                     strongSelf.lastNameField.text = profile.lastName;
                     strongSelf.emailField.text = result[@"email"];
@@ -75,6 +78,7 @@
         user.facebookAccount = YES;
         
         if ([self allFieldsFilled]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             __weak typeof(self) weakSelf = self;
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (error != nil) {
@@ -83,6 +87,7 @@
                     NSLog(@"Successfully saved Facebook user!");
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
+                        [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                         [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
                     }
                 }
@@ -105,6 +110,7 @@
         newUser.facebookAccount = NO;
         
         if ([self allFieldsFilled]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             __weak typeof(self) weakSelf = self;
             [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (error != nil) {
@@ -113,6 +119,7 @@
                     NSLog(@"Successfully signed up new user!");
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
+                        [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                         [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
                     }
                 }

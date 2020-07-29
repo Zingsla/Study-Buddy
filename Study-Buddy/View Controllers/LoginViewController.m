@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "SignupViewController.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import <PFFacebookUtils.h>
 
 @interface LoginViewController ()
@@ -30,6 +31,7 @@
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [User logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         if (error != nil) {
@@ -38,6 +40,7 @@
             NSLog(@"Successfully logged in user!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
             }
         }
