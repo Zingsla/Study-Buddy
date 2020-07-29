@@ -11,6 +11,7 @@ target 'Study-Buddy' do
     pod 'Parse/FacebookUtils'
     pod 'IQKeyboardManager'
     pod 'DateTools'
+    pod 'MBProgressHUD'
 
   target 'Study-BuddyTests' do
     inherit! :search_paths

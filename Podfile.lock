@@ -12,6 +12,7 @@ PODS:
   - FBSDKLoginKit/Login (5.15.1):
     - FBSDKCoreKit (~> 5.0)
   - IQKeyboardManager (6.5.5)
+  - MBProgressHUD (1.2.0)
   - Parse (1.18.0):
     - Parse/Core (= 1.18.0)
   - Parse/Core (1.18.0):
@@ -26,6 +27,7 @@ PODS:
 DEPENDENCIES:
   - DateTools
   - IQKeyboardManager
+  - MBProgressHUD
   - Parse
   - Parse/FacebookUtils
   - Parse/UI
@@ -37,6 +39,7 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - IQKeyboardManager
+    - MBProgressHUD
     - Parse
 
 SPEC CHECKSUMS:
@@ -45,8 +48,9 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: f7c74b6d9189d931222d5c6d6deedad9899a7832
+PODFILE CHECKSUM: b3e7d4a5bd2f1c78d907c3744b6f980fd0043471
 
 COCOAPODS: 1.9.3
