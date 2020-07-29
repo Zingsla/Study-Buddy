@@ -42,13 +42,15 @@
                 NSLog(@"Successfully fetched Facebook user data!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    strongSelf.existingAccountLabel.hidden = YES;
-                    strongSelf.existingAccountButton.hidden = YES;
-                    strongSelf.usernameField.hidden = YES;
-                    strongSelf.passwordField.hidden = YES;
                     strongSelf.firstNameField.text = profile.firstName;
                     strongSelf.lastNameField.text = profile.lastName;
                     strongSelf.emailField.text = result[@"email"];
+                    [UIView animateWithDuration:0.25 animations:^{
+                        strongSelf.existingAccountLabel.alpha = 0;
+                        strongSelf.existingAccountButton.alpha = 0;
+                        strongSelf.usernameField.alpha = 0;
+                        strongSelf.passwordField.alpha = 0;
+                    }];
                     
                     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", profile.userID]];
                     NSData *data = [NSData dataWithContentsOfURL:url];
