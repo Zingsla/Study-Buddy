@@ -17,19 +17,23 @@
 
 - (void)setUser:(User *)user {
     _user = user;
+    __weak typeof(self) weakSelf = self;
     [self.user fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error fetching user: %@", error.localizedDescription);
         } else {
-            self.nameLabel.text = [self.user getNameString];
-            self.majorLabel.text = self.user.major;
-            self.yearLabel.text = [self.user getYearString];
-            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-            if (user.profileImage != nil) {
-                 self.profileImageView.file = user.profileImage;
-                 [self.profileImageView loadInBackground];
-            } else {
-                self.profileImageView.image = [UIImage systemImageNamed:@"person"];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                strongSelf.nameLabel.text = [strongSelf.user getNameString];
+                strongSelf.majorLabel.text = strongSelf.user.major;
+                strongSelf.yearLabel.text = [strongSelf.user getYearString];
+                strongSelf.profileImageView.layer.cornerRadius = strongSelf.profileImageView.frame.size.width / 2;
+                if (user.profileImage != nil) {
+                     strongSelf.profileImageView.file = user.profileImage;
+                     [strongSelf.profileImageView loadInBackground];
+                } else {
+                    strongSelf.profileImageView.image = [UIImage systemImageNamed:@"person"];
+                }
             }
         }
     }];

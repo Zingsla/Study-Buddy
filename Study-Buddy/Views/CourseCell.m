@@ -12,21 +12,29 @@
 
 - (void)setTimeBlock:(TimeBlock *)timeBlock {
     _timeBlock = timeBlock;
+    __weak typeof(self) weakSelf = self;
     [self.timeBlock fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error fetching timeblock: %@", error.localizedDescription);
         } else {
-            [self.timeBlock.course fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if (error != nil) {
-                    NSLog(@"Error fetching course for timeblock: %@", error.localizedDescription);
-                } else {
-                    self.courseNameLabel.text = self.timeBlock.course.courseName;
-                    self.courseNumberLabel.text = self.timeBlock.course.courseNumber;
-                    self.professorNameLabel.text = self.timeBlock.course.professorName;
-                }
-            }];
-            self.daysLabel.text = [self.timeBlock getDaysString];
-            self.timesLabel.text = [self.timeBlock getTimesString];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                __weak typeof(self) weakSelf2 = strongSelf;
+                [strongSelf.timeBlock.course fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    if (error != nil) {
+                        NSLog(@"Error fetching course for timeblock: %@", error.localizedDescription);
+                    } else {
+                        __strong typeof(self) strongSelf2 = weakSelf2;
+                        if (strongSelf2) {
+                            strongSelf2.courseNameLabel.text = strongSelf2.timeBlock.course.courseName;
+                            strongSelf2.courseNumberLabel.text = strongSelf2.timeBlock.course.courseNumber;
+                            strongSelf2.professorNameLabel.text = strongSelf2.timeBlock.course.professorName;
+                        }
+                    }
+                }];
+                strongSelf.daysLabel.text = [strongSelf.timeBlock getDaysString];
+                strongSelf.timesLabel.text = [strongSelf.timeBlock getTimesString];
+            }
         }
     }];
 }

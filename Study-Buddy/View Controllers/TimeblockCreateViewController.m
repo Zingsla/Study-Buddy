@@ -59,7 +59,7 @@
                 NSLog(@"Successfully added new course timeblock!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [strongSelf dismissViewControllerAnimated:YES completion:nil];
                 }
             }
         }];
@@ -72,7 +72,7 @@
                 NSLog(@"Successfully added new blockout timeblock!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [strongSelf dismissViewControllerAnimated:YES completion:nil];
                 }
             }
         }];

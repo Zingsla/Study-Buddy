@@ -58,7 +58,7 @@
             NSLog(@"Successfully logged out!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+                SceneDelegate *myDelegate = (SceneDelegate *)strongSelf.view.window.windowScene.delegate;
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
                 myDelegate.window.rootViewController = loginViewController;
@@ -105,23 +105,23 @@
                 NSLog(@"Successfully saved user changes!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    self.firstNameField.hidden = YES;
-                    self.lastNameField.hidden = YES;
-                    self.yearControl.hidden = YES;
-                    self.majorField.hidden = YES;
-                    self.emailAddressField.hidden = YES;
-                    self.editImageButton.hidden = YES;
-                    self.nameLabel.text = [user getNameString];
-                    self.nameLabel.hidden = NO;
-                    self.yearLabel.text = [user getYearString];
-                    self.yearLabel.hidden = NO;
-                    self.majorLabel.text = user.major;
-                    self.majorLabel.hidden = NO;
-                    self.emailLabel.text = user.email;
-                    self.emailLabel.hidden = NO;
-                    self.editButton.title = @"Edit";
-                    self.inEditMode = NO;
-                    [self checkLink];
+                    strongSelf.firstNameField.hidden = YES;
+                    strongSelf.lastNameField.hidden = YES;
+                    strongSelf.yearControl.hidden = YES;
+                    strongSelf.majorField.hidden = YES;
+                    strongSelf.emailAddressField.hidden = YES;
+                    strongSelf.editImageButton.hidden = YES;
+                    strongSelf.nameLabel.text = [user getNameString];
+                    strongSelf.nameLabel.hidden = NO;
+                    strongSelf.yearLabel.text = [user getYearString];
+                    strongSelf.yearLabel.hidden = NO;
+                    strongSelf.majorLabel.text = user.major;
+                    strongSelf.majorLabel.hidden = NO;
+                    strongSelf.emailLabel.text = user.email;
+                    strongSelf.emailLabel.hidden = NO;
+                    strongSelf.editButton.title = @"Edit";
+                    strongSelf.inEditMode = NO;
+                    [strongSelf checkLink];
                 }
             }
         }];
@@ -170,7 +170,7 @@
             NSLog(@"Successfully linked Facebook account!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self checkLink];
+                [strongSelf checkLink];
             }
         }
     }];
@@ -185,7 +185,7 @@
             NSLog(@"Successfully unlinked Facebook account!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self checkLink];
+                [strongSelf checkLink];
             }
         }
     }];

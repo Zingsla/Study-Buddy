@@ -38,7 +38,7 @@
             NSLog(@"Successfully logged in user!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+                [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
             }
         }
     }];
@@ -46,6 +46,7 @@
 
 - (IBAction)didTapLoginWithFacebook:(id)sender {
     NSArray *permissions = @[@"email", @"public_profile"];
+    __weak typeof(self) weakSelf = self;
     [PFFacebookUtils logInInBackgroundWithReadPermissions:permissions block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error logging in with Facebook: %@", error.localizedDescription);
@@ -53,11 +54,17 @@
             NSLog(@"User cancelled Facebook login");
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in with Facebook!");
-            self.facebookSignup = YES;
-            [self performSelector:@selector(transitionToSignup) withObject:nil afterDelay:0.5];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                strongSelf.facebookSignup = YES;
+                [strongSelf performSelector:@selector(transitionToSignup) withObject:nil afterDelay:0.5];
+            }
         } else {
             NSLog(@"User successfully logged in with Facebook!");
-            [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
+            }
         }
     }];
 }

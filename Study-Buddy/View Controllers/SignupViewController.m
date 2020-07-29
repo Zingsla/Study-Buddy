@@ -41,13 +41,13 @@
                 NSLog(@"Successfully fetched Facebook user data!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    self.existingAccountLabel.hidden = YES;
-                    self.existingAccountButton.hidden = YES;
-                    self.usernameField.hidden = YES;
-                    self.passwordField.hidden = YES;
-                    self.firstNameField.text = profile.firstName;
-                    self.lastNameField.text = profile.lastName;
-                    self.emailField.text = result[@"email"];
+                    strongSelf.existingAccountLabel.hidden = YES;
+                    strongSelf.existingAccountButton.hidden = YES;
+                    strongSelf.usernameField.hidden = YES;
+                    strongSelf.passwordField.hidden = YES;
+                    strongSelf.firstNameField.text = profile.firstName;
+                    strongSelf.lastNameField.text = profile.lastName;
+                    strongSelf.emailField.text = result[@"email"];
                 }
             }
         }];
@@ -76,7 +76,7 @@
                     NSLog(@"Successfully saved Facebook user!");
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
-                        [self performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
                     }
                 }
             }];
@@ -106,7 +106,7 @@
                     NSLog(@"Successfully signed up new user!");
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
-                        [self performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
                     }
                 }
             }];
