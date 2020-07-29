@@ -49,9 +49,9 @@
             NSLog(@"Successfully fetched current buddies!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self.refreshControl endRefreshing];
-                self.buddies = [Connection getBuddiesArrayFromConnectionsArray:objects user:[User currentUser]];
-                [self.tableView reloadData];
+                [strongSelf.refreshControl endRefreshing];
+                strongSelf.buddies = [Connection getBuddiesArrayFromConnectionsArray:objects user:[User currentUser]];
+                [strongSelf.tableView reloadData];
             }
         }
     }];
@@ -84,8 +84,8 @@
                 NSLog(@"Successfully deleted connection!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [self.buddies removeObjectAtIndex:indexPath.row];
-                    [self.tableView reloadData];
+                    [strongSelf.buddies removeObjectAtIndex:indexPath.row];
+                    [strongSelf.tableView reloadData];
                 }
             }
         }];

@@ -60,9 +60,9 @@
             [possibleBuddies sortUsingSelector:@selector(compare:)];
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self.refreshControl endRefreshing];
-                self.buddies = possibleBuddies;
-                [self.tableView reloadData];
+                [strongSelf.refreshControl endRefreshing];
+                strongSelf.buddies = possibleBuddies;
+                [strongSelf.tableView reloadData];
             }
         }
     }];

@@ -8,6 +8,7 @@ target 'Study-Buddy' do
   # Pods for Study-Buddy
     pod 'Parse'
     pod 'Parse/UI'
+    pod 'Parse/FacebookUtils'
     pod 'IQKeyboardManager'
     pod 'DateTools'
 

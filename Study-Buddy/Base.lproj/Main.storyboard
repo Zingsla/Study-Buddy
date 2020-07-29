@@ -20,7 +20,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create New Account"/>
                                 <connections>
-                                    <segue destination="nOd-sb-1h3" kind="show" id="IgQ-5J-NFJ"/>
+                                    <segue destination="nOd-sb-1h3" kind="show" identifier="LoginToSignupSegue" id="IgQ-5J-NFJ"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nQx-H0-sd6">
@@ -50,6 +50,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Facebook user?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERv-O7-L8a">
+                                <rect key="frame" x="147" y="612" width="121" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Olz-EF-g3Y">
+                                <rect key="frame" x="137" y="641" width="141" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login with Facebook"/>
+                                <connections>
+                                    <action selector="didTapLoginWithFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cea-NZ-eTA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -68,7 +83,7 @@
         <!--Signup View Controller-->
         <scene sceneID="g7d-mh-hGp">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="nOd-sb-1h3" customClass="SignupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupViewController" modalPresentationStyle="fullScreen" id="nOd-sb-1h3" customClass="SignupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y25-bC-Prl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -181,6 +196,8 @@
                     <navigationItem key="navigationItem" id="9sb-xK-Lvm"/>
                     <connections>
                         <outlet property="emailField" destination="AcP-lb-LPb" id="IHZ-W4-lTG"/>
+                        <outlet property="existingAccountButton" destination="jvj-xP-6Pc" id="8RF-tV-nu7"/>
+                        <outlet property="existingAccountLabel" destination="Xmv-Lk-wcc" id="t8r-nF-jFr"/>
                         <outlet property="firstNameField" destination="ihg-hw-AeM" id="rMr-WC-lTp"/>
                         <outlet property="lastNameField" destination="NZD-bY-U6G" id="jLJ-CH-15p"/>
                         <outlet property="majorField" destination="DqV-Gn-dUU" id="j5H-AZ-zCD"/>
@@ -745,6 +762,31 @@
                                     <action selector="didTapEditImage:" destination="AMl-21-f6O" eventType="touchUpInside" id="mhU-tF-8RH"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account not linked with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbC-vf-Lkj">
+                                <rect key="frame" x="20" y="420" width="374" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nn-mE-yjA">
+                                <rect key="frame" x="141" y="481" width="132" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Link with Facebook"/>
+                                <connections>
+                                    <action selector="didTapLink:" destination="AMl-21-f6O" eventType="touchUpInside" id="GiS-Jp-p1k"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXI-WC-GBj">
+                                <rect key="frame" x="132" y="481" width="147" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Unlink with Facebook">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapUnlink:" destination="AMl-21-f6O" eventType="touchUpInside" id="6WV-pt-3mn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
@@ -768,10 +810,13 @@
                         <outlet property="emailLabel" destination="aGE-j8-4jP" id="fXW-Rv-TNX"/>
                         <outlet property="firstNameField" destination="Yfh-qX-YHF" id="ZMy-w9-1hQ"/>
                         <outlet property="lastNameField" destination="DOw-gE-5d2" id="pmB-AB-vFL"/>
+                        <outlet property="linkButton" destination="7nn-mE-yjA" id="udD-H0-KAM"/>
+                        <outlet property="linkedLabel" destination="GbC-vf-Lkj" id="uYF-t5-chA"/>
                         <outlet property="majorField" destination="9EC-yD-kMa" id="4iM-ZO-WHq"/>
                         <outlet property="majorLabel" destination="cio-4o-zkm" id="QT4-Af-I1c"/>
                         <outlet property="nameLabel" destination="iCj-DJ-lhO" id="xt0-vF-E03"/>
                         <outlet property="profileImage" destination="XXu-8Z-KVH" id="OUv-QH-7mt"/>
+                        <outlet property="unlinkButton" destination="XXI-WC-GBj" id="ujA-WR-IvP"/>
                         <outlet property="yearControl" destination="mco-aw-pn7" id="Odm-ur-oAQ"/>
                         <outlet property="yearLabel" destination="sZc-xq-wUG" id="SaG-BZ-58p"/>
                     </connections>

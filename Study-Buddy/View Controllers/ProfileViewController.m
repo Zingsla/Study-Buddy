@@ -26,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressField;
 @property (weak, nonatomic) IBOutlet UIButton *editImageButton;
+@property (weak, nonatomic) IBOutlet UILabel *linkedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *linkButton;
+@property (weak, nonatomic) IBOutlet UIButton *unlinkButton;
 @property (assign, nonatomic) BOOL inEditMode;
 
 @end
@@ -40,6 +43,7 @@
     self.yearLabel.text = [user getYearString];
     self.majorLabel.text = user.major;
     self.emailLabel.text = user.email;
+    [self checkLink];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self loadImage];
     self.inEditMode = NO;
@@ -54,7 +58,7 @@
             NSLog(@"Successfully logged out!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+                SceneDelegate *myDelegate = (SceneDelegate *)strongSelf.view.window.windowScene.delegate;
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
                 myDelegate.window.rootViewController = loginViewController;
@@ -84,6 +88,7 @@
         self.editButton.title = @"Save Changes";
         self.editImageButton.hidden = NO;
         self.inEditMode = YES;
+        [self checkLink];
     } else {
         user.firstName = self.firstNameField.text;
         user.lastName = self.lastNameField.text;
@@ -100,26 +105,90 @@
                 NSLog(@"Successfully saved user changes!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    self.firstNameField.hidden = YES;
-                    self.lastNameField.hidden = YES;
-                    self.yearControl.hidden = YES;
-                    self.majorField.hidden = YES;
-                    self.emailAddressField.hidden = YES;
-                    self.editImageButton.hidden = YES;
-                    self.nameLabel.text = [user getNameString];
-                    self.nameLabel.hidden = NO;
-                    self.yearLabel.text = [user getYearString];
-                    self.yearLabel.hidden = NO;
-                    self.majorLabel.text = user.major;
-                    self.majorLabel.hidden = NO;
-                    self.emailLabel.text = user.email;
-                    self.emailLabel.hidden = NO;
-                    self.editButton.title = @"Edit";
-                    self.inEditMode = NO;
+                    strongSelf.firstNameField.hidden = YES;
+                    strongSelf.lastNameField.hidden = YES;
+                    strongSelf.yearControl.hidden = YES;
+                    strongSelf.majorField.hidden = YES;
+                    strongSelf.emailAddressField.hidden = YES;
+                    strongSelf.editImageButton.hidden = YES;
+                    strongSelf.nameLabel.text = [user getNameString];
+                    strongSelf.nameLabel.hidden = NO;
+                    strongSelf.yearLabel.text = [user getYearString];
+                    strongSelf.yearLabel.hidden = NO;
+                    strongSelf.majorLabel.text = user.major;
+                    strongSelf.majorLabel.hidden = NO;
+                    strongSelf.emailLabel.text = user.email;
+                    strongSelf.emailLabel.hidden = NO;
+                    strongSelf.editButton.title = @"Edit";
+                    strongSelf.inEditMode = NO;
+                    [strongSelf checkLink];
                 }
             }
         }];
     }
+}
+
+- (void)checkLink {
+    if ([User currentUser].facebookAccount) {
+        self.linkedLabel.text = @"Account created with Facebook";
+        self.unlinkButton.hidden = YES;
+        self.linkButton.hidden = YES;
+        if (self.inEditMode) {
+            self.linkedLabel.hidden = YES;
+        } else {
+            self.linkedLabel.hidden = NO;
+        }
+    } else if ([PFFacebookUtils isLinkedWithUser:[User currentUser]]) {
+        self.linkedLabel.text = @"Account linked with Facebook";
+        self.linkButton.hidden = YES;
+        if (self.inEditMode) {
+            self.unlinkButton.hidden = NO;
+            self.linkedLabel.hidden = YES;
+        } else {
+            self.unlinkButton.hidden = YES;
+            self.linkedLabel.hidden = NO;
+        }
+    } else {
+        self.linkedLabel.text = @"Account not linked with Facebook";
+        self.unlinkButton.hidden = YES;
+        if (self.inEditMode) {
+            self.linkButton.hidden = NO;
+            self.linkedLabel.hidden = YES;
+        } else {
+            self.linkButton.hidden = YES;
+            self.linkedLabel.hidden = NO;
+        }
+    }
+}
+
+- (IBAction)didTapLink:(id)sender {
+    __weak typeof(self) weakSelf = self;
+    [PFFacebookUtils linkUserInBackground:[User currentUser] withReadPermissions:nil block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error linking Faceboook account: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully linked Facebook account!");
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [strongSelf checkLink];
+            }
+        }
+    }];
+}
+
+- (IBAction)didTapUnlink:(id)sender {
+    __weak typeof(self) weakSelf = self;
+    [PFFacebookUtils unlinkUserInBackground:[User currentUser] block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Eror unlinking Facebook account: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully unlinked Facebook account!");
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [strongSelf checkLink];
+            }
+        }
+    }];
 }
 
 - (void)loadImage {

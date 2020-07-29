@@ -71,7 +71,7 @@
             NSLog(@"Successfully created connection!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self checkBuddyStatus];
+                [strongSelf checkBuddyStatus];
             }
         }
     }];
@@ -86,7 +86,7 @@
             NSLog(@"Successfully removed buddy!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self checkBuddyStatus];
+                [strongSelf checkBuddyStatus];
             }
         }
     }];

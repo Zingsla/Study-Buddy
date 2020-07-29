@@ -7,12 +7,15 @@
 //
 
 #import "LoginViewController.h"
+#import "SignupViewController.h"
 #import "User.h"
+#import <PFFacebookUtils.h>
 
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (assign, nonatomic) BOOL facebookSignup;
 
 @end
 
@@ -20,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.facebookSignup = NO;
 }
 
 - (IBAction)didTapLogin:(id)sender {
@@ -35,20 +38,50 @@
             NSLog(@"Successfully logged in user!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self performSegueWithIdentifier:@"LoginSegue" sender:nil];
+                [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
             }
         }
     }];
 }
 
-/*
+- (IBAction)didTapLoginWithFacebook:(id)sender {
+    NSArray *permissions = @[@"email", @"public_profile"];
+    __weak typeof(self) weakSelf = self;
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissions block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error logging in with Facebook: %@", error.localizedDescription);
+        } else if (!user) {
+            NSLog(@"User cancelled Facebook login");
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in with Facebook!");
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                strongSelf.facebookSignup = YES;
+                [strongSelf performSelector:@selector(transitionToSignup) withObject:nil afterDelay:0.5];
+            }
+        } else {
+            NSLog(@"User successfully logged in with Facebook!");
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
+            }
+        }
+    }];
+}
+
+- (void)transitionToSignup {
+    SignupViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"SignupViewController"];
+    newView.signingUpWithFacebook = YES;
+    [self performSegueWithIdentifier:@"LoginToSignupSegue" sender:nil];
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"LoginToSignupSegue"]) {
+        SignupViewController *signupViewController = [segue destinationViewController];
+        signupViewController.signingUpWithFacebook = self.facebookSignup;
+    }
 }
-*/
 
 @end

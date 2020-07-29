@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SignupViewController : UIViewController
 
+@property (assign, nonatomic) BOOL signingUpWithFacebook;
+
 - (BOOL)allFieldsFilled;
 
 @end

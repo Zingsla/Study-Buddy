@@ -49,14 +49,14 @@
             User *user = objects[0];
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [self.refreshControl endRefreshing];
-                self.timeBlocks = user.schedule;
-                [self.timeBlocks sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                [strongSelf.refreshControl endRefreshing];
+                strongSelf.timeBlocks = user.schedule;
+                [strongSelf.timeBlocks sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                     TimeBlock *block1 = obj1;
                     TimeBlock *block2 = obj2;
                     return [block2.createdAt compare:block1.createdAt];
                 }];
-                [self.tableView reloadData];
+                [strongSelf.tableView reloadData];
             }
         }
     }];
@@ -96,7 +96,7 @@
                 NSLog(@"Successfully deleted timeblock!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [self.timeBlocks removeObjectAtIndex:indexPath.row];
+                    [strongSelf.timeBlocks removeObjectAtIndex:indexPath.row];
                 }
                 [tableView reloadData];
             }

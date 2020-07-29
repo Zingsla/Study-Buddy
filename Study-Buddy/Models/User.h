@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *year;
 @property (strong, nonatomic) PFFileObject *profileImage;
 @property (strong, nonatomic) NSMutableArray *schedule;
+@property (assign, nonatomic) BOOL facebookAccount;
 
 - (NSString *)getYearString;
 - (NSString *)getNameString;

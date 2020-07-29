@@ -9,6 +9,7 @@
 #import "SignupViewController.h"
 #import "User.h"
 #import <Parse/Parse.h>
+#import <PFFacebookUtils.h>
 
 @interface SignupViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -20,7 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *yearControl;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-
+@property (weak, nonatomic) IBOutlet UILabel *existingAccountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *existingAccountButton;
 
 @end
 
@@ -28,42 +30,98 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (IBAction)didTapSignup:(id)sender {
-    User *newUser = [User new];
-    newUser.username = self.usernameField.text;
-    newUser.password = self.passwordField.text;
-    newUser.email = self.emailField.text;
-    newUser.emailAddress = self.emailField.text;
-    newUser.firstName = self.firstNameField.text;
-    newUser.lastName = self.lastNameField.text;
-    newUser.major = self.majorField.text;
-    newUser.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
-    newUser.schedule = [[NSMutableArray alloc] init];
-    newUser.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
-    
-    if ([self allFieldsFilled]) {
+    if (self.signingUpWithFacebook) {
+        FBSDKProfile *profile = [FBSDKProfile currentProfile];
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{@"fields": @"email"} HTTPMethod:@"GET"];
         __weak typeof(self) weakSelf = self;
-        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection * _Nullable connection, id  _Nullable result, NSError * _Nullable error) {
             if (error != nil) {
-                NSLog(@"Error signing up user: %@", error.localizedDescription);
+                NSLog(@"Error fetching Facebook user data: %@", error.localizedDescription);
             } else {
-                NSLog(@"Successfully signed up new user!");
+                NSLog(@"Successfully fetched Facebook user data!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [self performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                    strongSelf.existingAccountLabel.hidden = YES;
+                    strongSelf.existingAccountButton.hidden = YES;
+                    strongSelf.usernameField.hidden = YES;
+                    strongSelf.passwordField.hidden = YES;
+                    strongSelf.firstNameField.text = profile.firstName;
+                    strongSelf.lastNameField.text = profile.lastName;
+                    strongSelf.emailField.text = result[@"email"];
                 }
             }
         }];
+    }
+}
+
+- (IBAction)didTapSignup:(id)sender {
+    if (self.signingUpWithFacebook) {
+        User *user = [User currentUser];
+        user.email = self.emailField.text;
+        user.emailAddress = self.emailField.text;
+        user.firstName = self.firstNameField.text;
+        user.lastName = self.lastNameField.text;
+        user.major = self.majorField.text;
+        user.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
+        user.schedule = [[NSMutableArray alloc] init];
+        user.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
+        user.facebookAccount = YES;
+        
+        if ([self allFieldsFilled]) {
+            __weak typeof(self) weakSelf = self;
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error != nil) {
+                    NSLog(@"Error saving Facebook user: %@", error.localizedDescription);
+                } else {
+                    NSLog(@"Successfully saved Facebook user!");
+                    __strong typeof(self) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                    }
+                }
+            }];
+        } else {
+            NSLog(@"At least one field has not been filled in");
+        }
     } else {
-        NSLog(@"At least one field has not been filled in");
+        User *newUser = [User new];
+        newUser.username = self.usernameField.text;
+        newUser.password = self.passwordField.text;
+        newUser.email = self.emailField.text;
+        newUser.emailAddress = self.emailField.text;
+        newUser.firstName = self.firstNameField.text;
+        newUser.lastName = self.lastNameField.text;
+        newUser.major = self.majorField.text;
+        newUser.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
+        newUser.schedule = [[NSMutableArray alloc] init];
+        newUser.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
+        newUser.facebookAccount = NO;
+        
+        if ([self allFieldsFilled]) {
+            __weak typeof(self) weakSelf = self;
+            [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error != nil) {
+                    NSLog(@"Error signing up user: %@", error.localizedDescription);
+                } else {
+                    NSLog(@"Successfully signed up new user!");
+                    __strong typeof(self) strongSelf = weakSelf;
+                    if (strongSelf) {
+                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                    }
+                }
+            }];
+        } else {
+            NSLog(@"At least one field has not been filled in");
+        }
     }
 }
 
 - (BOOL)allFieldsFilled {
-    return (![self.usernameField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""] && ![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
+    if (self.signingUpWithFacebook) {
+        return (![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
+    } else {
+        return (![self.usernameField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""] && ![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
+    }
 }
 
 - (IBAction)didTapProfileImage:(id)sender {
