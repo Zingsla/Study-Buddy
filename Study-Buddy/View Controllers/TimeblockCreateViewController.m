@@ -8,6 +8,7 @@
 
 #import "TimeblockCreateViewController.h"
 #import "TimeBlock.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface TimeblockCreateViewController ()
 
@@ -50,6 +51,7 @@
 }
 
 - (IBAction)didTapAdd:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (self.typeControl.selectedSegmentIndex == 0) {
         __weak typeof(self) weakSelf = self;
         [TimeBlock addTimeBlockWithCourseName:self.courseNameField.text courseNumber:self.courseNumberField.text professorName:self.professorNameField.text startTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -59,6 +61,7 @@
                 NSLog(@"Successfully added new course timeblock!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     [strongSelf dismissViewControllerAnimated:YES completion:nil];
                 }
             }
@@ -72,6 +75,7 @@
                 NSLog(@"Successfully added new blockout timeblock!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     [strongSelf dismissViewControllerAnimated:YES completion:nil];
                 }
             }

@@ -12,6 +12,7 @@
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -40,6 +41,7 @@
     PFQuery *query = [User query];
     [query whereKey:@"username" equalTo:[User currentUser].username];
     [query includeKey:@"schedule"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
@@ -57,6 +59,7 @@
                     return [block2.createdAt compare:block1.createdAt];
                 }];
                 [strongSelf.tableView reloadData];
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
             }
         }
     }];
@@ -88,6 +91,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         TimeBlock *block = self.timeBlocks[indexPath.row];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [block deleteExistingTimeBlockWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
@@ -97,6 +101,7 @@
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
                     [strongSelf.timeBlocks removeObjectAtIndex:indexPath.row];
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 }
                 [tableView reloadData];
             }

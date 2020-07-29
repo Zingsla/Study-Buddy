@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 @import Parse;
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -50,6 +51,7 @@
 }
 
 - (IBAction)didTapLogout:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [User logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error != nil) {
@@ -58,6 +60,7 @@
             NSLog(@"Successfully logged out!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 SceneDelegate *myDelegate = (SceneDelegate *)strongSelf.view.window.windowScene.delegate;
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
@@ -103,6 +106,7 @@
         user.email = self.emailAddressField.text;
         user.emailAddress = self.emailAddressField.text;
         user.profileImage = [User getPFFileObjectFromImage:self.profileImage.image];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
@@ -111,6 +115,7 @@
                 NSLog(@"Successfully saved user changes!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     strongSelf.nameLabel.text = [user getNameString];
                     strongSelf.yearLabel.text = [user getYearString];
                     strongSelf.majorLabel.text = user.major;
@@ -204,6 +209,7 @@
 }
 
 - (IBAction)didTapLink:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [PFFacebookUtils linkUserInBackground:[User currentUser] withReadPermissions:nil block:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
@@ -212,6 +218,7 @@
             NSLog(@"Successfully linked Facebook account!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 [strongSelf checkLink];
             }
         }
@@ -219,6 +226,7 @@
 }
 
 - (IBAction)didTapUnlink:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [PFFacebookUtils unlinkUserInBackground:[User currentUser] block:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
@@ -227,6 +235,7 @@
             NSLog(@"Successfully unlinked Facebook account!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 [strongSelf checkLink];
             }
         }

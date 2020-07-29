@@ -11,6 +11,7 @@
 #import "Connection.h"
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 @import Parse;
 
 @interface PersonDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -51,6 +52,7 @@
 }
 
 - (void)checkBuddyStatus {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if ([Connection connectionExistsWithUser:self.user andUser:[User currentUser]]) {
         self.buddyStatusLabel.text = @"Currently buddies!";
         self.addBuddyButton.hidden = YES;
@@ -60,9 +62,11 @@
         self.addBuddyButton.hidden = NO;
         self.removeBuddyButton.hidden = YES;
     }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 - (IBAction)didTapAddBuddy:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [Connection addConnectionWithUser:self.user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
@@ -71,6 +75,7 @@
             NSLog(@"Successfully created connection!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 [strongSelf checkBuddyStatus];
             }
         }
@@ -78,6 +83,7 @@
 }
 
 - (IBAction)didTapRemoveBuddy:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [Connection deleteConnectionWithUser:self.user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
@@ -86,6 +92,7 @@
             NSLog(@"Successfully removed buddy!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 [strongSelf checkBuddyStatus];
             }
         }

@@ -8,6 +8,7 @@
 
 #import "CompareScheduleViewController.h"
 #import "ComparePageContentViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface CompareScheduleViewController () <UIPageViewControllerDataSource>
 
@@ -21,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     self.dayNames = @[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday"];
     self.freetimeArrays = [[User currentUser] compareScheduleWith:self.user];
@@ -37,6 +39,7 @@
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark - UIPageViewControllerDataSource

@@ -10,6 +10,7 @@
 #import "Connection.h"
 #import "PersonDetailsViewController.h"
 #import "StudentCell.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface CurrentBuddiesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -41,6 +42,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
     [query whereKey:@"users" equalTo:[User currentUser]];
     [query includeKey:@"users"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
@@ -52,6 +54,7 @@
                 [strongSelf.refreshControl endRefreshing];
                 strongSelf.buddies = [Connection getBuddiesArrayFromConnectionsArray:objects user:[User currentUser]];
                 [strongSelf.tableView reloadData];
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
             }
         }
     }];
@@ -76,6 +79,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         User *buddy = self.buddies[indexPath.row];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [Connection deleteConnectionWithUser:buddy andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
@@ -86,6 +90,7 @@
                 if (strongSelf) {
                     [strongSelf.buddies removeObjectAtIndex:indexPath.row];
                     [strongSelf.tableView reloadData];
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 }
             }
         }];

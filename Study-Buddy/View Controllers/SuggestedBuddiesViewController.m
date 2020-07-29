@@ -11,6 +11,7 @@
 #import "PersonDetailsViewController.h"
 #import "StudentCell.h"
 #import "User.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface SuggestedBuddiesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -44,6 +45,7 @@
     
     PFQuery *query = [User query];
     [query includeKey:@"schedule"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
@@ -63,6 +65,7 @@
                 [strongSelf.refreshControl endRefreshing];
                 strongSelf.buddies = possibleBuddies;
                 [strongSelf.tableView reloadData];
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
             }
         }
     }];
