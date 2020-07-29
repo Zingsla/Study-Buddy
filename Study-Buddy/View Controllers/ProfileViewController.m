@@ -71,24 +71,30 @@
     User *user = [User currentUser];
     
     if (!self.inEditMode) {
-        self.nameLabel.hidden = YES;
-        self.yearLabel.hidden = YES;
-        self.majorLabel.hidden = YES;
-        self.emailLabel.hidden = YES;
         self.firstNameField.text = user.firstName;
-        self.firstNameField.hidden = NO;
         self.lastNameField.text = user.lastName;
-        self.lastNameField.hidden = NO;
         self.yearControl.selectedSegmentIndex = user.year.intValue - 1;
-        self.yearControl.hidden = NO;
         self.majorField.text = user.major;
-        self.majorField.hidden = NO;
         self.emailAddressField.text = user.email;
-        self.emailAddressField.hidden = NO;
         self.editButton.title = @"Save Changes";
-        self.editImageButton.hidden = NO;
         self.inEditMode = YES;
         [self checkLink];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            self.nameLabel.alpha = 0;
+            self.yearLabel.alpha = 0;
+            self.majorLabel.alpha = 0;
+            self.emailLabel.alpha = 0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.firstNameField.alpha = 1;
+                self.lastNameField.alpha = 1;
+                self.yearControl.alpha = 1;
+                self.majorField.alpha = 1;
+                self.emailAddressField.alpha = 1;
+                self.editImageButton.alpha = 1;
+            }];
+        }];
     } else {
         user.firstName = self.firstNameField.text;
         user.lastName = self.lastNameField.text;
@@ -105,23 +111,28 @@
                 NSLog(@"Successfully saved user changes!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    strongSelf.firstNameField.hidden = YES;
-                    strongSelf.lastNameField.hidden = YES;
-                    strongSelf.yearControl.hidden = YES;
-                    strongSelf.majorField.hidden = YES;
-                    strongSelf.emailAddressField.hidden = YES;
-                    strongSelf.editImageButton.hidden = YES;
                     strongSelf.nameLabel.text = [user getNameString];
-                    strongSelf.nameLabel.hidden = NO;
                     strongSelf.yearLabel.text = [user getYearString];
-                    strongSelf.yearLabel.hidden = NO;
                     strongSelf.majorLabel.text = user.major;
-                    strongSelf.majorLabel.hidden = NO;
                     strongSelf.emailLabel.text = user.email;
-                    strongSelf.emailLabel.hidden = NO;
                     strongSelf.editButton.title = @"Edit";
                     strongSelf.inEditMode = NO;
                     [strongSelf checkLink];
+                    [UIView animateWithDuration:0.25 animations:^{
+                        strongSelf.firstNameField.alpha = 0;
+                        strongSelf.lastNameField.alpha = 0;
+                        strongSelf.yearControl.alpha = 0;
+                        strongSelf.majorField.alpha = 0;
+                        strongSelf.emailAddressField.alpha = 0;
+                        strongSelf.editImageButton.alpha = 0;
+                    } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.25 animations:^{
+                            strongSelf.nameLabel.alpha = 1;
+                            strongSelf.yearLabel.alpha = 1;
+                            strongSelf.majorLabel.alpha = 1;
+                            strongSelf.emailLabel.alpha = 1;
+                        }];
+                    }];
                 }
             }
         }];
@@ -131,32 +142,63 @@
 - (void)checkLink {
     if ([User currentUser].facebookAccount) {
         self.linkedLabel.text = @"Account created with Facebook";
-        self.unlinkButton.hidden = YES;
-        self.linkButton.hidden = YES;
         if (self.inEditMode) {
-            self.linkedLabel.hidden = YES;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.unlinkButton.alpha = 0;
+                self.linkButton.alpha = 0;
+                self.linkedLabel.alpha = 0;
+            }];
         } else {
-            self.linkedLabel.hidden = NO;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.unlinkButton.alpha = 0;
+                self.linkButton.alpha = 0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.linkedLabel.alpha = 1;
+                }];
+            }];
         }
     } else if ([PFFacebookUtils isLinkedWithUser:[User currentUser]]) {
         self.linkedLabel.text = @"Account linked with Facebook";
-        self.linkButton.hidden = YES;
         if (self.inEditMode) {
-            self.unlinkButton.hidden = NO;
-            self.linkedLabel.hidden = YES;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.linkButton.alpha = 0;
+                self.linkedLabel.alpha = 0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.unlinkButton.alpha = 1;
+                }];
+            }];
         } else {
-            self.unlinkButton.hidden = YES;
-            self.linkedLabel.hidden = NO;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.linkButton.alpha = 0;
+                self.unlinkButton.alpha = 0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.linkedLabel.alpha = 1;
+                }];
+            }];
         }
     } else {
         self.linkedLabel.text = @"Account not linked with Facebook";
-        self.unlinkButton.hidden = YES;
         if (self.inEditMode) {
-            self.linkButton.hidden = NO;
-            self.linkedLabel.hidden = YES;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.unlinkButton.alpha = 0;
+                self.linkedLabel.alpha = 0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.linkButton.alpha = 1;
+                }];
+            }];
         } else {
-            self.linkButton.hidden = YES;
-            self.linkedLabel.hidden = NO;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.unlinkButton.alpha = 0;
+                self.linkButton.alpha = 0;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.linkedLabel.alpha = 1;
+                }];
+            }];
         }
     }
 }
