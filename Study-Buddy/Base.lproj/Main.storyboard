@@ -20,7 +20,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create New Account"/>
                                 <connections>
-                                    <segue destination="nOd-sb-1h3" kind="show" id="IgQ-5J-NFJ"/>
+                                    <segue destination="nOd-sb-1h3" kind="show" identifier="LoginToSignupSegue" id="IgQ-5J-NFJ"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nQx-H0-sd6">
@@ -83,7 +83,7 @@
         <!--Signup View Controller-->
         <scene sceneID="g7d-mh-hGp">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="nOd-sb-1h3" customClass="SignupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupViewController" modalPresentationStyle="fullScreen" id="nOd-sb-1h3" customClass="SignupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y25-bC-Prl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,6 +196,8 @@
                     <navigationItem key="navigationItem" id="9sb-xK-Lvm"/>
                     <connections>
                         <outlet property="emailField" destination="AcP-lb-LPb" id="IHZ-W4-lTG"/>
+                        <outlet property="existingAccountButton" destination="jvj-xP-6Pc" id="8RF-tV-nu7"/>
+                        <outlet property="existingAccountLabel" destination="Xmv-Lk-wcc" id="t8r-nF-jFr"/>
                         <outlet property="firstNameField" destination="ihg-hw-AeM" id="rMr-WC-lTp"/>
                         <outlet property="lastNameField" destination="NZD-bY-U6G" id="jLJ-CH-15p"/>
                         <outlet property="majorField" destination="DqV-Gn-dUU" id="j5H-AZ-zCD"/>
@@ -1428,7 +1430,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="CZb-uy-BKj"/>
-        <segue reference="9Ix-EY-815"/>
+        <segue reference="uAD-0P-uB1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
