@@ -32,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+    [self.profileImageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [self.profileImageView.layer setBorderWidth:2];
     if (self.signingUpWithFacebook) {
         FBSDKProfile *profile = [FBSDKProfile currentProfile];
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{@"fields": @"email"} HTTPMethod:@"GET"];

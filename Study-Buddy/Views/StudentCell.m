@@ -28,6 +28,8 @@
                 strongSelf.majorLabel.text = strongSelf.user.major;
                 strongSelf.yearLabel.text = [strongSelf.user getYearString];
                 strongSelf.profileImageView.layer.cornerRadius = strongSelf.profileImageView.frame.size.width / 2;
+                [strongSelf.profileImageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+                [strongSelf.profileImageView.layer setBorderWidth:2];
                 if (user.profileImage != nil) {
                      strongSelf.profileImageView.file = user.profileImage;
                      [strongSelf.profileImageView loadInBackground];

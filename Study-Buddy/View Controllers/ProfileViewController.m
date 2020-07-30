@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *yearControl;
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressField;
-@property (weak, nonatomic) IBOutlet UIButton *editImageButton;
+@property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *linkedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *linkButton;
 @property (weak, nonatomic) IBOutlet UIButton *unlinkButton;
@@ -46,6 +46,8 @@
     self.emailLabel.text = user.email;
     [self checkLink];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [self.profileImage.layer setBorderWidth:2];
     [self loadImage];
     self.inEditMode = NO;
 }
@@ -95,7 +97,7 @@
                 self.yearControl.alpha = 1;
                 self.majorField.alpha = 1;
                 self.emailAddressField.alpha = 1;
-                self.editImageButton.alpha = 1;
+                self.editImageLabel.alpha = 1;
             }];
         }];
     } else {
@@ -129,7 +131,7 @@
                         strongSelf.yearControl.alpha = 0;
                         strongSelf.majorField.alpha = 0;
                         strongSelf.emailAddressField.alpha = 0;
-                        strongSelf.editImageButton.alpha = 0;
+                        strongSelf.editImageLabel.alpha = 0;
                     } completion:^(BOOL finished) {
                         [UIView animateWithDuration:0.25 animations:^{
                             strongSelf.nameLabel.alpha = 1;
@@ -251,10 +253,12 @@
 }
 
 - (IBAction)didTapEditImage:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self showPhotoMenu];
-    } else {
-        [self selectPhotoFromLibrary];
+    if (self.inEditMode) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [self showPhotoMenu];
+        } else {
+            [self selectPhotoFromLibrary];
+        }
     }
 }
 
