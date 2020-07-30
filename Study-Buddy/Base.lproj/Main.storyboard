@@ -89,48 +89,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vyF-63-uyH">
-                                <rect key="frame" x="20" y="237" width="374" height="34"/>
+                                <rect key="frame" x="20" y="236.5" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GP5-ZK-Std">
-                                <rect key="frame" x="20" y="296" width="374" height="34"/>
+                                <rect key="frame" x="20" y="295.5" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AcP-lb-LPb">
-                                <rect key="frame" x="20" y="355" width="374" height="34"/>
+                                <rect key="frame" x="20" y="354.5" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8fk-JH-ILY">
-                                <rect key="frame" x="143" y="60.5" width="128" height="125.5"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="aPU-7A-PJQ"/>
-                                    <constraint firstAttribute="width" constant="128" id="j4X-8a-454"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="pyy-Aq-F1G" appends="YES" id="6sh-a0-iwT"/>
-                                </connections>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ihg-hw-AeM">
-                                <rect key="frame" x="20" y="414" width="162" height="34"/>
+                                <rect key="frame" x="20" y="413.5" width="162" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NZD-bY-U6G">
-                                <rect key="frame" x="232" y="414" width="162" height="34"/>
+                                <rect key="frame" x="232" y="413.5" width="162" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Major" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DqV-Gn-dUU">
-                                <rect key="frame" x="20" y="473" width="374" height="34"/>
+                                <rect key="frame" x="20" y="472.5" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0B0-bW-o1Z">
-                                <rect key="frame" x="20" y="532" width="374" height="32"/>
+                                <rect key="frame" x="20" y="531.5" width="374" height="32"/>
                                 <segments>
                                     <segment title="Freshman"/>
                                     <segment title="Sophomore"/>
@@ -139,7 +128,7 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQS-8d-Ndc">
-                                <rect key="frame" x="180" y="613" width="54" height="30"/>
+                                <rect key="frame" x="180" y="612.5" width="54" height="30"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="didTapSignup:" destination="nOd-sb-1h3" eventType="touchUpInside" id="qiK-k6-VM2"/>
@@ -160,16 +149,35 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="W81-Fl-s5s"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8fk-JH-ILY">
+                                <rect key="frame" x="143" y="86.5" width="128" height="125.5"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="aPU-7A-PJQ"/>
+                                    <constraint firstAttribute="width" constant="128" id="j4X-8a-454"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="pyy-Aq-F1G" appends="YES" id="6sh-a0-iwT"/>
+                                </connections>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the picture to change it!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdM-X6-hwC">
+                                <rect key="frame" x="106.5" y="56" width="201" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="zdM-X6-hwC" firstAttribute="top" secondItem="ILH-qb-lR4" secondAttribute="top" constant="12" id="4yg-iK-UBd"/>
                             <constraint firstItem="GP5-ZK-Std" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="8es-2C-aZh"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OQS-8d-Ndc" secondAttribute="bottom" constant="50" id="Fat-wN-nZ7"/>
                             <constraint firstItem="GP5-ZK-Std" firstAttribute="top" secondItem="vyF-63-uyH" secondAttribute="bottom" constant="25" id="Fvj-7A-mYq"/>
-                            <constraint firstItem="8fk-JH-ILY" firstAttribute="top" secondItem="ILH-qb-lR4" secondAttribute="top" constant="15" id="Gcw-4r-2lG"/>
                             <constraint firstItem="AcP-lb-LPb" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="Mhd-qk-Hzi"/>
+                            <constraint firstItem="8fk-JH-ILY" firstAttribute="top" secondItem="zdM-X6-hwC" secondAttribute="bottom" constant="8" id="Ot2-xx-Jdt"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="0B0-bW-o1Z" secondAttribute="trailing" constant="20" id="RHQ-fg-DQW"/>
                             <constraint firstItem="OQS-8d-Ndc" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="Swp-Vo-JhZ"/>
+                            <constraint firstItem="zdM-X6-hwC" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="TAn-83-G0q"/>
                             <constraint firstItem="ihg-hw-AeM" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="TK4-lv-iGV"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="DqV-Gn-dUU" secondAttribute="trailing" constant="20" id="Tmn-UU-fYK"/>
                             <constraint firstItem="NZD-bY-U6G" firstAttribute="width" secondItem="ihg-hw-AeM" secondAttribute="width" id="Vj0-zb-g6f"/>
@@ -188,7 +196,7 @@
                             <constraint firstItem="AcP-lb-LPb" firstAttribute="top" secondItem="GP5-ZK-Std" secondAttribute="bottom" constant="25" id="raE-r2-Tsg"/>
                             <constraint firstItem="OQS-8d-Ndc" firstAttribute="top" secondItem="0B0-bW-o1Z" secondAttribute="bottom" constant="50" id="thE-J7-pxk"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="vyF-63-uyH" secondAttribute="trailing" constant="20" id="toh-RP-3Wb"/>
-                            <constraint firstItem="vyF-63-uyH" firstAttribute="top" secondItem="8fk-JH-ILY" secondAttribute="bottom" constant="50" id="uXT-JR-k02"/>
+                            <constraint firstItem="vyF-63-uyH" firstAttribute="top" secondItem="8fk-JH-ILY" secondAttribute="bottom" constant="23.5" id="uXT-JR-k02"/>
                             <constraint firstItem="DqV-Gn-dUU" firstAttribute="top" secondItem="ihg-hw-AeM" secondAttribute="bottom" constant="25" id="w6G-iX-ekB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ILH-qb-lR4"/>
@@ -688,9 +696,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-8Z-KVH" customClass="PFImageView">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-8Z-KVH" customClass="PFImageView">
                                 <rect key="frame" x="132" y="110" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ZDR-F1-Idg" appends="YES" id="03L-re-dcA"/>
+                                </connections>
                             </imageView>
                             <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfh-qX-YHF">
                                 <rect key="frame" x="20" y="269" width="162" height="34"/>
@@ -754,14 +766,6 @@
                                     <segment title="Senior"/>
                                 </segments>
                             </segmentedControl>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef7-s6-sgo">
-                                <rect key="frame" x="290" y="169" width="73" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit Image"/>
-                                <connections>
-                                    <action selector="didTapEditImage:" destination="AMl-21-f6O" eventType="touchUpInside" id="mhU-tF-8RH"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account not linked with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbC-vf-Lkj">
                                 <rect key="frame" x="20" y="420" width="374" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -787,6 +791,13 @@
                                     <action selector="didTapUnlink:" destination="AMl-21-f6O" eventType="touchUpInside" id="6WV-pt-3mn"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap the image to change it!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eY-fc-GtP">
+                                <rect key="frame" x="290" y="149" width="115" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
@@ -805,7 +816,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="editButton" destination="7oV-zi-B0f" id="4f4-Y5-IQQ"/>
-                        <outlet property="editImageButton" destination="Ef7-s6-sgo" id="eQY-o9-wFj"/>
+                        <outlet property="editImageLabel" destination="8eY-fc-GtP" id="1R7-XC-hyd"/>
                         <outlet property="emailAddressField" destination="3qT-BB-2OY" id="HLb-T8-y0D"/>
                         <outlet property="emailLabel" destination="aGE-j8-4jP" id="fXW-Rv-TNX"/>
                         <outlet property="firstNameField" destination="Yfh-qX-YHF" id="ZMy-w9-1hQ"/>
@@ -822,6 +833,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9i-eW-gvS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ZDR-F1-Idg">
+                    <connections>
+                        <action selector="didTapEditImage:" destination="AMl-21-f6O" id="ie1-1h-Ca0"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2069.5652173913045" y="2335.7142857142858"/>
         </scene>
