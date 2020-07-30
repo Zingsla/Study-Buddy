@@ -12,6 +12,7 @@ target 'Study-Buddy' do
     pod 'IQKeyboardManager'
     pod 'DateTools'
     pod 'MBProgressHUD'
+    pod 'ChameleonFramework'
 
   target 'Study-BuddyTests' do
     inherit! :search_paths

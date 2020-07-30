@@ -1,5 +1,8 @@
 PODS:
   - Bolts/Tasks (1.9.1)
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
   - DateTools (2.0.0)
   - FBSDKCoreKit (5.15.1):
     - FBSDKCoreKit/Basics (= 5.15.1)
@@ -25,6 +28,7 @@ PODS:
     - Parse/Core
 
 DEPENDENCIES:
+  - ChameleonFramework
   - DateTools
   - IQKeyboardManager
   - MBProgressHUD
@@ -35,6 +39,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Bolts
+    - ChameleonFramework
     - DateTools
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -44,6 +49,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
@@ -51,6 +57,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: b3e7d4a5bd2f1c78d907c3744b6f980fd0043471
+PODFILE CHECKSUM: 0a177575d033fae964c7d0cfb9bae21a8feb1608
 
 COCOAPODS: 1.9.3
