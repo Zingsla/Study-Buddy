@@ -46,6 +46,8 @@
     self.emailLabel.text = user.email;
     [self checkLink];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [self.profileImage.layer setBorderWidth:2];
     [self loadImage];
     self.inEditMode = NO;
 }
