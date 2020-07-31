@@ -13,6 +13,7 @@ target 'Study-Buddy' do
     pod 'DateTools'
     pod 'MBProgressHUD'
     pod 'ChameleonFramework'
+    pod 'DZNEmptyDataSet'
 
   target 'Study-BuddyTests' do
     inherit! :search_paths
