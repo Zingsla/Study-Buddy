@@ -39,6 +39,8 @@
     self.majorLabel.text = self.user.major;
     self.emailLabel.text = self.user.emailAddress;
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [self.profileImage.layer setBorderWidth:2];
     if (self.user.profileImage != nil) {
         self.profileImage.file = self.user.profileImage;
         [self.profileImage loadInBackground];
