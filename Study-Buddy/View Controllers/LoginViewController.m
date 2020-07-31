@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "SignupViewController.h"
 #import "User.h"
+#import <ChameleonFramework/Chameleon.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <PFFacebookUtils.h>
 
@@ -24,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors:@[[UIColor flatGreenColor], [UIColor flatMintColor]]];
     self.facebookSignup = NO;
 }
 
