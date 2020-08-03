@@ -49,6 +49,8 @@
     }
 }
 
+#pragma mark - Creation
+
 - (IBAction)didTapAdd:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (self.typeControl.selectedSegmentIndex == 0) {
@@ -81,6 +83,8 @@
         }];
     }
 }
+
+#pragma mark - Navigation
 
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

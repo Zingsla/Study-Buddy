@@ -41,6 +41,8 @@
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     PFQuery *query = [User query];
     [query whereKey:kUsernameKey equalTo:[User currentUser].username];

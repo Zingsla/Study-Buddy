@@ -55,6 +55,8 @@ CGFloat const kAnimationDuration = 0.25;
     self.inEditMode = NO;
 }
 
+#pragma mark - Logout
+
 - (IBAction)didTapLogout:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
@@ -74,6 +76,8 @@ CGFloat const kAnimationDuration = 0.25;
         }
     }];
 }
+
+#pragma mark - Profile Edit
 
 - (IBAction)didTapEdit:(id)sender {
     User *user = [User currentUser];
@@ -148,6 +152,8 @@ CGFloat const kAnimationDuration = 0.25;
         }];
     }
 }
+
+#pragma mark - Facebook Link
 
 - (void)checkLink {
     if ([User currentUser].facebookAccount) {
@@ -246,6 +252,8 @@ CGFloat const kAnimationDuration = 0.25;
         }
     }];
 }
+
+#pragma mark - Photo Selection
 
 - (void)loadImage {
     User *user = [User currentUser];

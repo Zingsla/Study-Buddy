@@ -44,6 +44,8 @@ NSString *const kCurrentBuddyDetailsSegueIdentifier = @"CurrentBuddyDetailsSegue
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Connection.class)];
     [query whereKey:kUsersKey equalTo:[User currentUser]];

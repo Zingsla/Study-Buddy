@@ -7,8 +7,8 @@
 //
 
 #import "User.h"
-#import "TimeBlock.h"
 #import "DateTools.h"
+#import "TimeBlock.h"
 
 @implementation User
 
@@ -45,6 +45,8 @@ CGFloat const kDefaultProfilePhotoSize = 512;
 - (NSString *)getNameString {
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
+
+#pragma mark - User Comparison
 
 - (NSComparisonResult)compare:(User *)otherUser {
     if ([self compareSharedClassesWithUser:otherUser] != NSOrderedSame) {
@@ -112,6 +114,8 @@ CGFloat const kDefaultProfilePhotoSize = 512;
     
     return count;
 }
+
+#pragma mark - Schedule Comparison
 
 - (NSArray *)compareScheduleWith:(User *)otherUser {
     NSMutableArray *results = [[NSMutableArray alloc] init];
@@ -220,6 +224,8 @@ CGFloat const kDefaultProfilePhotoSize = 512;
     
     return results;
 }
+
+#pragma mark - Image Helper Functions
 
 + (PFFileObject *)getPFFileObjectFromImage:(UIImage * _Nullable)image {
     if (!image) {

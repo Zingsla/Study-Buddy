@@ -32,6 +32,8 @@ NSString *const kLoginToSignupSegueIdentifier = @"LoginToSignupSegue";
     self.facebookSignup = NO;
 }
 
+#pragma mark - Login
+
 - (IBAction)didTapLogin:(id)sender {
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
@@ -76,6 +78,8 @@ NSString *const kLoginToSignupSegueIdentifier = @"LoginToSignupSegue";
         }
     }];
 }
+
+#pragma mark - Navigation
 
 - (void)transitionToSignup {
     SignupViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(SignupViewController.class)];

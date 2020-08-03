@@ -45,6 +45,8 @@ NSString *const kSuggestedBuddyDetailsSegueIdentifier = @"SuggestedBuddyDetailsS
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     User *currentUser = [User currentUser];
     NSMutableArray *possibleBuddies = [[NSMutableArray alloc] init];

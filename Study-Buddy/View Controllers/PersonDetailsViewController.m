@@ -74,6 +74,8 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
+#pragma mark - Add Buddy
+
 - (IBAction)didTapAddBuddy:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
@@ -90,6 +92,8 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
         }
     }];
 }
+
+#pragma mark - Remove Buddy
 
 - (IBAction)didTapRemoveBuddy:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

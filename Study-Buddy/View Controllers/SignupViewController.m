@@ -72,6 +72,8 @@ CGFloat const kProfilePhotoBorderSize = 512;
     }
 }
 
+#pragma mark - Signup
+
 - (IBAction)didTapSignup:(id)sender {
     if (self.signingUpWithFacebook) {
         User *user = [User currentUser];
@@ -138,6 +140,8 @@ CGFloat const kProfilePhotoBorderSize = 512;
     }
 }
 
+#pragma mark - Helper Methods
+
 - (BOOL)allFieldsFilled {
     if (self.signingUpWithFacebook) {
         return (![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
@@ -145,6 +149,8 @@ CGFloat const kProfilePhotoBorderSize = 512;
         return (![self.usernameField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""] && ![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
     }
 }
+
+#pragma mark - Photo Selection
 
 - (IBAction)didTapProfileImage:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

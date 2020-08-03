@@ -10,14 +10,14 @@
 
 @implementation FreetimeCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 - (void)setTimeBlock:(TimeBlock *)timeBlock {
     _timeBlock = timeBlock;
     self.timeLabel.text = [timeBlock getTimesString];
     self.durationLabel.text = [timeBlock getDurationString];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

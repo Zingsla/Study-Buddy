@@ -10,14 +10,14 @@
 
 @implementation BlockoutCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 - (void)setTimeBlock:(TimeBlock *)timeBlock {
     _timeBlock = timeBlock;
     self.daysLabel.text = [self.timeBlock getDaysString];
     self.timesLabel.text = [self.timeBlock getTimesString];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

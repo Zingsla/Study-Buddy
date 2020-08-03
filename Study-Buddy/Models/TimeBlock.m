@@ -36,6 +36,8 @@ NSString *const kCourseKey = @"course";
     return @"TimeBlock";
 }
 
+#pragma mark - Creation
+
 + (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion{
     Course *newCourse = [Course new];
     newCourse.courseName = courseName;
@@ -105,6 +107,8 @@ NSString *const kCourseKey = @"course";
     }];
 }
 
+#pragma mark - Query
+
 - (TimeBlock *)getExistingMatchingTimeBlock {
     PFQuery *innerQuery = [Course query];
     [innerQuery whereKey:kCourseNameKey equalTo:self.course.courseName];
@@ -133,6 +137,8 @@ NSString *const kCourseKey = @"course";
     return match;
 }
 
+#pragma mark - Deletion
+
 - (void)deleteExistingTimeBlockWithCompletion:(PFBooleanResultBlock)completion {
     [[User currentUser] removeObject:self forKey:kScheduleKey];
     [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -154,6 +160,8 @@ NSString *const kCourseKey = @"course";
         }
     }];
 }
+
+#pragma mark - Strings
 
 - (NSString *)getDaysString {
     NSString *string = @"";

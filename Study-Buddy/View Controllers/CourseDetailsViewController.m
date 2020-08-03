@@ -45,6 +45,8 @@ NSString *const kPersonDetailsSegueIdentifier = @"PersonDetailsSegue";
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     self.students = self.timeBlock.course.students;
     User *toRemove;

@@ -11,10 +11,6 @@
 
 @implementation StudentCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 - (void)setUser:(User *)user {
     _user = user;
     __weak typeof(self) weakSelf = self;
@@ -39,6 +35,10 @@
             }
         }
     }];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
