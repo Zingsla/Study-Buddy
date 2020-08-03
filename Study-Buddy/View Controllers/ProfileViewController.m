@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
+#import "SignupViewController.h"
 #import "User.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 @import Parse;
@@ -36,6 +37,8 @@
 
 @implementation ProfileViewController
 
+CGFloat const kAnimationDuration = 0.25;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -47,7 +50,7 @@
     [self checkLink];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-    [self.profileImage.layer setBorderWidth:2];
+    [self.profileImage.layer setBorderWidth:kProfilePhotoBorderSize];
     [self loadImage];
     self.inEditMode = NO;
 }
@@ -85,13 +88,13 @@
         self.inEditMode = YES;
         [self checkLink];
         
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:kAnimationDuration animations:^{
             self.nameLabel.alpha = 0;
             self.yearLabel.alpha = 0;
             self.majorLabel.alpha = 0;
             self.emailLabel.alpha = 0;
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.firstNameField.alpha = 1;
                 self.lastNameField.alpha = 1;
                 self.yearControl.alpha = 1;
@@ -125,7 +128,7 @@
                     strongSelf.editButton.title = @"Edit";
                     strongSelf.inEditMode = NO;
                     [strongSelf checkLink];
-                    [UIView animateWithDuration:0.25 animations:^{
+                    [UIView animateWithDuration:kAnimationDuration animations:^{
                         strongSelf.firstNameField.alpha = 0;
                         strongSelf.lastNameField.alpha = 0;
                         strongSelf.yearControl.alpha = 0;
@@ -133,7 +136,7 @@
                         strongSelf.emailAddressField.alpha = 0;
                         strongSelf.editImageLabel.alpha = 0;
                     } completion:^(BOOL finished) {
-                        [UIView animateWithDuration:0.25 animations:^{
+                        [UIView animateWithDuration:kAnimationDuration animations:^{
                             strongSelf.nameLabel.alpha = 1;
                             strongSelf.yearLabel.alpha = 1;
                             strongSelf.majorLabel.alpha = 1;
@@ -150,17 +153,17 @@
     if ([User currentUser].facebookAccount) {
         self.linkedLabel.text = @"Account created with Facebook";
         if (self.inEditMode) {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.unlinkButton.alpha = 0;
                 self.linkButton.alpha = 0;
                 self.linkedLabel.alpha = 0;
             }];
         } else {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.unlinkButton.alpha = 0;
                 self.linkButton.alpha = 0;
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:kAnimationDuration animations:^{
                     self.linkedLabel.alpha = 1;
                 }];
             }];
@@ -168,20 +171,20 @@
     } else if ([PFFacebookUtils isLinkedWithUser:[User currentUser]]) {
         self.linkedLabel.text = @"Account linked with Facebook";
         if (self.inEditMode) {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.linkButton.alpha = 0;
                 self.linkedLabel.alpha = 0;
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:kAnimationDuration animations:^{
                     self.unlinkButton.alpha = 1;
                 }];
             }];
         } else {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.linkButton.alpha = 0;
                 self.unlinkButton.alpha = 0;
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:kAnimationDuration animations:^{
                     self.linkedLabel.alpha = 1;
                 }];
             }];
@@ -189,20 +192,20 @@
     } else {
         self.linkedLabel.text = @"Account not linked with Facebook";
         if (self.inEditMode) {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.unlinkButton.alpha = 0;
                 self.linkedLabel.alpha = 0;
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:kAnimationDuration animations:^{
                     self.linkButton.alpha = 1;
                 }];
             }];
         } else {
-            [UIView animateWithDuration:0.25 animations:^{
+            [UIView animateWithDuration:kAnimationDuration animations:^{
                 self.unlinkButton.alpha = 0;
                 self.linkButton.alpha = 0;
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:kAnimationDuration animations:^{
                     self.linkedLabel.alpha = 1;
                 }];
             }];
@@ -296,7 +299,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(512, 512)];
+    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(kDefaultProfilePhotoSize, kDefaultProfilePhotoSize)];
     self.profileImage.image = editedImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }

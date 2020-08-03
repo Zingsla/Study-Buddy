@@ -22,6 +22,7 @@
 @dynamic facebookAccount;
 NSString *const kScheduleKey = @"schedule";
 NSString *const kUsernameKey = @"username";
+CGFloat const kDefaultProfilePhotoSize = 512;
 
 + (User *)user {
     return (User *)[PFUser user];

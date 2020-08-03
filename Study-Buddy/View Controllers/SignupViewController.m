@@ -7,6 +7,7 @@
 //
 
 #import "SignupViewController.h"
+#import "ProfileViewController.h"
 #import "User.h"
 #import <ChameleonFramework/Chameleon.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -31,13 +32,14 @@
 @implementation SignupViewController
 
 NSString *const kSignupSegueIdentifier = @"SignupSegue";
+CGFloat const kProfilePhotoBorderSize = 512;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors:@[[UIColor flatGreenColor], [UIColor flatMintColor]]];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     [self.profileImageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-    [self.profileImageView.layer setBorderWidth:2];
+    [self.profileImageView.layer setBorderWidth:kProfilePhotoBorderSize];
     if (self.signingUpWithFacebook) {
         FBSDKProfile *profile = [FBSDKProfile currentProfile];
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{@"fields": @"email"} HTTPMethod:@"GET"];
@@ -54,7 +56,7 @@ NSString *const kSignupSegueIdentifier = @"SignupSegue";
                     strongSelf.firstNameField.text = profile.firstName;
                     strongSelf.lastNameField.text = profile.lastName;
                     strongSelf.emailField.text = result[@"email"];
-                    [UIView animateWithDuration:0.25 animations:^{
+                    [UIView animateWithDuration:kAnimationDuration animations:^{
                         strongSelf.existingAccountLabel.alpha = 0;
                         strongSelf.existingAccountButton.alpha = 0;
                         strongSelf.usernameField.alpha = 0;
@@ -63,7 +65,7 @@ NSString *const kSignupSegueIdentifier = @"SignupSegue";
                     
                     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", profile.userID]];
                     NSData *data = [NSData dataWithContentsOfURL:url];
-                    strongSelf.profileImageView.image = [User resizeImage:[UIImage imageWithData:data] withSize:CGSizeMake(512, 512)];
+                    strongSelf.profileImageView.image = [User resizeImage:[UIImage imageWithData:data] withSize:CGSizeMake(kDefaultProfilePhotoSize, kDefaultProfilePhotoSize)];
                 }
             }
         }];
@@ -186,7 +188,7 @@ NSString *const kSignupSegueIdentifier = @"SignupSegue";
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(512, 512)];
+    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(kDefaultProfilePhotoSize, kDefaultProfilePhotoSize)];
     self.profileImageView.image = editedImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }

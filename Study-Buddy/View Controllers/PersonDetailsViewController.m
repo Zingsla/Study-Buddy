@@ -11,6 +11,7 @@
 #import "Connection.h"
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
+#import "SignupViewController.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 @import Parse;
@@ -43,7 +44,7 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
     self.emailLabel.text = self.user.emailAddress;
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-    [self.profileImage.layer setBorderWidth:2];
+    [self.profileImage.layer setBorderWidth:kProfilePhotoBorderSize];
     if (self.user.profileImage != nil) {
         self.profileImage.file = self.user.profileImage;
         [self.profileImage loadInBackground];

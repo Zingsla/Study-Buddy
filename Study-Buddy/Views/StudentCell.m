@@ -7,6 +7,7 @@
 //
 
 #import "StudentCell.h"
+#import "SignupViewController.h"
 
 @implementation StudentCell
 
@@ -28,7 +29,7 @@
                 strongSelf.yearLabel.text = [strongSelf.user getYearString];
                 strongSelf.profileImageView.layer.cornerRadius = strongSelf.profileImageView.frame.size.width / 2;
                 [strongSelf.profileImageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-                [strongSelf.profileImageView.layer setBorderWidth:2];
+                [strongSelf.profileImageView.layer setBorderWidth:kProfilePhotoBorderSize];
                 if (user.profileImage != nil) {
                      strongSelf.profileImageView.file = user.profileImage;
                      [strongSelf.profileImageView loadInBackground];

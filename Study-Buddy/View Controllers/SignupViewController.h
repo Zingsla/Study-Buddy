@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) BOOL signingUpWithFacebook;
 extern NSString *const kSignupSegueIdentifier;
+extern CGFloat const kProfilePhotoBorderSize;
 
 - (BOOL)allFieldsFilled;
 
