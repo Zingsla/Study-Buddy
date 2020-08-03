@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PersonDetailsViewController : UIViewController
 
 @property (strong, nonatomic) User *user;
+extern NSString *const kCompareSegueIdentifier;
 
 @end
 

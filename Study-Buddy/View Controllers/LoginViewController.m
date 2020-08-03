@@ -23,6 +23,9 @@
 
 @implementation LoginViewController
 
+NSString *const kLoginSegueIdentifier = @"LoginSegue";
+NSString *const kLoginToSignupSegueIdentifier = @"LoginToSignupSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors:@[[UIColor flatGreenColor], [UIColor flatMintColor]]];
@@ -43,7 +46,7 @@
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-                [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
+                [strongSelf performSegueWithIdentifier:kLoginSegueIdentifier sender:nil];
             }
         }
     }];
@@ -68,7 +71,7 @@
             NSLog(@"User successfully logged in with Facebook!");
             __strong typeof(self) strongSelf = weakSelf;
             if (strongSelf) {
-                [strongSelf performSegueWithIdentifier:@"LoginSegue" sender:nil];
+                [strongSelf performSegueWithIdentifier:kLoginSegueIdentifier sender:nil];
             }
         }
     }];
@@ -77,16 +80,7 @@
 - (void)transitionToSignup {
     SignupViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(SignupViewController.class)];
     newView.signingUpWithFacebook = YES;
-    [self performSegueWithIdentifier:@"LoginToSignupSegue" sender:nil];
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"LoginToSignupSegue"]) {
-        SignupViewController *signupViewController = [segue destinationViewController];
-        signupViewController.signingUpWithFacebook = self.facebookSignup;
-    }
+    [self performSegueWithIdentifier:kLoginSegueIdentifier sender:nil];
 }
 
 @end

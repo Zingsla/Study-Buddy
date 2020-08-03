@@ -32,6 +32,8 @@
 
 @implementation PersonDetailsViewController
 
+NSString *const kCompareSegueIdentifier = @"CompareSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -108,7 +110,7 @@
 #pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+    CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CourseCell.class)];
     cell.timeBlock = self.schedule[indexPath.row];
     
     return cell;
@@ -164,7 +166,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CompareSegue"]) {
+    if ([segue.identifier isEqualToString:kCompareSegueIdentifier]) {
         CompareScheduleViewController *compareScheduleViewController = [segue destinationViewController];
         compareScheduleViewController.user = self.user;
     }

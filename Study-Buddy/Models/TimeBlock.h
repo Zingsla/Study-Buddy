@@ -24,6 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL saturday;
 @property (assign, nonatomic) BOOL sunday;
 @property (strong, nonatomic) Course *course;
+extern NSString *const kMondayKey;
+extern NSString *const kTuesdayKey;
+extern NSString *const kWednesdayKey;
+extern NSString *const kThursdayKey;
+extern NSString *const kFridayKey;
+extern NSString *const kSaturdayKey;
+extern NSString *const kSundayKey;
+extern NSString *const kCourseKey;
 
 + (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion;
 + (void)addTimeBlockWithStartTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion;

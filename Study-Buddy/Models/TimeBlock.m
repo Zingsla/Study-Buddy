@@ -23,6 +23,14 @@
 @dynamic saturday;
 @dynamic sunday;
 @dynamic course;
+NSString *const kMondayKey = @"monday";
+NSString *const kTuesdayKey = @"tuesday";
+NSString *const kWednesdayKey = @"wednesday";
+NSString *const kThursdayKey = @"thursday";
+NSString *const kFridayKey = @"friday";
+NSString *const kSaturdayKey = @"saturday";
+NSString *const kSundayKey = @"sunday";
+NSString *const kCourseKey = @"course";
 
 + (nonnull NSString *)parseClassName {
     return @"TimeBlock";
@@ -57,19 +65,19 @@
                 NSLog(@"Error creating new block: %@", error.localizedDescription);
                 completion(NO, error);
             } else {
-                [[User currentUser] addObject:newBlock forKey:@"schedule"];
+                [[User currentUser] addObject:newBlock forKey:kScheduleKey];
                 [[User currentUser] saveInBackgroundWithBlock:completion];
             }
         }];
     } else {
         NSLog(@"Adding to existing block");
-        [match.course addObject:[User currentUser] forKey:@"students"];
+        [match.course addObject:[User currentUser] forKey:kStudentsKey];
         [match saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error adding to existing block: %@", error.localizedDescription);
                 completion(NO, error);
             } else {
-                [[User currentUser] addObject:match forKey:@"schedule"];
+                [[User currentUser] addObject:match forKey:kScheduleKey];
                 [[User currentUser] saveInBackgroundWithBlock:completion];
             }
         }];
@@ -91,7 +99,7 @@
     
     [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error == nil) {
-            [[User currentUser] addObject:newBlock forKey:@"schedule"];
+            [[User currentUser] addObject:newBlock forKey:kScheduleKey];
             [[User currentUser] saveInBackgroundWithBlock:completion];
         }
     }];
@@ -99,19 +107,19 @@
 
 - (TimeBlock *)getExistingMatchingTimeBlock {
     PFQuery *innerQuery = [Course query];
-    [innerQuery whereKey:@"courseName" equalTo:self.course.courseName];
-    [innerQuery whereKey:@"courseNumber" equalTo:self.course.courseNumber];
-    [innerQuery whereKey:@"professorName" equalTo:self.course.professorName];
+    [innerQuery whereKey:kCourseNameKey equalTo:self.course.courseName];
+    [innerQuery whereKey:kCourseNumberKey equalTo:self.course.courseNumber];
+    [innerQuery whereKey:kProfessorNameKey equalTo:self.course.professorName];
     
     PFQuery *query = [TimeBlock query];
-    [query whereKey:@"monday" equalTo:[NSNumber numberWithBool:self.monday]];
-    [query whereKey:@"tuesday" equalTo:[NSNumber numberWithBool:self.tuesday]];
-    [query whereKey:@"wednesday" equalTo:[NSNumber numberWithBool:self.wednesday]];
-    [query whereKey:@"thursday" equalTo:[NSNumber numberWithBool:self.thursday]];
-    [query whereKey:@"friday" equalTo:[NSNumber numberWithBool:self.friday]];
-    [query whereKey:@"saturday" equalTo:[NSNumber numberWithBool:self.saturday]];
-    [query whereKey:@"sunday" equalTo:[NSNumber numberWithBool:self.sunday]];
-    [query whereKey:@"course" matchesQuery:innerQuery];
+    [query whereKey:kMondayKey equalTo:[NSNumber numberWithBool:self.monday]];
+    [query whereKey:kTuesdayKey equalTo:[NSNumber numberWithBool:self.tuesday]];
+    [query whereKey:kWednesdayKey equalTo:[NSNumber numberWithBool:self.wednesday]];
+    [query whereKey:kThursdayKey equalTo:[NSNumber numberWithBool:self.thursday]];
+    [query whereKey:kFridayKey equalTo:[NSNumber numberWithBool:self.friday]];
+    [query whereKey:kSaturdayKey equalTo:[NSNumber numberWithBool:self.saturday]];
+    [query whereKey:kSundayKey equalTo:[NSNumber numberWithBool:self.sunday]];
+    [query whereKey:kCourseKey matchesQuery:innerQuery];
     
     TimeBlock *match = nil;
     NSArray *blocks = [query findObjects];
@@ -126,13 +134,13 @@
 }
 
 - (void)deleteExistingTimeBlockWithCompletion:(PFBooleanResultBlock)completion {
-    [[User currentUser] removeObject:self forKey:@"schedule"];
+    [[User currentUser] removeObject:self forKey:kScheduleKey];
     [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             completion(NO, error);
         } else {
             if (self.isClass) {
-                [self.course removeObject:[User currentUser] forKey:@"students"];
+                [self.course removeObject:[User currentUser] forKey:kStudentsKey];
                 if (self.course.students.count == 0) {
                     [self.course deleteInBackground];
                     [self deleteInBackground];

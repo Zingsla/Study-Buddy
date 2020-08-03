@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Connection : PFObject<PFSubclassing>
 
 @property (strong, nonatomic) NSArray *users;
+extern NSString *const kUsersKey;
 
 + (void)addConnectionWithUser:(User *)user1 andUser:(User *)user2 withBlock:(PFBooleanResultBlock)completion;
 + (BOOL)connectionExistsWithUser:(User *)user1 andUser:(User *)user2;

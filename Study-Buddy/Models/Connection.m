@@ -11,6 +11,7 @@
 @implementation Connection
 
 @dynamic users;
+NSString *const kUsersKey = @"users";
 
 + (nonnull NSString *)parseClassName {
     return @"Connection";
@@ -34,8 +35,8 @@
     users[0] = user1;
     users[1] = user2;
     NSArray *usersArray = [NSArray arrayWithObjects:users count:2];
-    PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
-    [query whereKey:@"users" containsAllObjectsInArray:usersArray];
+    PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Connection.class)];
+    [query whereKey:kUsersKey containsAllObjectsInArray:usersArray];
     NSArray *connections = [query findObjects];
     return (connections.count > 0);
 }
@@ -73,8 +74,8 @@
 }
 
 + (Connection *)getExistingConnectionWithUser:(User *)user1 andUser:(User *)user2 {
-    PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
-    [query whereKey:@"users" containsAllObjectsInArray:[NSArray arrayWithObjects:user1, user2, nil]];
+    PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Connection.class)];
+    [query whereKey:kUsersKey containsAllObjectsInArray:[NSArray arrayWithObjects:user1, user2, nil]];
     return [query findObjects][0];
 }
 

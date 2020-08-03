@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *courseNumber;
 @property (strong, nonatomic) NSString *professorName;
 @property (strong, nonatomic) NSMutableArray *students;
+extern NSString *const kCourseNameKey;
+extern NSString *const kCourseNumberKey;
+extern NSString *const kProfessorNameKey;
+extern NSString *const kStudentsKey;
 
 @end
 

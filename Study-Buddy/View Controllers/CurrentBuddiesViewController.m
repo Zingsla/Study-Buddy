@@ -23,6 +23,8 @@
 
 @implementation CurrentBuddiesViewController
 
+NSString *const kCurrentBuddyDetailsSegueIdentifier = @"CurrentBuddyDetailsSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,9 +45,9 @@
 }
 
 - (void)fetchData {
-    PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
-    [query whereKey:@"users" equalTo:[User currentUser]];
-    [query includeKey:@"users"];
+    PFQuery *query = [PFQuery queryWithClassName:NSStringFromClass(Connection.class)];
+    [query whereKey:kUsersKey equalTo:[User currentUser]];
+    [query includeKey:kUsersKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -67,7 +69,7 @@
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudentCell"];
+    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(StudentCell.class)];
     cell.user = self.buddies[indexPath.row];
     return cell;
 }
@@ -137,7 +139,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CurrentBuddyDetailsSegue"]) {
+    if ([segue.identifier isEqualToString:kCurrentBuddyDetailsSegueIdentifier]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         User *user = self.buddies[indexPath.row];

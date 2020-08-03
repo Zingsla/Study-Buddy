@@ -1668,7 +1668,7 @@
         <!--Compare Page Content View Controller-->
         <scene sceneID="ohZ-oL-fg3">
             <objects>
-                <viewController storyboardIdentifier="PageContentController" id="uXb-Xh-Yzp" customClass="ComparePageContentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComparePageContentViewController" id="uXb-Xh-Yzp" customClass="ComparePageContentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t9q-4h-4dm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

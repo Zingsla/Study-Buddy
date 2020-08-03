@@ -65,7 +65,7 @@
                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 SceneDelegate *myDelegate = (SceneDelegate *)strongSelf.view.window.windowScene.delegate;
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(loginViewController.class)];
+                LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(LoginViewController.class)];
                 myDelegate.window.rootViewController = loginViewController;
             }
         }

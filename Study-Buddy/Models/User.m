@@ -20,6 +20,8 @@
 @dynamic profileImage;
 @dynamic schedule;
 @dynamic facebookAccount;
+NSString *const kScheduleKey = @"schedule";
+NSString *const kUsernameKey = @"username";
 
 + (User *)user {
     return (User *)[PFUser user];
@@ -89,13 +91,13 @@
 
 - (NSArray *)compareScheduleWith:(User *)otherUser {
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    [results addObject:[self compareDay:@"monday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"tuesday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"wednesday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"thursday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"friday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"saturday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"sunday" withUser:otherUser]];
+    [results addObject:[self compareDay:kMondayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kTuesdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kWednesdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kThursdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kFridayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kSaturdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kSundayKey withUser:otherUser]];
     return [NSArray arrayWithArray:results];
 }
 

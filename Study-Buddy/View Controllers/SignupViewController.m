@@ -30,6 +30,8 @@
 
 @implementation SignupViewController
 
+NSString *const kSignupSegueIdentifier = @"SignupSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors:@[[UIColor flatGreenColor], [UIColor flatMintColor]]];
@@ -92,7 +94,7 @@
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
                         [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                        [strongSelf performSegueWithIdentifier:kSignupSegueIdentifier sender:nil];
                     }
                 }
             }];
@@ -124,7 +126,7 @@
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
                         [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                        [strongSelf performSegueWithIdentifier:kSignupSegueIdentifier sender:nil];
                     }
                 }
             }];
