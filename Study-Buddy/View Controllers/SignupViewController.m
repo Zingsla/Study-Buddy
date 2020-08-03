@@ -7,6 +7,7 @@
 //
 
 #import "SignupViewController.h"
+#import "ProfileViewController.h"
 #import "User.h"
 #import <ChameleonFramework/Chameleon.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -30,12 +31,15 @@
 
 @implementation SignupViewController
 
+NSString *const kSignupSegueIdentifier = @"SignupSegue";
+CGFloat const kProfilePhotoBorderSize = 512;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:self.view.frame andColors:@[[UIColor flatGreenColor], [UIColor flatMintColor]]];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     [self.profileImageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-    [self.profileImageView.layer setBorderWidth:2];
+    [self.profileImageView.layer setBorderWidth:kProfilePhotoBorderSize];
     if (self.signingUpWithFacebook) {
         FBSDKProfile *profile = [FBSDKProfile currentProfile];
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/", profile.userID] parameters:@{@"fields": @"email"} HTTPMethod:@"GET"];
@@ -52,7 +56,7 @@
                     strongSelf.firstNameField.text = profile.firstName;
                     strongSelf.lastNameField.text = profile.lastName;
                     strongSelf.emailField.text = result[@"email"];
-                    [UIView animateWithDuration:0.25 animations:^{
+                    [UIView animateWithDuration:kAnimationDuration animations:^{
                         strongSelf.existingAccountLabel.alpha = 0;
                         strongSelf.existingAccountButton.alpha = 0;
                         strongSelf.usernameField.alpha = 0;
@@ -61,12 +65,14 @@
                     
                     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", profile.userID]];
                     NSData *data = [NSData dataWithContentsOfURL:url];
-                    strongSelf.profileImageView.image = [User resizeImage:[UIImage imageWithData:data] withSize:CGSizeMake(512, 512)];
+                    strongSelf.profileImageView.image = [User resizeImage:[UIImage imageWithData:data] withSize:CGSizeMake(kDefaultProfilePhotoSize, kDefaultProfilePhotoSize)];
                 }
             }
         }];
     }
 }
+
+#pragma mark - Signup
 
 - (IBAction)didTapSignup:(id)sender {
     if (self.signingUpWithFacebook) {
@@ -92,7 +98,7 @@
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
                         [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                        [strongSelf performSegueWithIdentifier:kSignupSegueIdentifier sender:nil];
                     }
                 }
             }];
@@ -124,7 +130,7 @@
                     __strong typeof(self) strongSelf = weakSelf;
                     if (strongSelf) {
                         [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-                        [strongSelf performSegueWithIdentifier:@"SignupSegue" sender:nil];
+                        [strongSelf performSegueWithIdentifier:kSignupSegueIdentifier sender:nil];
                     }
                 }
             }];
@@ -134,6 +140,8 @@
     }
 }
 
+#pragma mark - Helper Methods
+
 - (BOOL)allFieldsFilled {
     if (self.signingUpWithFacebook) {
         return (![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
@@ -141,6 +149,8 @@
         return (![self.usernameField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""] && ![self.emailField.text isEqualToString:@""] && ![self.firstNameField.text isEqualToString:@""] && ![self.lastNameField.text isEqualToString:@""] && ![self.majorField.text isEqualToString:@""]);
     }
 }
+
+#pragma mark - Photo Selection
 
 - (IBAction)didTapProfileImage:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -184,7 +194,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(512, 512)];
+    UIImage *editedImage = [User resizeImage:info[UIImagePickerControllerEditedImage] withSize:CGSizeMake(kDefaultProfilePhotoSize, kDefaultProfilePhotoSize)];
     self.profileImageView.image = editedImage;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -192,16 +202,5 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

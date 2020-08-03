@@ -14,6 +14,10 @@
 @dynamic courseNumber;
 @dynamic professorName;
 @dynamic students;
+NSString *const kCourseNameKey = @"courseName";
+NSString *const kCourseNumberKey = @"courseNumber";
+NSString *const kProfessorNameKey = @"professorName";
+NSString *const kStudentsKey = @"students";
 
 + (nonnull NSString *)parseClassName {
     return @"Course";

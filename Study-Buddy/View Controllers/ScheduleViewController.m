@@ -41,10 +41,12 @@
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     PFQuery *query = [User query];
-    [query whereKey:@"username" equalTo:[User currentUser].username];
-    [query includeKey:@"schedule"];
+    [query whereKey:kUsernameKey equalTo:[User currentUser].username];
+    [query includeKey:kScheduleKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -74,11 +76,11 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TimeBlock *timeBlock = self.timeBlocks[indexPath.row];
     if (timeBlock.isClass) {
-        CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+        CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CourseCell.class)];
         cell.timeBlock = timeBlock;
         return cell;
     } else {
-        BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlockoutCell"];
+        BlockoutCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(BlockoutCell.class)];
         cell.timeBlock = timeBlock;
         return cell;
     }
@@ -119,11 +121,11 @@
     TimeBlock *block = self.timeBlocks[indexPath.row];
     
     if (block.isClass) {
-        CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailsViewController"];
+        CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(CourseDetailsViewController.class)];
         newView.timeBlock = block;
         [self.navigationController pushViewController:newView animated:YES];
     } else {
-        BlockoutDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"BlockoutDetailsViewController"];
+        BlockoutDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(BlockoutDetailsViewController.class)];
         newView.timeBlock = block;
         [self.navigationController pushViewController:newView animated:YES];
     }
@@ -168,15 +170,5 @@
 {
     return YES;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

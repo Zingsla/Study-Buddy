@@ -20,6 +20,8 @@
 
 @implementation CompareScheduleViewController
 
+NSString *const kPageViewControllerIdentifier = @"PageViewContoller";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -27,7 +29,7 @@
     self.dayNames = @[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday"];
     self.freetimeArrays = [[User currentUser] compareScheduleWith:self.user];
 
-    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:kPageViewControllerIdentifier];
     self.pageViewController.dataSource = self;
     
     ComparePageContentViewController *startingViewController = [self viewControllerAtIndex:0];
@@ -74,7 +76,7 @@
         return nil;
     }
     
-    ComparePageContentViewController *comparePageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentController"];
+    ComparePageContentViewController *comparePageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(ComparePageContentViewController.class)];
     comparePageContentViewController.dayText = self.dayNames[index];
     comparePageContentViewController.freeTimes = self.freetimeArrays[index];
     comparePageContentViewController.pageIndex = index;
@@ -88,15 +90,5 @@
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
     return 0;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

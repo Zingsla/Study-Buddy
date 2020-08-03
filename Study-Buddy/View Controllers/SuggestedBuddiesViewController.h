@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SuggestedBuddiesViewController : UIViewController
 
+extern NSString *const kSuggestedBuddyDetailsSegueIdentifier;
+
 @end
 
 NS_ASSUME_NONNULL_END

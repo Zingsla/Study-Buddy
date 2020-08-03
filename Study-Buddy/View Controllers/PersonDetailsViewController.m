@@ -11,6 +11,7 @@
 #import "Connection.h"
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
+#import "SignupViewController.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 @import Parse;
@@ -32,6 +33,8 @@
 
 @implementation PersonDetailsViewController
 
+NSString *const kCompareSegueIdentifier = @"CompareSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -41,7 +44,7 @@
     self.emailLabel.text = self.user.emailAddress;
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-    [self.profileImage.layer setBorderWidth:2];
+    [self.profileImage.layer setBorderWidth:kProfilePhotoBorderSize];
     if (self.user.profileImage != nil) {
         self.profileImage.file = self.user.profileImage;
         [self.profileImage loadInBackground];
@@ -71,6 +74,8 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
+#pragma mark - Add Buddy
+
 - (IBAction)didTapAddBuddy:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
@@ -87,6 +92,8 @@
         }
     }];
 }
+
+#pragma mark - Remove Buddy
 
 - (IBAction)didTapRemoveBuddy:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -108,7 +115,7 @@
 #pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+    CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CourseCell.class)];
     cell.timeBlock = self.schedule[indexPath.row];
     
     return cell;
@@ -123,7 +130,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TimeBlock *block = self.schedule[indexPath.row];
     
-    CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"CourseDetailsViewController"];
+    CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(CourseDetailsViewController.class)];
     newView.timeBlock = block;
     [self.navigationController pushViewController:newView animated:YES];
 }
@@ -164,7 +171,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CompareSegue"]) {
+    if ([segue.identifier isEqualToString:kCompareSegueIdentifier]) {
         CompareScheduleViewController *compareScheduleViewController = [segue destinationViewController];
         compareScheduleViewController.user = self.user;
     }

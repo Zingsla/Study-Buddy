@@ -24,6 +24,8 @@
 
 @implementation SuggestedBuddiesViewController
 
+NSString *const kSuggestedBuddyDetailsSegueIdentifier = @"SuggestedBuddyDetailsSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,12 +45,14 @@
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     User *currentUser = [User currentUser];
     NSMutableArray *possibleBuddies = [[NSMutableArray alloc] init];
     
     PFQuery *query = [User query];
-    [query includeKey:@"schedule"];
+    [query includeKey:kScheduleKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -79,7 +83,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     User *user = self.buddies[indexPath.row];
-    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudentCell"];
+    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(StudentCell.class)];
     cell.user = user;
     return cell;
 }
@@ -124,7 +128,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"SuggestedBuddyDetailsSegue"]) {
+    if ([segue.identifier isEqualToString:kSuggestedBuddyDetailsSegueIdentifier]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         User *user = self.buddies[indexPath.row];

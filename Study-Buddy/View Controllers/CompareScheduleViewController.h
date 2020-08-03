@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CompareScheduleViewController : UIViewController
 
 @property (strong, nonatomic) User *user;
+extern NSString *const kPageViewControllerIdentifier;
 
 @end
 

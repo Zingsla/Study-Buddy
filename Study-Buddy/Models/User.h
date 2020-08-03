@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) PFFileObject *profileImage;
 @property (strong, nonatomic) NSMutableArray *schedule;
 @property (assign, nonatomic) BOOL facebookAccount;
+extern NSString *const kUsernameKey;
+extern NSString *const kScheduleKey;
+extern CGFloat const kDefaultProfilePhotoSize;
 
 - (NSString *)getYearString;
 - (NSString *)getNameString;

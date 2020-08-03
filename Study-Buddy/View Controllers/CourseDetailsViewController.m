@@ -25,6 +25,8 @@
 
 @implementation CourseDetailsViewController
 
+NSString *const kPersonDetailsSegueIdentifier = @"PersonDetailsSegue";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,6 +45,8 @@
     [self fetchData];
 }
 
+#pragma mark - Data Query
+
 - (void)fetchData {
     self.students = self.timeBlock.course.students;
     User *toRemove;
@@ -58,7 +62,7 @@
 #pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudentCell"];
+    StudentCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(StudentCell.class)];
     cell.user = self.students[indexPath.row];
     
     return cell;
@@ -104,7 +108,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"PersonDetailsSegue"]) {
+    if ([segue.identifier isEqualToString:kPersonDetailsSegueIdentifier]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         User *user = self.students[indexPath.row];

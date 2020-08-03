@@ -37,7 +37,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TimeBlock *block = self.freeTimes[indexPath.row];
-    FreetimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FreetimeCell"];
+    FreetimeCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(FreetimeCell.class)];
     cell.timeBlock = block;
     return cell;
 }
@@ -78,16 +78,5 @@
                                  
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

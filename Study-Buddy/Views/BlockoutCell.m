@@ -10,21 +10,18 @@
 
 @implementation BlockoutCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
 - (void)setTimeBlock:(TimeBlock *)timeBlock {
     _timeBlock = timeBlock;
     self.daysLabel.text = [self.timeBlock getDaysString];
     self.timesLabel.text = [self.timeBlock getTimesString];
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

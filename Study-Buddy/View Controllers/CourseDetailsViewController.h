@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CourseDetailsViewController : UIViewController
 
 @property (strong, nonatomic) TimeBlock *timeBlock;
+extern NSString *const kPersonDetailsSegueIdentifier;
 
 @end
 

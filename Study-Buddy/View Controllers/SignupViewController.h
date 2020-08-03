@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SignupViewController : UIViewController
 
 @property (assign, nonatomic) BOOL signingUpWithFacebook;
+extern NSString *const kSignupSegueIdentifier;
+extern CGFloat const kProfilePhotoBorderSize;
 
 - (BOOL)allFieldsFilled;
 

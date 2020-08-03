@@ -7,8 +7,8 @@
 //
 
 #import "User.h"
-#import "TimeBlock.h"
 #import "DateTools.h"
+#import "TimeBlock.h"
 
 @implementation User
 
@@ -20,6 +20,9 @@
 @dynamic profileImage;
 @dynamic schedule;
 @dynamic facebookAccount;
+NSString *const kScheduleKey = @"schedule";
+NSString *const kUsernameKey = @"username";
+CGFloat const kDefaultProfilePhotoSize = 512;
 
 + (User *)user {
     return (User *)[PFUser user];
@@ -43,7 +46,21 @@
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
+#pragma mark - User Comparison
+
 - (NSComparisonResult)compare:(User *)otherUser {
+    if ([self compareSharedClassesWithUser:otherUser] != NSOrderedSame) {
+        return [self compareSharedClassesWithUser:otherUser];
+    }
+    
+    if ([self compareMajorsWithUser:otherUser] != NSOrderedSame) {
+        return [self compareMajorsWithUser:otherUser];
+    }
+    
+    return [self compareYearsWithUser:otherUser];
+}
+
+- (NSComparisonResult)compareSharedClassesWithUser:(User *)otherUser {
     User *currentUser = [User currentUser];
     NSInteger sharedSelf = [self numberOfSharedClassesWith:currentUser];
     NSInteger sharedOther = [otherUser numberOfSharedClassesWith:currentUser];
@@ -53,26 +70,37 @@
     } else if (sharedOther > sharedSelf) {
         return NSOrderedDescending;
     } else {
-        BOOL majorMatchSelf = [self.major isEqualToString:currentUser.major];
-        BOOL majorMatchOther = [otherUser.major isEqualToString:currentUser.major];
-        if (majorMatchSelf && !majorMatchOther) {
-            return NSOrderedAscending;
-        } else if (majorMatchOther && !majorMatchSelf) {
-            return NSOrderedDescending;
-        } else {
-            NSInteger yearDifferenceSelf = labs([self.year integerValue] - [currentUser.year integerValue]);
-            NSInteger yearDifferenceOther = labs([otherUser.year integerValue] - [currentUser.year integerValue]);
-            if (yearDifferenceSelf < yearDifferenceOther) {
-                return NSOrderedAscending;
-            } else if (yearDifferenceOther < yearDifferenceSelf) {
-                return NSOrderedDescending;
-            } else {
-                return NSOrderedSame;
-            }
-        }
+        return NSOrderedSame;
     }
 }
 
+- (NSComparisonResult)compareMajorsWithUser:(User *)otherUser {
+    User *currentUser = [User currentUser];
+    BOOL majorMatchSelf = [self.major isEqualToString:currentUser.major];
+    BOOL majorMatchOther = [otherUser.major isEqualToString:currentUser.major];
+    
+    if (majorMatchSelf && !majorMatchOther) {
+        return NSOrderedAscending;
+    } else if (majorMatchOther && !majorMatchSelf) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
+}
+
+- (NSComparisonResult)compareYearsWithUser:(User *)otherUser {
+    User *currentUser = [User currentUser];
+    NSInteger yearDifferenceSelf = labs([self.year integerValue] - [currentUser.year integerValue]);
+    NSInteger yearDifferenceOther = labs([otherUser.year integerValue] - [currentUser.year integerValue]);
+    
+    if (yearDifferenceSelf < yearDifferenceOther) {
+        return NSOrderedAscending;
+    } else if (yearDifferenceOther < yearDifferenceSelf) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
+}
 
 - (NSInteger)numberOfSharedClassesWith:(User *)user {
     NSInteger count = 0;
@@ -87,15 +115,17 @@
     return count;
 }
 
+#pragma mark - Schedule Comparison
+
 - (NSArray *)compareScheduleWith:(User *)otherUser {
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    [results addObject:[self compareDay:@"monday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"tuesday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"wednesday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"thursday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"friday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"saturday" withUser:otherUser]];
-    [results addObject:[self compareDay:@"sunday" withUser:otherUser]];
+    [results addObject:[self compareDay:kMondayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kTuesdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kWednesdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kThursdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kFridayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kSaturdayKey withUser:otherUser]];
+    [results addObject:[self compareDay:kSundayKey withUser:otherUser]];
     return [NSArray arrayWithArray:results];
 }
 
@@ -194,6 +224,8 @@
     
     return results;
 }
+
+#pragma mark - Image Helper Functions
 
 + (PFFileObject *)getPFFileObjectFromImage:(UIImage * _Nullable)image {
     if (!image) {

@@ -32,7 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (IBAction)didChangeType:(id)sender {
@@ -49,6 +48,8 @@
         self.professorNameField.hidden = NO;
     }
 }
+
+#pragma mark - Creation
 
 - (IBAction)didTapAdd:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -83,18 +84,10 @@
     }
 }
 
+#pragma mark - Navigation
+
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
