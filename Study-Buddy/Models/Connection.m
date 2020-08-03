@@ -22,14 +22,20 @@
     }
     
     Connection *connection = [Connection new];
-    connection.users = [NSArray arrayWithObjects:user1, user2, nil];
+    User *users[2];
+    users[0] = user1;
+    users[1] = user2;
+    connection.users = [NSArray arrayWithObjects:users count:2];
     [connection saveInBackgroundWithBlock:completion];
 }
 
 + (BOOL)connectionExistsWithUser:(User *)user1 andUser:(User *)user2 {
-    NSArray *users = [NSArray arrayWithObjects:user1, user2, nil];
+    User *users[2];
+    users[0] = user1;
+    users[1] = user2;
+    NSArray *usersArray = [NSArray arrayWithObjects:users count:2];
     PFQuery *query = [PFQuery queryWithClassName:@"Connection"];
-    [query whereKey:@"users" containsAllObjectsInArray:users];
+    [query whereKey:@"users" containsAllObjectsInArray:usersArray];
     NSArray *connections = [query findObjects];
     return (connections.count > 0);
 }
