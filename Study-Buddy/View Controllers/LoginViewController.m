@@ -75,7 +75,7 @@
 }
 
 - (void)transitionToSignup {
-    SignupViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:@"SignupViewController"];
+    SignupViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(SignupViewController.class)];
     newView.signingUpWithFacebook = YES;
     [self performSegueWithIdentifier:@"LoginToSignupSegue" sender:nil];
 }
