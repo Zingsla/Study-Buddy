@@ -46,6 +46,18 @@ NSString *const kUsernameKey = @"username";
 }
 
 - (NSComparisonResult)compare:(User *)otherUser {
+    if ([self compareSharedClassesWithUser:otherUser] != NSOrderedSame) {
+        return [self compareSharedClassesWithUser:otherUser];
+    }
+    
+    if ([self compareMajorsWithUser:otherUser] != NSOrderedSame) {
+        return [self compareMajorsWithUser:otherUser];
+    }
+    
+    return [self compareYearsWithUser:otherUser];
+}
+
+- (NSComparisonResult)compareSharedClassesWithUser:(User *)otherUser {
     User *currentUser = [User currentUser];
     NSInteger sharedSelf = [self numberOfSharedClassesWith:currentUser];
     NSInteger sharedOther = [otherUser numberOfSharedClassesWith:currentUser];
@@ -55,26 +67,37 @@ NSString *const kUsernameKey = @"username";
     } else if (sharedOther > sharedSelf) {
         return NSOrderedDescending;
     } else {
-        BOOL majorMatchSelf = [self.major isEqualToString:currentUser.major];
-        BOOL majorMatchOther = [otherUser.major isEqualToString:currentUser.major];
-        if (majorMatchSelf && !majorMatchOther) {
-            return NSOrderedAscending;
-        } else if (majorMatchOther && !majorMatchSelf) {
-            return NSOrderedDescending;
-        } else {
-            NSInteger yearDifferenceSelf = labs([self.year integerValue] - [currentUser.year integerValue]);
-            NSInteger yearDifferenceOther = labs([otherUser.year integerValue] - [currentUser.year integerValue]);
-            if (yearDifferenceSelf < yearDifferenceOther) {
-                return NSOrderedAscending;
-            } else if (yearDifferenceOther < yearDifferenceSelf) {
-                return NSOrderedDescending;
-            } else {
-                return NSOrderedSame;
-            }
-        }
+        return NSOrderedSame;
     }
 }
 
+- (NSComparisonResult)compareMajorsWithUser:(User *)otherUser {
+    User *currentUser = [User currentUser];
+    BOOL majorMatchSelf = [self.major isEqualToString:currentUser.major];
+    BOOL majorMatchOther = [otherUser.major isEqualToString:currentUser.major];
+    
+    if (majorMatchSelf && !majorMatchOther) {
+        return NSOrderedAscending;
+    } else if (majorMatchOther && !majorMatchSelf) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
+}
+
+- (NSComparisonResult)compareYearsWithUser:(User *)otherUser {
+    User *currentUser = [User currentUser];
+    NSInteger yearDifferenceSelf = labs([self.year integerValue] - [currentUser.year integerValue]);
+    NSInteger yearDifferenceOther = labs([otherUser.year integerValue] - [currentUser.year integerValue]);
+    
+    if (yearDifferenceSelf < yearDifferenceOther) {
+        return NSOrderedAscending;
+    } else if (yearDifferenceOther < yearDifferenceSelf) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
+}
 
 - (NSInteger)numberOfSharedClassesWith:(User *)user {
     NSInteger count = 0;
