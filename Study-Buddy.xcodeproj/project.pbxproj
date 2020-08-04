@@ -20,6 +20,7 @@
 		2202E30B24BFBEE300130982 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E30A24BFBEE300130982 /* ProfileViewController.m */; };
 		2202E31124C0E92F00130982 /* BlockoutDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E31024C0E92F00130982 /* BlockoutDetailsViewController.m */; };
 		2202E31424C0E93B00130982 /* CourseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E31324C0E93B00130982 /* CourseDetailsViewController.m */; };
+		2215D6EB24D8C3C8000FAB1F /* UIAlertController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215D6EA24D8C3C8000FAB1F /* UIAlertController+Utils.m */; };
 		22B148A324C24FD900EEC31A /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A224C24FD900EEC31A /* StudentCell.m */; };
 		22B148A624C6323B00EEC31A /* PersonDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A524C6323B00EEC31A /* PersonDetailsViewController.m */; };
 		22B148A924C7765000EEC31A /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A824C7765000EEC31A /* Connection.m */; };
@@ -83,6 +84,8 @@
 		2202E31024C0E92F00130982 /* BlockoutDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockoutDetailsViewController.m; sourceTree = "<group>"; };
 		2202E31224C0E93B00130982 /* CourseDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseDetailsViewController.h; sourceTree = "<group>"; };
 		2202E31324C0E93B00130982 /* CourseDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseDetailsViewController.m; sourceTree = "<group>"; };
+		2215D6E924D8C3C8000FAB1F /* UIAlertController+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Utils.h"; sourceTree = "<group>"; };
+		2215D6EA24D8C3C8000FAB1F /* UIAlertController+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Utils.m"; sourceTree = "<group>"; };
 		22B148A124C24FD900EEC31A /* StudentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentCell.h; sourceTree = "<group>"; };
 		22B148A224C24FD900EEC31A /* StudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentCell.m; sourceTree = "<group>"; };
 		22B148A424C6323B00EEC31A /* PersonDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonDetailsViewController.h; sourceTree = "<group>"; };
@@ -237,6 +240,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		2215D6E824D8C367000FAB1F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				2215D6E924D8C3C8000FAB1F /* UIAlertController+Utils.h */,
+				2215D6EA24D8C3C8000FAB1F /* UIAlertController+Utils.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		22F9F4EE24BCC8FD005379A9 = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +274,7 @@
 		22F9F4F924BCC8FD005379A9 /* Study-Buddy */ = {
 			isa = PBXGroup;
 			children = (
+				2215D6E824D8C367000FAB1F /* Categories */,
 				2202E2E524BCFCD300130982 /* Models */,
 				2202E2E924BD03DC00130982 /* View Controllers */,
 				2202E2FC24BE272500130982 /* Views */,
@@ -544,6 +557,7 @@
 				2202E31424C0E93B00130982 /* CourseDetailsViewController.m in Sources */,
 				2202E2F224BE095000130982 /* TimeBlock.m in Sources */,
 				2202E2F824BE0CD900130982 /* Course.m in Sources */,
+				2215D6EB24D8C3C8000FAB1F /* UIAlertController+Utils.m in Sources */,
 				22B148B224CA2A5400EEC31A /* ComparePageContentViewController.m in Sources */,
 				22F9F50D24BCC8FE005379A9 /* main.m in Sources */,
 				2202E30224BE3C0900130982 /* BlockoutCell.m in Sources */,
