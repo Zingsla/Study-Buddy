@@ -8,6 +8,7 @@
 
 #import "TimeblockCreateViewController.h"
 #import "DateTools.h"
+#import "ProfileViewController.h"
 #import "TimeBlock.h"
 #import "UIAlertController+Utils.h"
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -40,16 +41,21 @@ static NSString *const errorTitle = @"Timeblock Creation Error";
 
 - (IBAction)didChangeType:(id)sender {
     if (self.typeControl.selectedSegmentIndex == 1) {
-        self.courseNameField.hidden = YES;
-        self.courseNameField.text = @"";
-        self.courseNumberField.hidden = YES;
-        self.courseNumberField.text = @"";
-        self.professorNameField.hidden = YES;
-        self.professorNameField.text = @"";
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            self.courseNameField.alpha = 0;
+            self.courseNumberField.alpha = 0;
+            self.professorNameField.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.courseNameField.text = @"";
+            self.courseNumberField.text = @"";
+            self.professorNameField.text = @"";
+        }];
     } else {
-        self.courseNameField.hidden = NO;
-        self.courseNumberField.hidden = NO;
-        self.professorNameField.hidden = NO;
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            self.courseNameField.alpha = 1;
+            self.courseNumberField.alpha = 1;
+            self.professorNameField.alpha = 1;
+        }];
     }
 }
 
