@@ -46,6 +46,10 @@ CGFloat const kDefaultProfilePhotoSize = 512;
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
+- (NSMutableSet *)scheduleSet {
+    return [NSMutableSet setWithArray:self.schedule];
+}
+
 #pragma mark - User Comparison
 
 - (NSComparisonResult)compare:(User *)otherUser {
@@ -103,16 +107,9 @@ CGFloat const kDefaultProfilePhotoSize = 512;
 }
 
 - (NSInteger)numberOfSharedClassesWith:(User *)user {
-    NSInteger count = 0;
-    for (TimeBlock *block in self.schedule) {
-        for (TimeBlock *otherBlock in user.schedule) {
-            if ([block.objectId isEqualToString:otherBlock.objectId]) {
-                count++;
-            }
-        }
-    }
-    
-    return count;
+    NSMutableSet *intersection = [NSMutableSet setWithSet:[self scheduleSet]];
+    [intersection intersectSet:[user scheduleSet]];
+    return [intersection count];
 }
 
 #pragma mark - Schedule Comparison
