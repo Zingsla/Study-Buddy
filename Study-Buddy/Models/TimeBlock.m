@@ -36,6 +36,17 @@ NSString *const kCourseKey = @"course";
     return @"TimeBlock";
 }
 
+- (BOOL)isEqual:(id)object {
+    if (object == self) {
+        return YES;
+    } else if (!object || ![object isKindOfClass:[self class]]) {
+        return NO;
+    } else {
+        TimeBlock *other = (TimeBlock *)object;
+        return [self.objectId isEqualToString:other.objectId];
+    }
+}
+
 #pragma mark - Creation
 
 + (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(void(^)(TimeBlock *timeBlock, NSError *error))completion {

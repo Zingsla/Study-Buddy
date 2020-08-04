@@ -26,6 +26,7 @@ extern CGFloat const kDefaultProfilePhotoSize;
 
 - (NSString *)getYearString;
 - (NSString *)getNameString;
+- (NSMutableSet *)scheduleSet;
 - (NSComparisonResult)compare:(User *)otherUser;
 - (NSInteger)numberOfSharedClassesWith:(User *)user;
 - (NSArray *)compareScheduleWith:(User *)otherUser;
