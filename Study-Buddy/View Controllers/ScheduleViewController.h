@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ScheduleViewController : UIViewController
 
+extern NSString *const kCreateTimeblockSegueIdentifier;
+
 @end
 
 NS_ASSUME_NONNULL_END

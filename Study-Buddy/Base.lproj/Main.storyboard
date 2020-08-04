@@ -403,7 +403,7 @@
                     <navigationItem key="navigationItem" title="Schedule" id="rOD-ZY-4j4">
                         <barButtonItem key="rightBarButtonItem" title="Create" image="plus" catalog="system" id="56Q-lP-RWT">
                             <connections>
-                                <segue destination="L7I-ng-MUE" kind="presentation" id="RCn-Nf-z8O"/>
+                                <segue destination="L7I-ng-MUE" kind="presentation" identifier="CreateTimeblockSegue" id="RCn-Nf-z8O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

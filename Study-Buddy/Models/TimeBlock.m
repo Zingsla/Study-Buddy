@@ -38,7 +38,7 @@ NSString *const kCourseKey = @"course";
 
 #pragma mark - Creation
 
-+ (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion{
++ (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(void(^)(TimeBlock *timeBlock, NSError *error))completion {
     Course *newCourse = [Course new];
     newCourse.courseName = courseName;
     newCourse.courseNumber = courseNumber;
@@ -65,10 +65,16 @@ NSString *const kCourseKey = @"course";
         [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error creating new block: %@", error.localizedDescription);
-                completion(NO, error);
+                completion(nil, error);
             } else {
                 [[User currentUser] addObject:newBlock forKey:kScheduleKey];
-                [[User currentUser] saveInBackgroundWithBlock:completion];
+                [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error != nil) {
+                        completion(nil, error);
+                    } else {
+                        completion(newBlock, nil);
+                    }
+                }];
             }
         }];
     } else {
@@ -77,16 +83,22 @@ NSString *const kCourseKey = @"course";
         [match saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"Error adding to existing block: %@", error.localizedDescription);
-                completion(NO, error);
+                completion(nil, error);
             } else {
                 [[User currentUser] addObject:match forKey:kScheduleKey];
-                [[User currentUser] saveInBackgroundWithBlock:completion];
+                [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error != nil) {
+                        completion(nil, error);
+                    } else {
+                        completion(match, nil);
+                    }
+                }];
             }
         }];
     }
 }
 
-+ (void)addTimeBlockWithStartTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(PFBooleanResultBlock)completion {
++ (void)addTimeBlockWithStartTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(void(^)(TimeBlock *timeBlock, NSError *error))completion {
     TimeBlock *newBlock = [TimeBlock new];
     newBlock.startTime = startTime;
     newBlock.endTime = endTime;
@@ -100,9 +112,17 @@ NSString *const kCourseKey = @"course";
     newBlock.isClass = NO;
     
     [newBlock saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error == nil) {
+        if (error != nil) {
+            completion(nil, error);
+        } else {
             [[User currentUser] addObject:newBlock forKey:kScheduleKey];
-            [[User currentUser] saveInBackgroundWithBlock:completion];
+            [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error != nil) {
+                    completion(nil, error);
+                } else {
+                    completion(newBlock, nil);
+                }
+            }];
         }
     }];
 }

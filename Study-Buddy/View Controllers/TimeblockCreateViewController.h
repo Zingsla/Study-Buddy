@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimeBlock.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TimeblockCreateViewControllerDelegate
+
+- (void)didCreateTimeblock:(TimeBlock *)timeblock;
+
+@end
+
 @interface TimeblockCreateViewController : UIViewController
+
+@property (weak, nonatomic) id<TimeblockCreateViewControllerDelegate> delegate;
 
 @end
 
