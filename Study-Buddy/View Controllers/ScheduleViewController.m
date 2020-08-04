@@ -11,11 +11,12 @@
 #import "BlockoutDetailsViewController.h"
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
+#import "TimeblockCreateViewController.h"
 #import "User.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
-@interface ScheduleViewController () <UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface ScheduleViewController () <TimeblockCreateViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -24,6 +25,8 @@
 @end
 
 @implementation ScheduleViewController
+
+NSString *const kCreateTimeblockSegueIdentifier = @"CreateTimeblockSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,6 +72,13 @@
             }
         }
     }];
+}
+
+#pragma mark - TimeblockCreateViewControllerDelegate
+
+- (void)didCreateTimeblock:(TimeBlock *)timeblock {
+    [self.timeBlocks insertObject:timeblock atIndex:0];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -169,6 +179,16 @@
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
 {
     return YES;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kCreateTimeblockSegueIdentifier]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        TimeblockCreateViewController *timeblockCreateViewController = (TimeblockCreateViewController *)navigationController.topViewController;
+        timeblockCreateViewController.delegate = self;
+    }
 }
 
 @end

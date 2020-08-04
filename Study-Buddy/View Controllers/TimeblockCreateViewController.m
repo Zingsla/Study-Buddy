@@ -9,7 +9,6 @@
 #import "TimeblockCreateViewController.h"
 #import "DateTools.h"
 #import "ProfileViewController.h"
-#import "TimeBlock.h"
 #import "UIAlertController+Utils.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
@@ -66,7 +65,7 @@ static NSString *const errorTitle = @"Timeblock Creation Error";
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         if (self.typeControl.selectedSegmentIndex == 0) {
             __weak typeof(self) weakSelf = self;
-            [TimeBlock addTimeBlockWithCourseName:self.courseNameField.text courseNumber:self.courseNumberField.text professorName:self.professorNameField.text startTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [TimeBlock addTimeBlockWithCourseName:self.courseNameField.text courseNumber:self.courseNumberField.text professorName:self.professorNameField.text startTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(TimeBlock *timeBlock, NSError *error) {
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
@@ -76,13 +75,14 @@ static NSString *const errorTitle = @"Timeblock Creation Error";
                         [strongSelf presentViewController:alert animated:YES completion:nil];
                     } else {
                         NSLog(@"Successfully added new course timeblock!");
+                        [strongSelf.delegate didCreateTimeblock:timeBlock];
                         [strongSelf dismissViewControllerAnimated:YES completion:nil];
                     }
                 }
             }];
         } else {
             __weak typeof(self) weakSelf = self;
-            [TimeBlock addTimeBlockWithStartTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [TimeBlock addTimeBlockWithStartTime:self.startTimePicker.date endTime:self.endTimePicker.date monday:self.mondaySwitch.on tuesday:self.tuesdaySwitch.on wednesday:self.wednesdaySwitch.on thursday:self.thursdaySwitch.on friday:self.fridaySwitch.on saturday:self.saturdaySwitch.on sunday:self.sundaySwitch.on withCompletion:^(TimeBlock *timeBlock, NSError *error) {
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
@@ -92,6 +92,7 @@ static NSString *const errorTitle = @"Timeblock Creation Error";
                         [strongSelf presentViewController:alert animated:YES completion:nil];
                     } else {
                         NSLog(@"Successfully added new blockout timeblock!");
+                        [strongSelf.delegate didCreateTimeblock:timeBlock];
                         [strongSelf dismissViewControllerAnimated:YES completion:nil];
                     }
                 }
