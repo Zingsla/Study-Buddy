@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import "ProfileViewController.h"
+#import "UIAlertController+Utils.h"
 #import "User.h"
 #import <ChameleonFramework/Chameleon.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -46,13 +47,15 @@ CGFloat const kProfilePhotoBorderSize = 512;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection * _Nullable connection, id  _Nullable result, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"Error fetching Facebook user data: %@", error.localizedDescription);
-            } else {
-                NSLog(@"Successfully fetched Facebook user data!");
-                __strong typeof(self) strongSelf = weakSelf;
-                if (strongSelf) {
-                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+            __strong typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                if (error != nil) {
+                    NSLog(@"Error fetching Facebook user data: %@", error.localizedDescription);
+                    UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:@"An error occurred while fetching your Facebook data. Please try again."];
+                    [strongSelf presentViewController:alert animated:YES completion:nil];
+                } else {
+                    NSLog(@"Successfully fetched Facebook user data!");
                     strongSelf.firstNameField.text = profile.firstName;
                     strongSelf.lastNameField.text = profile.lastName;
                     strongSelf.emailField.text = result[@"email"];
@@ -91,19 +94,22 @@ CGFloat const kProfilePhotoBorderSize = 512;
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             __weak typeof(self) weakSelf = self;
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (error != nil) {
-                    NSLog(@"Error saving Facebook user: %@", error.localizedDescription);
-                } else {
-                    NSLog(@"Successfully saved Facebook user!");
-                    __strong typeof(self) strongSelf = weakSelf;
-                    if (strongSelf) {
-                        [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                    if (error != nil) {
+                        NSLog(@"Error saving Facebook user: %@", error.localizedDescription);
+                        UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:[NSString stringWithFormat:@"An error occurred while signing up your account. %@ Please try again.", error.localizedDescription]];
+                        [strongSelf presentViewController:alert animated:YES completion:nil];
+                    } else {
+                        NSLog(@"Successfully saved Facebook user!");
                         [strongSelf performSegueWithIdentifier:kSignupSegueIdentifier sender:nil];
                     }
                 }
             }];
         } else {
-            NSLog(@"At least one field has not been filled in");
+            UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:@"At least one field has not been filled in. Please fill in all fields and try again."];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     } else {
         User *newUser = [User new];
@@ -123,19 +129,22 @@ CGFloat const kProfilePhotoBorderSize = 512;
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             __weak typeof(self) weakSelf = self;
             [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (error != nil) {
-                    NSLog(@"Error signing up user: %@", error.localizedDescription);
-                } else {
-                    NSLog(@"Successfully signed up new user!");
-                    __strong typeof(self) strongSelf = weakSelf;
-                    if (strongSelf) {
-                        [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                    if (error != nil) {
+                        NSLog(@"Error signing up user: %@", error.localizedDescription);
+                        UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:[NSString stringWithFormat:@"An error occurred while signing up your account. %@ Please try again.", error.localizedDescription]];
+                        [strongSelf presentViewController:alert animated:YES completion:nil];
+                    } else {
+                        NSLog(@"Successfully signed up new user!");
                         [strongSelf performSegueWithIdentifier:kSignupSegueIdentifier sender:nil];
                     }
                 }
             }];
         } else {
-            NSLog(@"At least one field has not been filled in");
+            UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:@"At least one field has not been filled in. Please fill in all fields and try again."];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }
 }
