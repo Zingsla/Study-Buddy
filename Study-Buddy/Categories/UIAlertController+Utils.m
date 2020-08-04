@@ -17,4 +17,11 @@
     return alert;
 }
 
++ (UIAlertController *)sendFormattedErrorWithTitle:(NSString *)title message:(NSString *)message error:(NSString *)error {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:[NSString stringWithFormat:@"%@ %@ Please try again.", message, error] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:dismissAction];
+    return alert;
+}
+
 @end

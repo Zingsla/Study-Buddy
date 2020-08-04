@@ -99,7 +99,7 @@ CGFloat const kProfilePhotoBorderSize = 512;
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     if (error != nil) {
                         NSLog(@"Error saving Facebook user: %@", error.localizedDescription);
-                        UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:[NSString stringWithFormat:@"An error occurred while signing up your account. %@ Please try again.", error.localizedDescription]];
+                        UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:@"Signup Error" message:@"An error occurred while signing up your account." error:error.localizedDescription];
                         [strongSelf presentViewController:alert animated:YES completion:nil];
                     } else {
                         NSLog(@"Successfully saved Facebook user!");
@@ -134,7 +134,7 @@ CGFloat const kProfilePhotoBorderSize = 512;
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     if (error != nil) {
                         NSLog(@"Error signing up user: %@", error.localizedDescription);
-                        UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:[NSString stringWithFormat:@"An error occurred while signing up your account. %@ Please try again.", error.localizedDescription]];
+                        UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:@"Signup Error" message:@"An error occurred while signing up your account." error:error.localizedDescription];
                         [strongSelf presentViewController:alert animated:YES completion:nil];
                     } else {
                         NSLog(@"Successfully signed up new user!");

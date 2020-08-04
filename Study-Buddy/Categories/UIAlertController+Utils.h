@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIAlertController (Utils)
 
 + (UIAlertController *)sendErrorWithTitle:(NSString *)title message:(NSString *)message;
++ (UIAlertController *)sendFormattedErrorWithTitle:(NSString *)title message:(NSString *)message error:(NSString *)error;
 
 @end
 
