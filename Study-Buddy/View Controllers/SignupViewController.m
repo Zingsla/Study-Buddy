@@ -33,7 +33,7 @@
 @implementation SignupViewController
 
 NSString *const kSignupSegueIdentifier = @"SignupSegue";
-CGFloat const kProfilePhotoBorderSize = 512;
+CGFloat const kProfilePhotoBorderSize = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
