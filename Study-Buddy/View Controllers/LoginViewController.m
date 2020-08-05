@@ -14,6 +14,8 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <PFFacebookUtils.h>
 
+static NSString *const errorTitle = @"Login Error";
+
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -47,7 +49,7 @@ NSString *const kLoginToSignupSegueIdentifier = @"LoginToSignupSegue";
             [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
             if (error != nil) {
                 NSLog(@"Error logging in user: %@", error.localizedDescription);
-                UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:@"Login Error" message:@"An error occurred while logging into your account." error:error.localizedDescription];
+                UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:errorTitle message:@"An error occurred while logging into your account." error:error.localizedDescription];
                 [strongSelf presentViewController:alert animated:YES completion:nil];
             } else {
                 NSLog(@"Successfully logged in user!");
@@ -65,7 +67,7 @@ NSString *const kLoginToSignupSegueIdentifier = @"LoginToSignupSegue";
         if (strongSelf) {
             if (error != nil) {
                 NSLog(@"Error logging in with Facebook: %@", error.localizedDescription);
-                UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:@"Login Error" message:@"An error occurred while logging into your account." error:error.localizedDescription];
+                UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:errorTitle message:@"An error occurred while logging into your account." error:error.localizedDescription];
                 [strongSelf presentViewController:alert animated:YES completion:nil];
             } else if (!user) {
                 NSLog(@"User cancelled Facebook login");
