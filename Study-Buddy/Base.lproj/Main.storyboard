@@ -164,13 +164,13 @@
                                 <color key="selectedSegmentTintColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmv-Lk-wcc">
-                                <rect key="frame" x="109" y="667" width="196" height="21"/>
+                                <rect key="frame" x="109" y="719" width="196" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.11181893199682236" green="0.1118365004658699" blue="0.1118125319480896" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvj-xP-6Pc">
-                                <rect key="frame" x="120" y="698" width="174" height="30"/>
+                                <rect key="frame" x="120" y="750" width="174" height="30"/>
                                 <state key="normal" title="Login to Existing Account">
                                     <color key="titleColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -198,7 +198,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQS-8d-Ndc">
-                                <rect key="frame" x="180" y="562" width="54" height="30"/>
+                                <rect key="frame" x="180" y="649" width="54" height="30"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -206,40 +206,60 @@
                                     <action selector="didTapSignup:" destination="nOd-sb-1h3" eventType="touchUpInside" id="qiK-k6-VM2"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D3M-ut-oTw">
+                                <rect key="frame" x="20" y="588" width="374" height="32"/>
+                                <color key="backgroundColor" red="0.15101002156734467" green="0.56891876459121704" blue="0.43715286254882812" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="Everybody"/>
+                                    <segment title="Only Friends"/>
+                                    <segment title="Nobody"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who can see your email address?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAm-RB-0My">
+                                <rect key="frame" x="79" y="557" width="256" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.11181893199682236" green="0.1118365004658699" blue="0.1118125319480896" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="D3M-ut-oTw" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="3aW-pl-iaf"/>
                             <constraint firstItem="zdM-X6-hwC" firstAttribute="top" secondItem="ILH-qb-lR4" secondAttribute="top" constant="10" id="4bd-aP-lKX"/>
+                            <constraint firstItem="nAm-RB-0My" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="5Y5-WK-TNq"/>
                             <constraint firstItem="GP5-ZK-Std" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="8es-2C-aZh"/>
-                            <constraint firstItem="Xmv-Lk-wcc" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="Cod-5P-gjy"/>
                             <constraint firstItem="GP5-ZK-Std" firstAttribute="top" secondItem="vyF-63-uyH" secondAttribute="bottom" constant="20" id="Fvj-7A-mYq"/>
-                            <constraint firstItem="Xmv-Lk-wcc" firstAttribute="top" secondItem="OQS-8d-Ndc" secondAttribute="bottom" constant="75" id="HPH-9H-2eK"/>
-                            <constraint firstItem="jvj-xP-6Pc" firstAttribute="top" secondItem="Xmv-Lk-wcc" secondAttribute="bottom" constant="10" id="I1A-vV-mpb"/>
+                            <constraint firstItem="D3M-ut-oTw" firstAttribute="top" secondItem="nAm-RB-0My" secondAttribute="bottom" constant="10" id="Mga-ha-3JA"/>
                             <constraint firstItem="AcP-lb-LPb" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="Mhd-qk-Hzi"/>
                             <constraint firstItem="8fk-JH-ILY" firstAttribute="top" secondItem="zdM-X6-hwC" secondAttribute="bottom" constant="8" id="Ot2-xx-Jdt"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="0B0-bW-o1Z" secondAttribute="trailing" constant="20" id="RHQ-fg-DQW"/>
-                            <constraint firstItem="jvj-xP-6Pc" firstAttribute="centerX" secondItem="Xmv-Lk-wcc" secondAttribute="centerX" id="RWp-xK-esQ"/>
                             <constraint firstItem="zdM-X6-hwC" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="TAn-83-G0q"/>
                             <constraint firstItem="ihg-hw-AeM" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="TK4-lv-iGV"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="DqV-Gn-dUU" secondAttribute="trailing" constant="20" id="Tmn-UU-fYK"/>
+                            <constraint firstItem="OQS-8d-Ndc" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="UDP-hy-sq0"/>
                             <constraint firstItem="NZD-bY-U6G" firstAttribute="width" secondItem="ihg-hw-AeM" secondAttribute="width" id="Vj0-zb-g6f"/>
                             <constraint firstItem="vyF-63-uyH" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="XMY-xH-1Vt"/>
                             <constraint firstItem="DqV-Gn-dUU" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="Y4u-aS-fX7"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="GP5-ZK-Std" secondAttribute="trailing" constant="20" id="YaV-6c-4Zd"/>
+                            <constraint firstItem="OQS-8d-Ndc" firstAttribute="top" secondItem="D3M-ut-oTw" secondAttribute="bottom" constant="30" id="aVr-vW-XNl"/>
                             <constraint firstItem="ihg-hw-AeM" firstAttribute="top" secondItem="AcP-lb-LPb" secondAttribute="bottom" constant="20" id="bhR-Qq-YVn"/>
                             <constraint firstItem="8fk-JH-ILY" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="bhj-3K-PIU"/>
                             <constraint firstItem="NZD-bY-U6G" firstAttribute="leading" secondItem="ihg-hw-AeM" secondAttribute="trailing" constant="50" id="eKz-Hu-KBg"/>
+                            <constraint firstItem="jvj-xP-6Pc" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="edX-Wu-Pax"/>
                             <constraint firstItem="0B0-bW-o1Z" firstAttribute="top" secondItem="DqV-Gn-dUU" secondAttribute="bottom" constant="20" id="gW9-3t-Fbo"/>
-                            <constraint firstItem="OQS-8d-Ndc" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="giT-sX-HPp"/>
+                            <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="D3M-ut-oTw" secondAttribute="trailing" constant="20" id="jCk-lb-QEi"/>
                             <constraint firstItem="NZD-bY-U6G" firstAttribute="top" secondItem="AcP-lb-LPb" secondAttribute="bottom" constant="20" id="jz5-JN-8zy"/>
-                            <constraint firstItem="OQS-8d-Ndc" firstAttribute="top" secondItem="0B0-bW-o1Z" secondAttribute="bottom" constant="30" id="lI9-33-WI5"/>
+                            <constraint firstItem="nAm-RB-0My" firstAttribute="top" secondItem="0B0-bW-o1Z" secondAttribute="bottom" constant="25" id="k4D-3y-gjq"/>
+                            <constraint firstItem="Xmv-Lk-wcc" firstAttribute="centerX" secondItem="ILH-qb-lR4" secondAttribute="centerX" id="kZP-0U-UFG"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="NZD-bY-U6G" secondAttribute="trailing" constant="20" id="mLL-7o-GLb"/>
                             <constraint firstItem="0B0-bW-o1Z" firstAttribute="leading" secondItem="ILH-qb-lR4" secondAttribute="leading" constant="20" id="mck-iu-UjN"/>
+                            <constraint firstItem="Xmv-Lk-wcc" firstAttribute="top" secondItem="OQS-8d-Ndc" secondAttribute="bottom" constant="40" id="ms5-DA-G4h"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="AcP-lb-LPb" secondAttribute="trailing" constant="20" id="n7L-jw-cMD"/>
                             <constraint firstItem="AcP-lb-LPb" firstAttribute="top" secondItem="GP5-ZK-Std" secondAttribute="bottom" constant="20" id="raE-r2-Tsg"/>
-                            <constraint firstItem="ILH-qb-lR4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jvj-xP-6Pc" secondAttribute="bottom" constant="10" id="tEF-8K-icL"/>
                             <constraint firstItem="ILH-qb-lR4" firstAttribute="trailing" secondItem="vyF-63-uyH" secondAttribute="trailing" constant="20" id="toh-RP-3Wb"/>
                             <constraint firstItem="vyF-63-uyH" firstAttribute="top" secondItem="8fk-JH-ILY" secondAttribute="bottom" constant="20" id="uXT-JR-k02"/>
+                            <constraint firstItem="jvj-xP-6Pc" firstAttribute="top" secondItem="Xmv-Lk-wcc" secondAttribute="bottom" constant="10" id="vOa-L3-Eyf"/>
                             <constraint firstItem="DqV-Gn-dUU" firstAttribute="top" secondItem="ihg-hw-AeM" secondAttribute="bottom" constant="20" id="w6G-iX-ekB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ILH-qb-lR4"/>
@@ -253,6 +273,7 @@
                         <outlet property="lastNameField" destination="NZD-bY-U6G" id="jLJ-CH-15p"/>
                         <outlet property="majorField" destination="DqV-Gn-dUU" id="j5H-AZ-zCD"/>
                         <outlet property="passwordField" destination="GP5-ZK-Std" id="rBE-eu-oSn"/>
+                        <outlet property="privacyControl" destination="D3M-ut-oTw" id="uOg-Nc-LFL"/>
                         <outlet property="profileImageView" destination="8fk-JH-ILY" id="HlY-Sg-m0h"/>
                         <outlet property="usernameField" destination="vyF-63-uyH" id="Wny-04-xBH"/>
                         <outlet property="yearControl" destination="0B0-bW-o1Z" id="Y8s-eK-Jf6"/>
