@@ -15,6 +15,8 @@
 #import <Parse/Parse.h>
 #import <PFFacebookUtils.h>
 
+static NSString *const errorTitle = @"Signup Error";
+
 @interface SignupViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -52,7 +54,7 @@ CGFloat const kProfilePhotoBorderSize = 2;
                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                 if (error != nil) {
                     NSLog(@"Error fetching Facebook user data: %@", error.localizedDescription);
-                    UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:@"An error occurred while fetching your Facebook data. Please try again."];
+                    UIAlertController *alert = [UIAlertController sendErrorWithTitle:errorTitle message:@"An error occurred while fetching your Facebook data. Please try again."];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
                 } else {
                     NSLog(@"Successfully fetched Facebook user data!");
@@ -99,7 +101,7 @@ CGFloat const kProfilePhotoBorderSize = 2;
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     if (error != nil) {
                         NSLog(@"Error saving Facebook user: %@", error.localizedDescription);
-                        UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:@"Signup Error" message:@"An error occurred while signing up your account." error:error.localizedDescription];
+                        UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:errorTitle message:@"An error occurred while signing up your account." error:error.localizedDescription];
                         [strongSelf presentViewController:alert animated:YES completion:nil];
                     } else {
                         NSLog(@"Successfully saved Facebook user!");
@@ -108,7 +110,7 @@ CGFloat const kProfilePhotoBorderSize = 2;
                 }
             }];
         } else {
-            UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:@"At least one field has not been filled in. Please fill in all fields and try again."];
+            UIAlertController *alert = [UIAlertController sendErrorWithTitle:errorTitle message:@"At least one field has not been filled in. Please fill in all fields and try again."];
             [self presentViewController:alert animated:YES completion:nil];
         }
     } else {
@@ -134,7 +136,7 @@ CGFloat const kProfilePhotoBorderSize = 2;
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                     if (error != nil) {
                         NSLog(@"Error signing up user: %@", error.localizedDescription);
-                        UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:@"Signup Error" message:@"An error occurred while signing up your account." error:error.localizedDescription];
+                        UIAlertController *alert = [UIAlertController sendFormattedErrorWithTitle:errorTitle message:@"An error occurred while signing up your account." error:error.localizedDescription];
                         [strongSelf presentViewController:alert animated:YES completion:nil];
                     } else {
                         NSLog(@"Successfully signed up new user!");
@@ -143,7 +145,7 @@ CGFloat const kProfilePhotoBorderSize = 2;
                 }
             }];
         } else {
-            UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Signup Error" message:@"At least one field has not been filled in. Please fill in all fields and try again."];
+            UIAlertController *alert = [UIAlertController sendErrorWithTitle:errorTitle message:@"At least one field has not been filled in. Please fill in all fields and try again."];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
