@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *yearControl;
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressField;
+@property (weak, nonatomic) IBOutlet UILabel *emailPrivacyLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *emailPrivacyControl;
 @property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *linkedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *linkButton;
@@ -88,6 +90,7 @@ CGFloat const kAnimationDuration = 0.25;
         self.yearControl.selectedSegmentIndex = user.year.intValue - 1;
         self.majorField.text = user.major;
         self.emailAddressField.text = user.email;
+        self.emailPrivacyControl.selectedSegmentIndex = [user.emailPrivacy intValue];
         self.editButton.title = @"Save Changes";
         self.inEditMode = YES;
         [self checkLink];
@@ -104,6 +107,8 @@ CGFloat const kAnimationDuration = 0.25;
                 self.yearControl.alpha = 1;
                 self.majorField.alpha = 1;
                 self.emailAddressField.alpha = 1;
+                self.emailPrivacyLabel.alpha = 1;
+                self.emailPrivacyControl.alpha = 1;
                 self.editImageLabel.alpha = 1;
             }];
         }];
@@ -113,8 +118,14 @@ CGFloat const kAnimationDuration = 0.25;
         user.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
         user.major = self.majorField.text;
         user.email = self.emailAddressField.text;
+        user.emailPrivacy = [NSNumber numberWithInteger:self.emailPrivacyControl.selectedSegmentIndex];
         user.emailAddress = self.emailAddressField.text;
         user.profileImage = [User getPFFileObjectFromImage:self.profileImage.image];
+        if ([user.emailPrivacy intValue] == 2) {
+            user.emailAddress = @"";
+        } else {
+            user.emailAddress = user.email;
+        }
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -138,6 +149,8 @@ CGFloat const kAnimationDuration = 0.25;
                         strongSelf.yearControl.alpha = 0;
                         strongSelf.majorField.alpha = 0;
                         strongSelf.emailAddressField.alpha = 0;
+                        strongSelf.emailPrivacyLabel.alpha = 0;
+                        strongSelf.emailPrivacyControl.alpha = 0;
                         strongSelf.editImageLabel.alpha = 0;
                     } completion:^(BOOL finished) {
                         [UIView animateWithDuration:kAnimationDuration animations:^{

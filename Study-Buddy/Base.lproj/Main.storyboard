@@ -943,14 +943,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nn-mE-yjA">
-                                <rect key="frame" x="141" y="491" width="132" height="30"/>
+                                <rect key="frame" x="141" y="573" width="132" height="30"/>
                                 <state key="normal" title="Link with Facebook"/>
                                 <connections>
                                     <action selector="didTapLink:" destination="AMl-21-f6O" eventType="touchUpInside" id="GiS-Jp-p1k"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXI-WC-GBj">
-                                <rect key="frame" x="133.5" y="491" width="147" height="30"/>
+                                <rect key="frame" x="133.5" y="573" width="147" height="30"/>
                                 <state key="normal" title="Unlink with Facebook">
                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -964,6 +964,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="srz-Oh-SPW">
+                                <rect key="frame" x="20" y="522" width="374" height="32"/>
+                                <segments>
+                                    <segment title="Everybody"/>
+                                    <segment title="Only Friends"/>
+                                    <segment title="Nobody"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who can see your email address?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVP-9i-Oqc">
+                                <rect key="frame" x="83" y="491" width="248" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -972,9 +986,14 @@
                             <constraint firstItem="aGE-j8-4jP" firstAttribute="top" secondItem="cio-4o-zkm" secondAttribute="bottom" constant="10" id="4Gn-Ec-5yA"/>
                             <constraint firstItem="3qT-BB-2OY" firstAttribute="leading" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="20" id="87X-cR-Lkn"/>
                             <constraint firstItem="iCj-DJ-lhO" firstAttribute="centerX" secondItem="XXu-8Z-KVH" secondAttribute="centerX" id="FRR-yg-wtj"/>
+                            <constraint firstItem="srz-Oh-SPW" firstAttribute="leading" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="20" id="Hqg-KT-O4h"/>
                             <constraint firstItem="cio-4o-zkm" firstAttribute="centerX" secondItem="sZc-xq-wUG" secondAttribute="centerX" id="JBo-0L-qoN"/>
                             <constraint firstItem="sZc-xq-wUG" firstAttribute="top" secondItem="iCj-DJ-lhO" secondAttribute="bottom" constant="10" id="K2m-ZA-ZLR"/>
+                            <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" secondItem="srz-Oh-SPW" secondAttribute="trailing" constant="20" id="LLb-Vu-tMD"/>
+                            <constraint firstItem="7nn-mE-yjA" firstAttribute="centerX" secondItem="Z1e-YW-6o2" secondAttribute="centerX" id="MkK-GG-d3D"/>
+                            <constraint firstItem="zVP-9i-Oqc" firstAttribute="top" secondItem="3qT-BB-2OY" secondAttribute="bottom" constant="20" id="OQB-HC-sac"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sZc-xq-wUG" secondAttribute="trailing" constant="10" id="Poe-cw-nTk"/>
+                            <constraint firstItem="srz-Oh-SPW" firstAttribute="top" secondItem="zVP-9i-Oqc" secondAttribute="bottom" constant="10" id="RdU-xM-gBH"/>
                             <constraint firstItem="iCj-DJ-lhO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="10" id="Rhb-54-eI1"/>
                             <constraint firstItem="sZc-xq-wUG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="10" id="SKF-QP-oJS"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iCj-DJ-lhO" secondAttribute="trailing" constant="10" id="Sc0-GG-6P0"/>
@@ -982,18 +1001,17 @@
                             <constraint firstItem="3qT-BB-2OY" firstAttribute="top" secondItem="9EC-yD-kMa" secondAttribute="bottom" constant="20" id="UCu-kt-TJn"/>
                             <constraint firstItem="iCj-DJ-lhO" firstAttribute="top" secondItem="XXu-8Z-KVH" secondAttribute="bottom" constant="10" id="W8R-M9-Ek8"/>
                             <constraint firstItem="sZc-xq-wUG" firstAttribute="centerX" secondItem="iCj-DJ-lhO" secondAttribute="centerX" id="WEi-y6-Gib"/>
-                            <constraint firstItem="7nn-mE-yjA" firstAttribute="centerX" secondItem="Z1e-YW-6o2" secondAttribute="centerX" id="WaX-cO-JFN"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GbC-vf-Lkj" secondAttribute="trailing" constant="10" id="Wtq-eA-cqp"/>
                             <constraint firstItem="XXu-8Z-KVH" firstAttribute="centerX" secondItem="Z1e-YW-6o2" secondAttribute="centerX" id="WyX-E5-VGh"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" secondItem="mco-aw-pn7" secondAttribute="trailing" constant="20" id="XIv-He-hNl"/>
                             <constraint firstItem="XXu-8Z-KVH" firstAttribute="top" secondItem="Z1e-YW-6o2" secondAttribute="top" constant="20" id="YVf-5Z-HCh"/>
                             <constraint firstItem="mco-aw-pn7" firstAttribute="top" secondItem="Yfh-qX-YHF" secondAttribute="bottom" constant="20" id="YuJ-v3-onT"/>
-                            <constraint firstItem="XXI-WC-GBj" firstAttribute="top" secondItem="3qT-BB-2OY" secondAttribute="bottom" constant="20" id="aF6-LE-KFS"/>
+                            <constraint firstItem="XXI-WC-GBj" firstAttribute="top" secondItem="srz-Oh-SPW" secondAttribute="bottom" constant="20" id="ceO-0N-UXJ"/>
                             <constraint firstItem="Yfh-qX-YHF" firstAttribute="width" secondItem="DOw-gE-5d2" secondAttribute="width" id="d67-Wb-ebe"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" secondItem="8eY-fc-GtP" secondAttribute="trailing" constant="8" id="fZy-or-J8c"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aGE-j8-4jP" secondAttribute="trailing" constant="10" id="hBs-A5-x75"/>
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" secondItem="9EC-yD-kMa" secondAttribute="trailing" constant="20" id="hOT-gg-HEH"/>
-                            <constraint firstItem="XXI-WC-GBj" firstAttribute="centerX" secondItem="Z1e-YW-6o2" secondAttribute="centerX" id="lcL-VS-UrQ"/>
+                            <constraint firstItem="7nn-mE-yjA" firstAttribute="top" secondItem="srz-Oh-SPW" secondAttribute="bottom" constant="20" id="lSq-re-g1F"/>
                             <constraint firstItem="Yfh-qX-YHF" firstAttribute="top" secondItem="XXu-8Z-KVH" secondAttribute="bottom" constant="20" id="m1n-U3-u05"/>
                             <constraint firstItem="DOw-gE-5d2" firstAttribute="top" secondItem="Yfh-qX-YHF" secondAttribute="top" id="n4O-2F-fg2"/>
                             <constraint firstItem="cio-4o-zkm" firstAttribute="top" secondItem="sZc-xq-wUG" secondAttribute="bottom" constant="10" id="nHS-Dv-I9i"/>
@@ -1001,16 +1019,17 @@
                             <constraint firstItem="Z1e-YW-6o2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cio-4o-zkm" secondAttribute="trailing" constant="10" id="pmF-eD-vLr"/>
                             <constraint firstItem="aGE-j8-4jP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="10" id="q7i-80-e9O"/>
                             <constraint firstItem="9EC-yD-kMa" firstAttribute="leading" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="20" id="qyM-Zy-wSh"/>
+                            <constraint firstItem="zVP-9i-Oqc" firstAttribute="centerX" secondItem="Z1e-YW-6o2" secondAttribute="centerX" id="r7M-lE-dj1"/>
                             <constraint firstItem="aGE-j8-4jP" firstAttribute="centerX" secondItem="cio-4o-zkm" secondAttribute="centerX" id="rKW-L0-CkY"/>
                             <constraint firstItem="Yfh-qX-YHF" firstAttribute="leading" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="20" id="riH-Hb-J3a"/>
                             <constraint firstItem="9EC-yD-kMa" firstAttribute="top" secondItem="mco-aw-pn7" secondAttribute="bottom" constant="20" id="sYg-UK-UrG"/>
                             <constraint firstItem="GbC-vf-Lkj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="10" id="tRQ-RR-FTs"/>
-                            <constraint firstItem="7nn-mE-yjA" firstAttribute="top" secondItem="3qT-BB-2OY" secondAttribute="bottom" constant="20" id="tqN-O2-yoc"/>
                             <constraint firstItem="GbC-vf-Lkj" firstAttribute="top" secondItem="aGE-j8-4jP" secondAttribute="bottom" constant="10" id="vf9-dH-hLy"/>
                             <constraint firstItem="cio-4o-zkm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z1e-YW-6o2" secondAttribute="leading" constant="10" id="vsC-ot-uRJ"/>
                             <constraint firstItem="8eY-fc-GtP" firstAttribute="leading" secondItem="XXu-8Z-KVH" secondAttribute="trailing" constant="8" id="w3y-lw-h6u"/>
                             <constraint firstItem="DOw-gE-5d2" firstAttribute="leading" secondItem="Yfh-qX-YHF" secondAttribute="trailing" constant="50" id="zOZ-9f-rnQ"/>
                             <constraint firstItem="8eY-fc-GtP" firstAttribute="centerY" secondItem="XXu-8Z-KVH" secondAttribute="centerY" id="zkl-vf-tkc"/>
+                            <constraint firstItem="XXI-WC-GBj" firstAttribute="centerX" secondItem="Z1e-YW-6o2" secondAttribute="centerX" id="zsP-7q-8Mh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Z1e-YW-6o2"/>
                     </view>
@@ -1031,6 +1050,8 @@
                         <outlet property="editImageLabel" destination="8eY-fc-GtP" id="1R7-XC-hyd"/>
                         <outlet property="emailAddressField" destination="3qT-BB-2OY" id="HLb-T8-y0D"/>
                         <outlet property="emailLabel" destination="aGE-j8-4jP" id="fXW-Rv-TNX"/>
+                        <outlet property="emailPrivacyControl" destination="srz-Oh-SPW" id="ra0-3R-wms"/>
+                        <outlet property="emailPrivacyLabel" destination="zVP-9i-Oqc" id="dKJ-1K-9bE"/>
                         <outlet property="firstNameField" destination="Yfh-qX-YHF" id="ZMy-w9-1hQ"/>
                         <outlet property="lastNameField" destination="DOw-gE-5d2" id="pmB-AB-vFL"/>
                         <outlet property="linkButton" destination="7nn-mE-yjA" id="udD-H0-KAM"/>
