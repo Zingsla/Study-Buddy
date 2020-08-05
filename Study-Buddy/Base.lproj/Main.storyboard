@@ -1620,7 +1620,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecZ-yM-8YR">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecZ-yM-8YR">
                                 <rect key="frame" x="10" y="331" width="394" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="jacobwfranz@gmail.com"/>
@@ -1628,11 +1628,18 @@
                                     <action selector="didTapEmail:" destination="D0D-ni-X1f" eventType="touchUpInside" id="BYq-xb-tEu"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address Hidden for Privacy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-uI-ffS">
+                                <rect key="frame" x="71.5" y="337" width="271" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Bj9-aL-dKJ" secondAttribute="bottom" id="0k9-DV-rhE"/>
                             <constraint firstItem="W5e-m6-1EM" firstAttribute="trailing" secondItem="yDU-2C-27c" secondAttribute="trailing" constant="10" id="2kA-bi-FAD"/>
+                            <constraint firstItem="PUT-uI-ffS" firstAttribute="centerY" secondItem="ecZ-yM-8YR" secondAttribute="centerY" id="4IM-yE-H59"/>
                             <constraint firstItem="lRJ-Ce-PnF" firstAttribute="centerX" secondItem="Hes-5c-cgU" secondAttribute="centerX" id="4MU-0O-2ES"/>
                             <constraint firstItem="0pa-E1-8Pp" firstAttribute="leading" secondItem="W5e-m6-1EM" secondAttribute="leading" constant="10" id="F6r-Ze-Ebz"/>
                             <constraint firstItem="0pa-E1-8Pp" firstAttribute="top" secondItem="bdC-H6-CC5" secondAttribute="bottom" constant="5" id="G3g-uW-S80"/>
@@ -1641,7 +1648,7 @@
                             <constraint firstItem="bdC-H6-CC5" firstAttribute="leading" secondItem="W5e-m6-1EM" secondAttribute="leading" constant="10" id="N8e-Io-qw4"/>
                             <constraint firstItem="W5e-m6-1EM" firstAttribute="trailing" secondItem="0pa-E1-8Pp" secondAttribute="trailing" constant="10" id="NrR-Rl-CtM"/>
                             <constraint firstItem="ecZ-yM-8YR" firstAttribute="top" secondItem="0pa-E1-8Pp" secondAttribute="bottom" constant="5" id="SfI-DT-g9H"/>
-                            <constraint firstItem="W5e-m6-1EM" firstAttribute="trailing" secondItem="ecZ-yM-8YR" secondAttribute="trailing" constant="10" id="UFG-BK-WO2"/>
+                            <constraint firstItem="W5e-m6-1EM" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ecZ-yM-8YR" secondAttribute="trailing" constant="10" id="UFG-BK-WO2"/>
                             <constraint firstItem="W5e-m6-1EM" firstAttribute="trailing" secondItem="bdC-H6-CC5" secondAttribute="trailing" constant="10" id="Wk2-P9-kq1"/>
                             <constraint firstItem="Bj9-aL-dKJ" firstAttribute="top" secondItem="ecZ-yM-8YR" secondAttribute="bottom" constant="20" id="Yif-Ji-eRG"/>
                             <constraint firstItem="bdC-H6-CC5" firstAttribute="top" secondItem="g8O-83-Slu" secondAttribute="bottom" constant="10" id="ZC7-If-D5f"/>
@@ -1649,6 +1656,7 @@
                             <constraint firstItem="A7W-hH-cyL" firstAttribute="centerX" secondItem="Hes-5c-cgU" secondAttribute="centerX" id="cjQ-Ff-A8p"/>
                             <constraint firstItem="yDU-2C-27c" firstAttribute="leading" secondItem="g8O-83-Slu" secondAttribute="trailing" constant="10" id="dZV-cI-Mel"/>
                             <constraint firstItem="Hes-5c-cgU" firstAttribute="leading" secondItem="g8O-83-Slu" secondAttribute="trailing" constant="10" id="ejd-eR-FBY"/>
+                            <constraint firstItem="PUT-uI-ffS" firstAttribute="centerX" secondItem="ecZ-yM-8YR" secondAttribute="centerX" id="go0-69-qbw"/>
                             <constraint firstItem="A7W-hH-cyL" firstAttribute="bottom" secondItem="g8O-83-Slu" secondAttribute="bottom" id="oyU-Xs-A4c"/>
                             <constraint firstItem="g8O-83-Slu" firstAttribute="top" secondItem="W5e-m6-1EM" secondAttribute="top" constant="20" id="rjh-ih-ZCb"/>
                             <constraint firstItem="ecZ-yM-8YR" firstAttribute="leading" secondItem="W5e-m6-1EM" secondAttribute="leading" constant="10" id="uoh-Yf-Cyy"/>
@@ -1670,6 +1678,7 @@
                         <outlet property="addBuddyButton" destination="A7W-hH-cyL" id="rk3-IG-B4F"/>
                         <outlet property="buddyStatusLabel" destination="Hes-5c-cgU" id="46n-Bv-qzC"/>
                         <outlet property="emailButton" destination="ecZ-yM-8YR" id="QlR-15-LbY"/>
+                        <outlet property="emailHiddenLabel" destination="PUT-uI-ffS" id="dQc-fa-aGM"/>
                         <outlet property="majorLabel" destination="0pa-E1-8Pp" id="T3g-p7-E88"/>
                         <outlet property="nameLabel" destination="yDU-2C-27c" id="SUD-VT-cZX"/>
                         <outlet property="profileImage" destination="g8O-83-Slu" id="GxZ-8E-OMn"/>
