@@ -12,18 +12,20 @@
 #import "CourseCell.h"
 #import "CourseDetailsViewController.h"
 #import "SignupViewController.h"
+#import "UIAlertController+Utils.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <MessageUI/MessageUI.h>
 @import Parse;
 
-@interface PersonDetailsViewController () <UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface PersonDetailsViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *buddyStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *majorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *addBuddyButton;
 @property (weak, nonatomic) IBOutlet UIButton *removeBuddyButton;
@@ -41,7 +43,7 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
     self.nameLabel.text = [self.user getNameString];
     self.yearLabel.text = [self.user getYearString];
     self.majorLabel.text = self.user.major;
-    self.emailLabel.text = self.user.emailAddress;
+    self.emailButton.titleLabel.text = self.user.emailAddress;
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [self.profileImage.layer setBorderWidth:kProfilePhotoBorderSize];
@@ -112,6 +114,26 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
     }];
 }
 
+#pragma mark - Email Composition
+
+- (IBAction)didTapEmail:(id)sender {
+    if (![MFMailComposeViewController canSendMail]) {
+        NSLog(@"Mail services are unavailable");
+        UIAlertController *alert = [UIAlertController sendErrorWithTitle:@"Mail Error" message:@"Unable to send an email to this user. Please try again later."];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
+    MFMailComposeViewController *composeVC = [[MFMailComposeViewController alloc] init];
+    composeVC.mailComposeDelegate = self;
+    
+    [composeVC setToRecipients:@[self.emailButton.titleLabel.text]];
+    [composeVC setSubject:@"Study Buddy Request"];
+    [composeVC setMessageBody:@"Hi there! I found your profile through Study Buddy and would like to reach out to you!" isHTML:NO];
+    
+    [self presentViewController:composeVC animated:YES completion:nil];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,6 +155,12 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
     CourseDetailsViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(CourseDetailsViewController.class)];
     newView.timeBlock = block;
     [self.navigationController pushViewController:newView animated:YES];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - DZNEmptyDataSetSource
