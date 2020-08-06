@@ -107,9 +107,9 @@ NSString *const kSuggestedBuddyDetailsSegueIdentifier = @"SuggestedBuddyDetailsS
                 NSLog(@"Successfully created connection!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [strongSelf.buddies removeObject:user];
                     [strongSelf.tableView reloadData];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     completionHandler(YES);
                 }
             }

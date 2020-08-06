@@ -10,6 +10,7 @@
 #import "Connection.h"
 #import "PersonDetailsViewController.h"
 #import "StudentCell.h"
+#import <ChameleonFramework/Chameleon.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
@@ -84,9 +85,11 @@ NSString *const kCurrentBuddyDetailsSegueIdentifier = @"CurrentBuddyDetailsSegue
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        User *buddy = self.buddies[indexPath.row];
+#pragma mark - UITableViewDelegate
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    User *buddy = self.buddies[indexPath.row];
+    UIContextualAction *removeBuddyAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Remove Buddy" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         __weak typeof(self) weakSelf = self;
         [Connection deleteConnectionWithUser:buddy andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -96,13 +99,18 @@ NSString *const kCurrentBuddyDetailsSegueIdentifier = @"CurrentBuddyDetailsSegue
                 NSLog(@"Successfully deleted connection!");
                 __strong typeof(self) strongSelf = weakSelf;
                 if (strongSelf) {
-                    [strongSelf.buddies removeObjectAtIndex:indexPath.row];
+                    [strongSelf.buddies removeObject:buddy];
                     [strongSelf.tableView reloadData];
                     [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                    completionHandler(YES);
                 }
             }
         }];
-    }
+    }];
+    removeBuddyAction.backgroundColor = [UIColor flatRedColor];
+    removeBuddyAction.image = [UIImage systemImageNamed:@"xmark"];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[removeBuddyAction]];
+    return config;
 }
 
 #pragma mark - DZNEmptyDataSetSource
