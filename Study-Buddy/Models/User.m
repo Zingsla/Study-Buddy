@@ -20,6 +20,7 @@
 @dynamic profileImage;
 @dynamic schedule;
 @dynamic facebookAccount;
+@dynamic emailPrivacy;
 NSString *const kScheduleKey = @"schedule";
 NSString *const kUsernameKey = @"username";
 CGFloat const kDefaultProfilePhotoSize = 512;

@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *majorLabel;
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
+@property (weak, nonatomic) IBOutlet UILabel *emailHiddenLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *addBuddyButton;
 @property (weak, nonatomic) IBOutlet UIButton *removeBuddyButton;
@@ -43,7 +44,7 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
     self.nameLabel.text = [self.user getNameString];
     self.yearLabel.text = [self.user getYearString];
     self.majorLabel.text = self.user.major;
-    self.emailButton.titleLabel.text = self.user.emailAddress;
+    [self.emailButton setTitle:self.user.emailAddress forState:UIControlStateNormal];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     [self.profileImage.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [self.profileImage.layer setBorderWidth:kProfilePhotoBorderSize];
@@ -68,10 +69,24 @@ NSString *const kCompareSegueIdentifier = @"CompareSegue";
         self.buddyStatusLabel.text = @"Currently buddies!";
         self.addBuddyButton.hidden = YES;
         self.removeBuddyButton.hidden = NO;
+        if ([self.user.emailPrivacy intValue] == 2) {
+            self.emailButton.alpha = 0;
+            self.emailHiddenLabel.alpha = 1;
+        } else {
+            self.emailHiddenLabel.alpha = 0;
+            self.emailButton.alpha = 1;
+        }
     } else {
         self.buddyStatusLabel.text = @"Not currently buddies";
         self.addBuddyButton.hidden = NO;
         self.removeBuddyButton.hidden = YES;
+        if ([self.user.emailPrivacy intValue] == 0) {
+            self.emailHiddenLabel.alpha = 0;
+            self.emailButton.alpha = 1;
+        } else {
+            self.emailButton.alpha = 0;
+            self.emailHiddenLabel.alpha = 1;
+        }
     }
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }

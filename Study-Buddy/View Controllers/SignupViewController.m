@@ -26,6 +26,7 @@ static NSString *const errorTitle = @"Signup Error";
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
 @property (weak, nonatomic) IBOutlet UITextField *majorField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *yearControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *privacyControl;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *existingAccountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *existingAccountButton;
@@ -83,14 +84,17 @@ CGFloat const kProfilePhotoBorderSize = 2;
     if (self.signingUpWithFacebook) {
         User *user = [User currentUser];
         user.email = self.emailField.text;
-        user.emailAddress = self.emailField.text;
         user.firstName = self.firstNameField.text;
         user.lastName = self.lastNameField.text;
         user.major = self.majorField.text;
         user.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
+        user.emailPrivacy = [NSNumber numberWithInteger:self.privacyControl.selectedSegmentIndex];
         user.schedule = [[NSMutableArray alloc] init];
         user.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
         user.facebookAccount = YES;
+        if ([user.emailPrivacy intValue] != 2) {
+            user.emailAddress = user.email;
+        }
         
         if ([self allFieldsFilled]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -118,14 +122,17 @@ CGFloat const kProfilePhotoBorderSize = 2;
         newUser.username = self.usernameField.text;
         newUser.password = self.passwordField.text;
         newUser.email = self.emailField.text;
-        newUser.emailAddress = self.emailField.text;
         newUser.firstName = self.firstNameField.text;
         newUser.lastName = self.lastNameField.text;
         newUser.major = self.majorField.text;
         newUser.year = [NSNumber numberWithInteger:(self.yearControl.selectedSegmentIndex + 1)];
+        newUser.emailPrivacy = [NSNumber numberWithInteger:self.privacyControl.selectedSegmentIndex];
         newUser.schedule = [[NSMutableArray alloc] init];
         newUser.profileImage = [User getPFFileObjectFromImage:self.profileImageView.image];
         newUser.facebookAccount = NO;
+        if ([newUser.emailPrivacy intValue] != 2) {
+            newUser.emailAddress = newUser.email;
+        }
         
         if ([self allFieldsFilled]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
