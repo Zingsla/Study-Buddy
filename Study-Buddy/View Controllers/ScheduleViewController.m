@@ -13,6 +13,7 @@
 #import "CourseDetailsViewController.h"
 #import "TimeblockCreateViewController.h"
 #import "User.h"
+#import <ChameleonFramework/Chameleon.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
@@ -104,27 +105,6 @@ NSString *const kCreateTimeblockSegueIdentifier = @"CreateTimeblockSegue";
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        TimeBlock *block = self.timeBlocks[indexPath.row];
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        __weak typeof(self) weakSelf = self;
-        [block deleteExistingTimeBlockWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"Error deleting timeblock: %@", error.localizedDescription);
-            } else {
-                NSLog(@"Successfully deleted timeblock!");
-                __strong typeof(self) strongSelf = weakSelf;
-                if (strongSelf) {
-                    [strongSelf.timeBlocks removeObjectAtIndex:indexPath.row];
-                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-                }
-                [tableView reloadData];
-            }
-        }];
-    }
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -139,6 +119,31 @@ NSString *const kCreateTimeblockSegueIdentifier = @"CreateTimeblockSegue";
         newView.timeBlock = block;
         [self.navigationController pushViewController:newView animated:YES];
     }
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TimeBlock *block = self.timeBlocks[indexPath.row];
+    UIContextualAction *removeBlockAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Remove Timeblock" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
+        [block deleteExistingTimeBlockWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error deleting timeblock: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully deleted timeblock!");
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [strongSelf.timeBlocks removeObject:block];
+                    [strongSelf.tableView reloadData];
+                    [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                }
+            }
+        }];
+    }];
+    removeBlockAction.backgroundColor = [UIColor flatRedColor];
+    removeBlockAction.image = [UIImage systemImageNamed:@"xmark"];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[removeBlockAction]];
+    return config;
 }
 
 #pragma mark - DZNEmptyDataSetSource
