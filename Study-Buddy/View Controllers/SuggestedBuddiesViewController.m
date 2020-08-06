@@ -11,6 +11,7 @@
 #import "PersonDetailsViewController.h"
 #import "StudentCell.h"
 #import "User.h"
+#import <ChameleonFramework/Chameleon.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
@@ -90,6 +91,34 @@ NSString *const kSuggestedBuddyDetailsSegueIdentifier = @"SuggestedBuddyDetailsS
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.buddies.count;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    User *user = self.buddies[indexPath.row];
+    UIContextualAction *addBuddyAction =  [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Add Buddy" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
+        [Connection addConnectionWithUser:user andUser:[User currentUser] withBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error creating connection: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successfully created connection!");
+                __strong typeof(self) strongSelf = weakSelf;
+                if (strongSelf) {
+                    [strongSelf.buddies removeObject:user];
+                    [strongSelf.tableView reloadData];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    completionHandler(YES);
+                }
+            }
+        }];
+    }];
+    addBuddyAction.backgroundColor = [UIColor flatGreenColor];
+    addBuddyAction.image = [UIImage systemImageNamed:@"smiley"];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[addBuddyAction]];
+    return config;
 }
 
 #pragma mark - DZNEmptyDataSetSource
