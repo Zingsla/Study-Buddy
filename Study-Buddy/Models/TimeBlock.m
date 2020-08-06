@@ -47,6 +47,10 @@ NSString *const kCourseKey = @"course";
     }
 }
 
+- (NSUInteger)hash {
+    return [self.objectId hash];
+}
+
 #pragma mark - Creation
 
 + (void)addTimeBlockWithCourseName:(NSString *)courseName courseNumber:(NSString *)courseNumber professorName:(NSString *)professorName startTime:(NSDate *)startTime endTime:(NSDate *)endTime monday:(BOOL)monday tuesday:(BOOL)tuesday wednesday:(BOOL)wednesday thursday:(BOOL)thursday friday:(BOOL)friday saturday:(BOOL)saturday sunday:(BOOL)sunday withCompletion:(void(^)(TimeBlock *timeBlock, NSError *error))completion {
