@@ -20,10 +20,10 @@
 
 @implementation CompareScheduleViewController
 
-NSString *const kPageViewControllerIdentifier = @"PageViewContoller";
+NSString *const kPageViewControllerIdentifier = @"PageViewController";
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     self.dayNames = @[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday"];

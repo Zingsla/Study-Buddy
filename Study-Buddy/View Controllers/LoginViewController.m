@@ -86,9 +86,14 @@ NSString *const kLoginToSignupSegueIdentifier = @"LoginToSignupSegue";
 #pragma mark - Navigation
 
 - (void)transitionToSignup {
-    SignupViewController *newView = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass(SignupViewController.class)];
-    newView.signingUpWithFacebook = YES;
-    [self performSegueWithIdentifier:kLoginSegueIdentifier sender:nil];
+    [self performSegueWithIdentifier:kLoginToSignupSegueIdentifier sender:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kLoginToSignupSegueIdentifier]) {
+        SignupViewController *newView = [segue destinationViewController];
+        newView.signingUpWithFacebook = self.facebookSignup;
+    }
 }
 
 @end
