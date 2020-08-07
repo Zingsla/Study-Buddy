@@ -1670,7 +1670,7 @@
                     <navigationItem key="navigationItem" id="OGS-Iu-xtI">
                         <barButtonItem key="rightBarButtonItem" title="Compare" id="Y8R-5i-49t">
                             <connections>
-                                <segue destination="An1-7y-f9k" kind="show" id="ccp-x3-kAf"/>
+                                <segue destination="An1-7y-f9k" kind="show" identifier="CompareSegue" id="ccp-x3-kAf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
