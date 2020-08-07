@@ -21,6 +21,7 @@
 		2202E31124C0E92F00130982 /* BlockoutDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E31024C0E92F00130982 /* BlockoutDetailsViewController.m */; };
 		2202E31424C0E93B00130982 /* CourseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202E31324C0E93B00130982 /* CourseDetailsViewController.m */; };
 		2215D6EB24D8C3C8000FAB1F /* UIAlertController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2215D6EA24D8C3C8000FAB1F /* UIAlertController+Utils.m */; };
+		223368E924DDC8B000D9AFDF /* CompareSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223368E824DDC8B000D9AFDF /* CompareSettingsViewController.m */; };
 		22B148A324C24FD900EEC31A /* StudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A224C24FD900EEC31A /* StudentCell.m */; };
 		22B148A624C6323B00EEC31A /* PersonDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A524C6323B00EEC31A /* PersonDetailsViewController.m */; };
 		22B148A924C7765000EEC31A /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B148A824C7765000EEC31A /* Connection.m */; };
@@ -86,6 +87,8 @@
 		2202E31324C0E93B00130982 /* CourseDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseDetailsViewController.m; sourceTree = "<group>"; };
 		2215D6E924D8C3C8000FAB1F /* UIAlertController+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Utils.h"; sourceTree = "<group>"; };
 		2215D6EA24D8C3C8000FAB1F /* UIAlertController+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Utils.m"; sourceTree = "<group>"; };
+		223368E724DDC8B000D9AFDF /* CompareSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompareSettingsViewController.h; sourceTree = "<group>"; };
+		223368E824DDC8B000D9AFDF /* CompareSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompareSettingsViewController.m; sourceTree = "<group>"; };
 		22B148A124C24FD900EEC31A /* StudentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentCell.h; sourceTree = "<group>"; };
 		22B148A224C24FD900EEC31A /* StudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentCell.m; sourceTree = "<group>"; };
 		22B148A424C6323B00EEC31A /* PersonDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonDetailsViewController.h; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 				22B148B124CA2A5400EEC31A /* ComparePageContentViewController.m */,
 				22B148B324CA2ADA00EEC31A /* CompareScheduleViewController.h */,
 				22B148B424CA2ADA00EEC31A /* CompareScheduleViewController.m */,
+				223368E724DDC8B000D9AFDF /* CompareSettingsViewController.h */,
+				223368E824DDC8B000D9AFDF /* CompareSettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				2202E30B24BFBEE300130982 /* ProfileViewController.m in Sources */,
 				22B148B824CA2B9600EEC31A /* FreetimeCell.m in Sources */,
 				22F9F4FF24BCC8FD005379A9 /* SceneDelegate.m in Sources */,
+				223368E924DDC8B000D9AFDF /* CompareSettingsViewController.m in Sources */,
 				2202E2FB24BE238900130982 /* ScheduleViewController.m in Sources */,
 				2202E2EC24BD040B00130982 /* SignupViewController.m in Sources */,
 				22B148A324C24FD900EEC31A /* StudentCell.m in Sources */,

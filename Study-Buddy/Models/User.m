@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "CompareSettingsViewController.h"
 #import "DateTools.h"
 #import "TimeBlock.h"
 
@@ -128,6 +129,10 @@ CGFloat const kDefaultProfilePhotoSize = 512;
 }
 
 - (NSArray *)compareDay:(NSString *)day withUser:(User *)otherUser {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *startTime = [defaults objectForKey:kUserDefaultsStartTimeKey];
+    NSDate *endTime = [defaults objectForKey:kUserDefaultsEndTimeKey];
+    
     NSDate *today = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [[NSDateComponents alloc] init];
@@ -135,11 +140,12 @@ CGFloat const kDefaultProfilePhotoSize = 512;
     components.year = today.year;
     components.month = today.month;
     components.day = today.day;
-    components.hour = 8;
-    components.minute = 0;
+    components.hour = startTime.hour;
+    components.minute = startTime.minute;
     components.second = 0;
     NSDate *baseStartDate = [gregorian dateFromComponents:components];
-    components.hour = 20;
+    components.hour = endTime.hour;
+    components.minute = endTime.minute;
     NSDate *baseEndDate = [gregorian dateFromComponents:components];
         
     NSMutableArray *busyPeriods = [[NSMutableArray alloc] init];
