@@ -20,7 +20,7 @@
 
 @implementation CompareScheduleViewController
 
-NSString *const kPageViewControllerIdentifier = @"PageViewContoller";
+NSString *const kPageViewControllerIdentifier = @"PageViewController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
